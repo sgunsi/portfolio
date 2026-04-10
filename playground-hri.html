@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playground Global HRI — Simran Gunsi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2B2BFF;--bg:#ffffff;--text:#0a0a0a;--muted:#888;--border:rgba(0,0,0,0.07);--card:#fafafa}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+.corner-glow-left{position:fixed;top:20%;left:-120px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(43,43,255,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+.corner-glow-right{position:fixed;bottom:20%;right:-120px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(43,43,255,0.04) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(255,255,255,0.92);backdrop-filter:blur(14px)}
+.nav-logo{font-weight:500;font-size:15px;text-decoration:none;color:var(--text)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:14px;text-decoration:none;color:var(--muted);transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-resume{color:var(--blue)!important;font-weight:500}
+.burger-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.burger-btn span{display:block;width:22px;height:1px;background:var(--text)}
+.mobile-menu{display:none;position:fixed;top:58px;left:0;right:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);padding:24px 32px;z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:18px;text-decoration:none;color:var(--text);font-weight:500}
+
+/* PAGE TRANSITION */
+.page-transition{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0;background:var(--bg);transition:opacity 0.35s ease}
+
+/* HERO */
+.hero-image{width:100%;height:55vh;overflow:hidden;background:#e8e8f0;margin-top:64px}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+
+.meta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--border);padding:24px 56px;max-width:1100px;margin:0 auto}
+.meta-item{padding:0 24px;border-right:1px solid var(--border)}
+.meta-item:first-child{padding-left:0}
+.meta-item:last-child{border-right:none}
+.meta-label{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--muted);margin-bottom:10px}
+.meta-value{font-size:14px;font-weight:500;color:var(--text);line-height:1.5}
+
+/* CONTENT */
+.content{padding:48px 56px;position:relative;z-index:1;max-width:1100px;margin:0 auto}
+.content.tight{padding-top:24px}
+
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,36px);font-weight:400;line-height:1.2;letter-spacing:-0.01em;color:var(--text);margin-bottom:16px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.5vw,32px);font-weight:400;font-style:italic;color:var(--text);line-height:1.15;margin-bottom:16px}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px;background:#e8e8ff;color:var(--blue)}
+
+.body-text{font-size:14px;color:var(--muted);line-height:1.8;max-width:640px}
+.body-text strong{color:var(--text);font-weight:600}
+.body-text p+p{margin-top:12px}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.two-col-wide{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;transition:box-shadow 0.25s,transform 0.25s}
+.card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.06);transform:translateY(-2px)}
+.card-label{font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;font-style:italic;color:var(--text);margin-bottom:8px}
+.card-body{font-size:13px;color:var(--muted);line-height:1.7}
+.card-body strong{color:var(--text);font-weight:600}
+
+.full-img{width:100%;margin:24px 0}
+.full-img img{width:100%;display:block;border-radius:10px;max-height:520px;object-fit:contain;background:#f8f8f6}
+
+.quote-bubble{background:#333;color:#fff;border-radius:14px 14px 14px 3px;padding:12px 16px;font-size:13px;line-height:1.6;margin-top:12px;font-style:italic;max-width:560px}
+
+.bullet-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.bullet-list li{font-size:14px;color:var(--muted);line-height:1.75;padding-left:20px;position:relative}
+.bullet-list li::before{content:'—';position:absolute;left:0;color:var(--blue)}
+.bullet-list li strong{color:var(--text);font-weight:600}
+
+/* NEXT */
+.next-case{padding:0 56px 80px;position:relative;z-index:1;max-width:1100px;margin:0 auto}
+.next-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.next-card{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center;padding:40px;background:var(--card);border:1px solid var(--border);border-radius:16px;text-decoration:none;color:inherit;transition:box-shadow 0.25s,transform 0.25s}
+.next-card:hover{box-shadow:0 16px 48px rgba(0,0,0,0.07);transform:translateY(-3px)}
+.next-card-eyebrow{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
+.next-card-title{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,30px);font-weight:400;font-style:italic;color:var(--text);line-height:1.2;margin-bottom:12px}
+.next-card-cta{font-size:13px;font-weight:500;color:var(--blue)}
+.next-card img{width:100%;border-radius:10px;aspect-ratio:16/9;object-fit:cover}
+
+footer{padding:64px 56px;border-top:1px solid var(--border);position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px}
+.footer-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.footer-email{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,2.5vw,28px);font-weight:400;color:var(--text);text-decoration:none;transition:color 0.2s}
+.footer-email:hover{color:var(--blue)}
+.footer-right{text-align:right}
+.footer-note{font-size:13px;color:var(--muted);margin-bottom:12px}
+.footer-social{display:flex;gap:16px;justify-content:flex-end}
+.footer-social a{font-size:13px;color:var(--blue);text-decoration:none;font-weight:500}
+.footer-social a:hover{text-decoration:underline}
+
+@media(max-width:900px){
+  .two-col,.two-col-wide{grid-template-columns:1fr}
+  .meta-strip{grid-template-columns:1fr 1fr;padding:24px}
+  .meta-item{border-right:none;border-bottom:1px solid var(--border);padding:14px 0}
+  .next-card{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav{padding:16px 20px}.nav-links{display:none}.burger-btn{display:flex}
+  .content,.next-case{padding-left:24px;padding-right:24px}
+  .hero-image{height:40vh}
+  .meta-strip{padding:20px 24px;grid-template-columns:1fr}
+  footer{padding:48px 24px;flex-direction:column;gap:24px;align-items:flex-start}
+  .footer-right{text-align:left}.footer-social{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div class="page-transition" id="pageTransition"></div>
+<div class="corner-glow-left"></div>
+<div class="corner-glow-right"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Simran Gunsi</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Work</a></li>
+    <li><a href="play.html">Play</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#" class="nav-resume">Résumé ↗</a></li>
+  </ul>
+  <button class="burger-btn" id="burgerBtn"><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Work</a>
+  <a href="play.html">Play</a>
+  <a href="about.html">About</a>
+  <a href="#" style="color:var(--blue);font-weight:500">Résumé ↗</a>
+</div>
+
+<div class="hero-image">
+  <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/0b36b6c7-b265-427f-9f98-27a2d8bb1150/Frame+80.png" alt="Playground Global HRI">
+</div>
+
+<div class="meta-strip">
+  <div class="meta-item">
+    <p class="meta-label">Role</p>
+    <p class="meta-value">UX Design Intern</p>
+  </div>
+  <div class="meta-item">
+    <p class="meta-label">Timeline</p>
+    <p class="meta-value">July 2021 – December 2021</p>
+  </div>
+  <div class="meta-item">
+    <p class="meta-label">Team</p>
+    <p class="meta-value">Software Team + UX Team</p>
+  </div>
+  <div class="meta-item">
+    <p class="meta-label">Tools</p>
+    <p class="meta-value">Figma · FigJam</p>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="content">
+  <p class="section-label">Playground Global</p>
+  <div class="chips">
+    <span class="chip">HRI</span>
+    <span class="chip">Robotics</span>
+    <span class="chip">UX Research</span>
+  </div>
+  <h1 class="page-title">Exploring warehouse automation through a human-robot interaction lens</h1>
+  <div class="two-col" style="margin-top:32px">
+    <div class="card">
+      <p class="card-label">The Problem</p>
+      <p class="card-body">The industry standard for collaborative mobile robots is simply <strong>not hitting people and objects</strong> — there's an opportunity to design robots that foster deeper connections with warehouse workers.</p>
+    </div>
+    <div class="card">
+      <p class="card-label">The Solution</p>
+      <p class="card-body">Robots can <strong>foster deeper connections within the warehouse</strong> and help workers when made more collaborative and human-centered in their design.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BACKGROUND -->
+<div class="content tight">
+  <p class="section-label">The Background</p>
+  <div class="two-col">
+    <div>
+      <h2 class="section-title">Working with early-stage startups</h2>
+      <div class="body-text">
+        <p>Playground Global is an early-stage venture capital firm that invests in deep tech and assists startups with software, hardware, machine learning, marketing, talent, and design.</p>
+        <p>I worked within the internal software team, which assisted various portfolio companies with diverse needs. As a UX design intern, I worked closely with a portfolio company to explore the <strong>warehouse automation space from a UX perspective</strong>.</p>
+        <p><em>A coworker and I were even getting soldering lessons while home robots Kuri and Misty were on display — a glimpse at how exploratory working at Playground was.</em></p>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/b153e711-7f44-4bcc-a3eb-e6f0971f3411/61d4f665f7c6dda6d0f66ba0_Screen+Shot+2022-01-04+at+5.37.20+PM.png" style="width:100%;border-radius:16px;display:block" alt="Playground office">
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT RESEARCH -->
+<div class="content tight">
+  <p class="section-label">Product Research</p>
+  <h2 class="section-title">Understanding the warehouse space</h2>
+  <div class="body-text">
+    <p>Warehouses are in a unique position — COVID-19, worker shortages, and supply chain issues cause them to struggle, while the increase in e-commerce raises their demand exponentially. There's a clear need for a solution, but varied ideas of what that solution could be.</p>
+    <p>From my time at Playground, I researched three main areas to understand the space: <strong>literature analysis, informal user research, and industry research.</strong></p>
+    <p>The goal was to explore proposed ideas and better understand our potential target users.</p>
+  </div>
+</div>
+
+<!-- ROBOTICS RESEARCH -->
+<div class="content tight">
+  <p class="section-label">01 Literature Analysis</p>
+  <div class="two-col">
+    <div>
+      <h2 class="section-title">Robotics research & semantic mapping</h2>
+      <div class="body-text">
+        <p>One proposed solution I explored was <strong>semantic mapping in warehouse settings</strong> — having robots store information in models similar to how humans perceive space.</p>
+        <p>If robots can create mental models similar to humans, they'd be more relatable and helpful within the space. I read a series of papers on semantic mapping and how it can improve human-robot interaction.</p>
+        <p><strong>Conclusion:</strong> exciting research, but current technology limitations make this more of a future solution than a present reality.</p>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/173d9a2e-afe7-412c-875d-2f92a9ea5666/61c368644cc87f4d8849c18b_Screen+Shot+2021-12-22+at+9.58.48+AM.png" style="width:100%;border-radius:12px;display:block" alt="Semantic mapping diagram">
+      <p style="font-size:11px;color:var(--muted);margin-top:8px;font-style:italic">Flow proposal for semantic models from Seed Gholami Shahbandi's paper on Semi-Supervised Semantic Labeling</p>
+    </div>
+  </div>
+</div>
+
+<!-- WAREHOUSE WORKER -->
+<div class="content tight">
+  <p class="section-label">02 Informal User Research</p>
+  <div class="two-col">
+    <div>
+      <h2 class="section-title">Understanding the warehouse worker</h2>
+      <div class="body-text">
+        <p>To understand workers' everyday lives, challenges, and achievements, I explored a community of online creators sharing their experiences working in warehouses.</p>
+        <p><strong>Key findings:</strong></p>
+      </div>
+      <ul class="bullet-list" style="margin-top:16px">
+        <li>Jobs were repetitive with long hours, though some workers enjoyed the rhythm it created</li>
+        <li>High turnover rates meant limited coworker relationships</li>
+        <li>Online sentiment toward automation and robotics was largely <strong>open or neutral</strong>, not opposed</li>
+      </ul>
+    </div>
+    <div>
+      <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/c894f8df-9837-4ff8-a41f-d6d8200ea8ca/61c36bd92d133117f25b5f4d_Screen+Shot+2021-12-22+at+10.17.18+AM.png" style="width:100%;border-radius:12px;display:block" alt="Warehouse worker research">
+    </div>
+  </div>
+</div>
+
+<!-- INDUSTRY RESEARCH -->
+<div class="content tight">
+  <p class="section-label">03 Industry Research</p>
+  <div class="two-col">
+    <div>
+      <h2 class="section-title">What are other companies thinking?</h2>
+      <div class="body-text">
+        <p>I virtually attended the 6 Rivers Robotics Flow conference, where companies shared perspectives on worker satisfaction, throughput, and the efficacy of collaborative robots.</p>
+        <p><strong>Interesting ideas that emerged:</strong></p>
+      </div>
+      <ul class="bullet-list" style="margin-top:16px">
+        <li><strong>Gamification:</strong> incentivizing workers with in-app badges for picking tasks</li>
+        <li><strong>Optimization vs. retention tradeoffs:</strong> maximum throughput often comes at the cost of worker wellbeing</li>
+        <li><strong>Robots for satisfaction:</strong> having robots do the "dirty work" so workers feel the robot is working for them, not the other way around</li>
+      </ul>
+    </div>
+    <div>
+      <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/2a28b0eb-1b6b-47ed-acf6-30abf2effad7/61c36feb8599706c6409b4b1_Screen+Shot+2021-12-22+at+10.35.15+AM.png" style="width:100%;border-radius:12px;display:block" alt="Industry research">
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITIVE ANALYSIS -->
+<div class="content tight">
+  <p class="section-label">Competitive Analysis</p>
+  <h2 class="section-title">Mapping what's already in the market</h2>
+  <div class="body-text" style="margin-bottom:24px">
+    <p>We found many robot bases with interchangeable additions, but not many cart-like robots. We decided to focus on prototyping a <strong>cart-style warehouse AMR</strong>.</p>
+    <p>Before designing, I created a spreadsheet of all collaborative mobile warehouse robots and their specs — weight, size, charge time — to find meaningful averages vital to our design decisions.</p>
+  </div>
+  <div class="full-img">
+    <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/858b47c2-ed45-4aef-b437-dc79796d1116/61c394dd40ba38c9739fc4d2_Screen+Shot+2021-12-22+at+1.09.37+PM.png" alt="Competitive analysis spreadsheet">
+  </div>
+</div>
+
+<!-- USER TESTING -->
+<div class="content tight">
+  <p class="section-label">Informal User Testing</p>
+  <h2 class="section-title">But how? Prototyping and testing with users</h2>
+  <div class="body-text" style="margin-bottom:24px">
+    <p>Once focused on cart-style AMRs, we had questions to answer before building any hardware. We made makeshift cart prototypes and conducted user testing to learn what worked and what didn't.</p>
+    <p>Users performed a picking task with two customizable carts — they could adjust screen position and handlebar placement. Afterward we asked what they liked, didn't like, and would change.</p>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <p style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px">Questions we were focused on:</p>
+      <ul class="bullet-list">
+        <li>What handlebar placement feels most natural?</li>
+        <li>Vertical or horizontal handlebars?</li>
+        <li>How do different heights affect handlebar preference?</li>
+        <li>Where should the screen be placed?</li>
+        <li>Should there even be a screen?</li>
+        <li>What combination allows the most flexibility?</li>
+      </ul>
+      <div class="quote-bubble" style="margin-top:24px">"I don't like these 2 bars here on the top. When I pick up something I have to avoid hitting them... they feel like a cage to work around."</div>
+      <div class="body-text" style="margin-top:20px">
+        <p>I assumed more hand placement options would be better — but we found some users felt overwhelmed and confused. We also realized we'd need to make tradeoffs: optimal handlebar placement vs. ideal screen placement.</p>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/0b041bd5-6eb6-479b-8817-c987a40ce88b/61d5467c049a8b7354ab7e3b_Untitled_Artwork.jpg" style="width:100%;border-radius:12px;display:block" alt="Cart prototype sketches">
+    </div>
+  </div>
+</div>
+
+<!-- TAKEAWAYS -->
+<div class="content tight">
+  <p class="section-label">Takeaways and reflections</p>
+  <div class="two-col-wide" style="align-items:start;margin-bottom:0">
+    <div class="body-text">
+      <h2 class="section-title" style="font-style:normal">It's better to do some things imperfectly</h2>
+      <p>Interning at Playground Global, I learned that not everything needs to be perfect — especially in early-stage startups. It's better to <strong>maximize efficiency by utilizing your resources</strong> and iterating fast.</p>
+      <p style="margin-top:12px">This was my first time immersing myself in HRI and user testing with 3D physical products. The experience showed me that <strong>my passion for UX is never-ending</strong>, given the infinite opportunities available when design intersects with hardware, robotics, and emerging tech.</p>
+    </div>
+    <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/efd1fb0c-deb6-46ea-835a-4fa85a7c8d52/61d62f1a709ef4198b7b01d9_Screen+Shot+2022-01-05+at+3.51.41+PM.png" style="width:100%;border-radius:12px;display:block" alt="Playground reflections">
+  </div>
+</div>
+
+<!-- NEXT CASE STUDY -->
+<div class="next-case" style="margin-top:64px">
+  <p class="next-label">Next case study</p>
+  <a class="next-card" href="samsung.html">
+    <div>
+      <p class="next-card-eyebrow">Samsung Research America</p>
+      <p class="next-card-title">Building the foundation for digital health at scale</p>
+      <p class="next-card-cta">View case study →</p>
+    </div>
+    <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/6baeaf3a-a31c-4f89-91ee-057fb8dc0f71/Frame+86.png" alt="Samsung">
+  </a>
+</div>
+
+<footer>
+  <div>
+    <p class="footer-label">Simran Gunsi</p>
+    <a href="/cdn-cgi/l/email-protection#5b28303c2e3528321b3c363a323775383436" class="footer-email"><span class="__cf_email__" data-cfemail="27544c405249544e67404a464e4b0944484a">[email&#160;protected]</span></a>
+  </div>
+  <div class="footer-right">
+    <p class="footer-note">Thanks for checking out my work 😊</p>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/simrangunsi" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@simrxnk" target="_blank">Medium</a>
+      <a href="/cdn-cgi/l/email-protection#07746c607269746e47606a666e6b2964686a">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.getElementById('burgerBtn').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+const pt=document.getElementById("pageTransition");
+window.addEventListener("pageshow",()=>{pt.style.opacity="0"});
+document.addEventListener("click",e=>{
+  const a=e.target.closest("a");
+  if(!a||!a.href||a.target==="_blank"||a.href.startsWith

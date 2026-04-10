@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play Simran Gunsi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0e0e0c;--text:#f0ede6;--muted:#777;--blue:#6b6bff;--border:rgba(255,255,255,0.08)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+
+.glow-left{position:fixed;top:10%;left:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(107,107,255,0.15) 0%,rgba(107,107,255,0.06) 50%,transparent 70%);pointer-events:none;z-index:0}
+.glow-right{position:fixed;bottom:10%;right:-100px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(107,107,255,0.12) 0%,rgba(107,107,255,0.04) 50%,transparent 70%);pointer-events:none;z-index:0}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(14,14,12,0.88);backdrop-filter:blur(14px)}
+.nav-logo{font-weight:500;font-size:15px;text-decoration:none;color:var(--text)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:14px;text-decoration:none;color:var(--muted);transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--text);font-weight:500}
+.nav-resume{color:var(--blue)!important;font-weight:500}
+.burger-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.burger-btn span{display:block;width:22px;height:1px;background:var(--text)}
+.mobile-menu{display:none;position:fixed;top:58px;left:0;right:0;background:rgba(14,14,12,0.97);backdrop-filter:blur(12px);padding:24px 32px;z-index:99;flex-direction:column;gap:20px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:18px;text-decoration:none;color:var(--text);font-weight:500}
+
+/* HERO */
+.hero{padding:120px 56px 72px;position:relative;z-index:1}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;opacity:0;animation:up 0.5s ease forwards 0.1s}
+.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:400;line-height:1.1;letter-spacing:-0.01em;color:var(--text);margin-bottom:20px;opacity:0;animation:up 0.6s ease forwards 0.2s}
+.hero-headline .community{font-style:italic;color:var(--blue);cursor:default;position:relative;display:inline}
+.hero-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:520px;opacity:0;animation:up 0.6s ease forwards 0.35s}
+
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* sparkles */
+.sparkle{position:fixed;pointer-events:none;z-index:999;animation:sparkleOut 0.7s ease forwards}
+@keyframes sparkleOut{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.3) rotate(var(--dr))}}
+
+/* CARDS GRID */
+.projects{padding:0 56px 80px;position:relative;z-index:1}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.section-line{flex:1;height:1px;background:var(--border)}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+.card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  text-decoration:none;
+  color:inherit;
+  transition:background 0.25s, transform 0.25s, border-color 0.25s;
+  display:flex;
+  flex-direction:column;
+}
+.card:hover{
+  background:rgba(255,255,255,0.07);
+  border-color:rgba(107,107,255,0.3);
+  transform:translateY(-4px);
+}
+
+.card-img{width:100%;aspect-ratio:16/10;overflow:hidden;background:rgba(255,255,255,0.03)}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;filter:brightness(0.8) saturate(0.85)}
+.card:hover .card-img img{transform:scale(1.04);filter:brightness(0.95) saturate(1)}
+
+.card-body{padding:20px 20px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue)}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2vw,26px);font-weight:400;font-style:italic;color:var(--text);line-height:1.2}
+.card-role{font-size:11px;color:var(--muted);border:1px solid var(--border);padding:3px 10px;border-radius:100px;width:fit-content}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.7;flex:1}
+.card-desc strong{color:var(--text);font-weight:500}
+.card-link{font-size:12px;font-weight:500;color:var(--blue);margin-top:4px;display:inline-flex;align-items:center;gap:4px;transition:gap 0.2s}
+.card:hover .card-link{gap:8px}
+
+/* FOOTER */
+footer{padding:64px 56px;border-top:1px solid var(--border);position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end}
+.footer-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.footer-email{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,2.5vw,28px);font-weight:400;color:var(--text);text-decoration:none;transition:color 0.2s}
+.footer-email:hover{color:var(--blue)}
+.footer-right{text-align:right}
+.footer-note{font-size:13px;color:var(--muted);margin-bottom:12px}
+.footer-social{display:flex;gap:16px;justify-content:flex-end}
+.footer-social a{font-size:13px;color:var(--blue);text-decoration:none;font-weight:500}
+.footer-social a:hover{text-decoration:underline}
+
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){
+  nav{padding:16px 20px}.nav-links{display:none}.burger-btn{display:flex}
+  .hero,.projects{padding-left:24px;padding-right:24px}
+  .hero{padding-top:96px}
+  .cards{grid-template-columns:1fr}
+  footer{padding:48px 24px;flex-direction:column;gap:24px;align-items:flex-start}
+  .footer-right{text-align:left}.footer-social{justify-content:flex-start}
+}
+
+</style>
+</head>
+<body>
+<div class="glow-left"></div>
+<div class="glow-right"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Simran Gunsi</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Work</a></li>
+    <li><a href="#" class="active">Play</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#" class="nav-resume">Résumé ↗</a></li>
+  </ul>
+  <button class="burger-btn" id="burgerBtn"><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Work</a>
+  <a href="#">Play</a>
+  <a href="about.html">About</a>
+  <a href="#" style="color:var(--blue);font-weight:500">Résumé ↗</a>
+</div>
+
+<section class="hero">
+  <p class="hero-eyebrow">Play</p>
+  <h1 class="hero-headline">
+    When I'm not designing<br>
+    I'm <span class="community" id="community">building community</span>
+  </h1>
+  <p class="hero-sub">A collection of projects outside of my day job founding design orgs, running hackathons, and bringing designers together.</p>
+</section>
+
+<section class="projects">
+  <div class="section-header">
+    <span class="section-label">Some examples</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="cards">
+
+    <a class="card" href="https://www.linkedin.com/company/ucsc-ctd/" target="_blank">
+      <div class="card-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/cbe0133b-4585-461f-abb6-1875b2a8291c/Group+691.jpg" alt="Creative Tech Design">
+      </div>
+      <div class="card-body">
+        <p class="card-eyebrow">Creative Tech Design</p>
+        <p class="card-title">Founding UCSC's first UI/UX organization</p>
+        <span class="card-role">Design community · Education</span>
+        <p class="card-desc">Built the <strong>first UI/UX community</strong> at UC Santa Cruz bringing together students and aspiring designers around design education.</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://medium.com/ucsc-creative-tech-design/just-design-ing-a-community-5a27de639d49" target="_blank">
+      <div class="card-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/65e9f307-8e21-4f66-b47a-d617c46c5823/Group+689.png" alt="Just Design">
+      </div>
+      <div class="card-body">
+        <p class="card-eyebrow">Just Design</p>
+        <p class="card-title">A design-a-thon for justice</p>
+        <span class="card-role">Design community · Education</span>
+        <p class="card-desc">Led a design-a-thon bringing together <strong>students, designers, and aspiring leaders</strong> to design for social justice.</p>
+      </div>
+    </a>
+
+    <a class="card" href="https://www.instagram.com/gracehacks/" target="_blank">
+      <div class="card-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/65ab44fc8d37f511ba5b46ba/37146664-ceb0-4b4b-aa0a-d8333856a28a/Group+694.png" alt="Grace Hacks">
+      </div>
+      <div class="card-body">
+        <p class="card-eyebrow">Grace-Hacks</p>
+        <p class="card-title">Hackathon for underrepresented genders</p>
+        <span class="card-role">Web design · Graphic design</span>
+        <p class="card-desc"><strong>Lead designer</strong> for UCSC's hackathon for underrepresented genders web experience and full <strong>visual identity</strong>.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <div>
+    <p class="footer-label">Simran Gunsi</p>
+    <a href="/cdn-cgi/l/email-protection#36455f5b445758514358455f76515b575f5a1855595b" class="footer-email"><span class="__cf_email__" data-cfemail="2d5e44405f4c434a58435e446d4a404c4441034e4240">[email&#160;protected]</span></a>
+  </div>
+  <div class="footer-right">
+    <p class="footer-note">Thanks for checking out my work 😊</p>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/simrangunsi" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@simrxnk" target="_blank">Medium</a>
+      <a href="/cdn-cgi/l/email-protection#4f3c26223d2e21283a213c260f28222e2623612c2022">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.getElementById('burgerBtn').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
+
+const community=document.getElementById('community');
+const chars=['✦','✧','★','⋆','✶','·','✵','⟡','˖'];
+const colors=['#6b6bff','#a0a0ff','#FFD700','#FF6B9D','#4ECDC4','#A78BFA','#c0c0ff'];
+let timer=null;
+function burst(){
+  const r=community.getBoundingClientRect();
+  for(let i=0;i<14;i++){
+    setTimeout(()=>{
+      const s=document.createElement('span');
+      s.className='sparkle';
+      s.textContent=chars[Math.floor(Math.random()*chars.length)];
+      s.style.color=colors[Math.floor(Math.random()*colors.length)];
+      s.style.left=(r.left+Math.random()*r.width)+'px';
+      s.style.top=(r.top+Math.random()*r.height)+'px';
+      const a=Math.random()*Math.PI*2,d=40+Math.random()*70;
+      s.style.setProperty('--dx',Math.cos(a)*d+'px');
+      s.style.setProperty('--dy',Math.sin(a)*d+'px');
+      s.style.setProperty('--dr',(Math.random()*360-180)+'deg');
+      s.style.fontSize=(12+Math.random()*16)+'px';
+      s.style.position='fixed';
+      s.style.pointerEvents='none';
+      document.body.appendChild(s);
+      setTimeout(()=>s.remove(),750);
+    },i*40);
+  }
+}
+community.addEventListener('mouseenter',()=>{burst();timer=setInterval(burst,350);});
+community.addEventListener('mouseleave',()=>{clearInterval(timer);timer=null;});
+</script>
