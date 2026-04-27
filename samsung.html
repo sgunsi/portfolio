@@ -165,7 +165,7 @@ footer{padding:64px 56px;border-top:1px solid var(--border);position:relative;z-
 /* PASSWORD GATE */
 #password-gate{position:fixed;top:0;left:0;width:100%;height:100%;background:#ffffff;z-index:9999;display:flex;align-items:center;justify-content:center}
 #password-gate .gate-inner{text-align:center;max-width:420px;padding:0 24px}
-#password-gate .gate-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;font-style:italic;color:var(--text);margin-bottom:16px;line-height:1.2}
+#password-gate .gate-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:300;font-style:italic;color:var(--text);margin-bottom:16px;line-height:1.2}
 #password-gate .gate-sub{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:32px}
 #password-gate .gate-input{width:100%;padding:12px 16px;font-family:'Inter',sans-serif;font-size:15px;border:1px solid var(--border);border-radius:8px;outline:none;transition:border-color 0.2s}
 #password-gate .gate-input:focus{border-color:#2B2BFF}
@@ -180,7 +180,7 @@ footer{padding:64px 56px;border-top:1px solid var(--border);position:relative;z-
 
 <div id="password-gate">
   <div class="gate-inner">
-    <h1 class="gate-headline">(somewhat) confidential material ahead 🙈</h1>
+    <h1 class="gate-headline">(somewhat) confidential material ahead 🔒</h1>
     <p class="gate-sub">The password's in my resume. If you've got it, you've got the key.</p>
     <input class="gate-input" id="gate-input" type="password" placeholder="Enter password" autocomplete="off">
     <button class="gate-btn" id="gate-btn">Enter</button>
@@ -235,7 +235,7 @@ footer{padding:64px 56px;border-top:1px solid var(--border);position:relative;z-
 <div class="divider"></div>
 
 <!-- NDA DISCLAIMER -->
-<div style="padding:16px 56px;display:flex;align-items:center;gap:10px;background:rgba(43,43,255,0.03);border-bottom:1px solid var(--border);max-width:1200px;margin:0 auto">
+<div style="padding:16px 56px;display:flex;align-items:center;gap:10px;background:rgba(43,43,255,0.03);border-bottom:1px solid var(--border)">
   <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style="flex-shrink:0"><circle cx="10" cy="10" r="9" stroke="rgba(43,43,255,0.4)" stroke-width="1.5"/><path d="M10 9v5" stroke="rgba(43,43,255,0.5)" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="6.5" r="0.75" fill="rgba(43,43,255,0.5)"/></svg>
   <p style="font-size:12px;color:var(--muted);line-height:1.6">The work shown here is a <strong style="color:var(--text);font-weight:500">representative sample</strong> — much of my work at Samsung is covered under NDA and cannot be publicly shared.</p>
 </div>
