@@ -35,7 +35,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .wave{display:inline-block;transform-origin:70% 70%}
 @keyframes wave{0%{transform:rotate(0deg)}10%{transform:rotate(14deg)}20%{transform:rotate(-8deg)}30%{transform:rotate(14deg)}40%{transform:rotate(-4deg)}50%{transform:rotate(10deg)}60%{transform:rotate(0deg)}100%{transform:rotate(0deg)}}
 
-.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.2vw,54px);font-weight:400;line-height:1.15;letter-spacing:-0.01em;color:var(--text);margin-bottom:24px;opacity:0;animation:up 0.6s ease forwards 0.2s}
+.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4.2vw,54px);font-weight:400;line-height:1.15;letter-spacing:-0.01em;color:var(--text);margin-bottom:48px;opacity:0;animation:up 0.6s ease forwards 0.2s}
 .hero-headline .name{color:var(--blue);font-weight:600;font-style:italic;text-decoration:none}
 .hero-headline .name:hover{text-decoration:underline;text-underline-offset:4px}
 .hero-headline em{font-style:italic;color:var(--text)}
@@ -46,8 +46,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .hl::after{content:'';position:absolute;bottom:-1px;left:-3px;right:-3px;height:12px;background:rgba(220,255,0,0.6);z-index:-1;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease}
 .hl:hover::after{transform:scaleX(1)}
 
-.hero-roles{font-size:clamp(13px,1.3vw,15px);font-weight:400;color:var(--muted);letter-spacing:-0.005em;line-height:1.6;opacity:0;animation:up 0.6s ease forwards 0.35s}
-.hero-roles strong{color:var(--text);font-weight:500}
+.hero-roles{font-size:clamp(16px,1.5vw,18px);font-weight:500;color:var(--text);letter-spacing:-0.005em;line-height:1.6;opacity:0;animation:up 0.6s ease forwards 0.35s}
+.hero-roles .hero-prev{font-size:clamp(13px,1.3vw,15px);font-weight:400;color:var(--muted)}
 
 @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
@@ -153,8 +153,8 @@ footer{padding:64px 56px;position:relative;z-index:1;display:flex;justify-conten
       into <em>experiences</em> people <span class="hl">actually want.</span>
     </h1>
     <p class="hero-roles">
-      <strong>Product Designer @ Samsung Research America and MDEi Candidate at University of Waterloo</strong><br>
-      Previously @ Thoughtspot and Playground Global
+      Product Designer @ Samsung Research America and MDEi Candidate at University of Waterloo<br>
+      <span class="hero-prev">Previously @ Thoughtspot and Playground Global</span>
     </p>
   </div>
   <a href="#work" class="scroll-cue">
