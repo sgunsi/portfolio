@@ -31,7 +31,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .mobile-menu a{font-size:18px;text-decoration:none;color:var(--text);font-weight:500}
 
 /* HERO */
-.hero{padding:110px 56px 64px;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.hero{padding:110px 56px 64px;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;max-width:1400px;margin:0 auto}
 .hero-inner{max-width:760px;width:100%;align-self:flex-start}
 
 .hero-greeting{font-size:18px;font-weight:400;color:var(--muted);margin-bottom:16px;opacity:0;animation:up 0.5s ease forwards 0.1s;display:flex;align-items:center;gap:6px;cursor:default;width:fit-content}
@@ -65,7 +65,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* WORK */
-.work-section{padding:64px 56px 80px;position:relative;z-index:1}
+.work-section{padding:64px 56px 80px;position:relative;z-index:1;max-width:1400px;margin:0 auto}
 .section-header{display:flex;align-items:center;gap:16px;margin-bottom:48px}
 .section-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .section-line{flex:1;height:1px;background:var(--border)}
@@ -89,7 +89,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .project-row:hover .row-right img{transform:scale(1.03)}
 
 /* PREV */
-.prev-section{padding:0 56px 80px;position:relative;z-index:1}
+.prev-section{padding:0 56px 80px;position:relative;z-index:1;max-width:1400px;margin:0 auto}
 .prev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .prev-card{background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;border:1px solid var(--border);transition:box-shadow 0.25s,transform 0.25s}
 .prev-card:hover{box-shadow:0 10px 30px rgba(0,0,0,0.07);transform:translateY(-2px)}
@@ -100,7 +100,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .prev-card-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4;letter-spacing:-0.01em}
 
 /* FOOTER */
-footer{padding:64px 56px;position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end}
+footer{padding:64px 56px;position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;max-width:1400px;margin-left:auto;margin-right:auto}
 .footer-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
 .footer-email{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,2.5vw,28px);font-weight:400;color:var(--text);text-decoration:none;transition:color 0.2s}
 .footer-email:hover{color:var(--blue)}
