@@ -41,7 +41,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 @keyframes shimmer{from{background-position:120% 0}to{background-position:-120% 0}}
 .arr{display:inline-block;margin-left:6px;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s}.tile:hover .arr{opacity:1;transform:none}
 </style>
-<style>[hidden]{display:none!important}@keyframes twinkle{0%{scale:1;rotate:0deg}35%{scale:1.4;rotate:24deg}65%{scale:.9;rotate:-8deg}100%{scale:1;rotate:0deg}}section:has(.name:hover) img[src$='sticker-star.png']{animation:twinkle .7s cubic-bezier(.3,1.4,.5,1) both}section:has(.name:hover) img[src$='sticker-star.png']:nth-of-type(2){animation-delay:.08s}section:has(.name:hover) img[src$='sticker-star.png']:nth-of-type(3){animation-delay:.16s}@media (prefers-reduced-motion: reduce){section:has(.name:hover) img[src$='sticker-star.png']{animation:none}}.deco:not(img){display:none!important}html{scroll-behavior:smooth}#work{scroll-margin-top:112px}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+<style>[hidden]{display:none!important}@view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}::view-transition-group(nav-pill){animation-duration:.32s;animation-timing-function:cubic-bezier(.3,1,.4,1)}@media (prefers-reduced-motion: reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}@keyframes twinkle{0%{scale:1;rotate:0deg}35%{scale:1.4;rotate:24deg}65%{scale:.9;rotate:-8deg}100%{scale:1;rotate:0deg}}section:has(.name:hover) img[src$='sticker-star.png'],.twinkling img[src$='sticker-star.png']{animation:twinkle .7s cubic-bezier(.3,1.4,.5,1) both}section:has(.name:hover) img[src$='sticker-star.png']:nth-of-type(2),.twinkling img[src$='sticker-star.png']:nth-of-type(2){animation-delay:.08s}section:has(.name:hover) img[src$='sticker-star.png']:nth-of-type(3),.twinkling img[src$='sticker-star.png']:nth-of-type(3){animation-delay:.16s}section:has(.name:hover) img[src$='sticker-star.png']:nth-of-type(4),.twinkling img[src$='sticker-star.png']:nth-of-type(4){animation-delay:.24s}section:has(.name:hover) img[src$='sticker-star.png']:nth-of-type(5),.twinkling img[src$='sticker-star.png']:nth-of-type(5){animation-delay:.32s}section:has(.name:hover) img[src$='sticker-star.png']:nth-of-type(6),.twinkling img[src$='sticker-star.png']:nth-of-type(6){animation-delay:.4s}@media (prefers-reduced-motion: reduce){section:has(.name:hover) img[src$='sticker-star.png'],.twinkling img[src$='sticker-star.png']{animation:none}}.deco:not(img){display:none!important}html{scroll-behavior:smooth}#work{scroll-margin-top:112px}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 @media (max-width: 760px){
   .nav-wrap nav{gap:2px!important;padding:6px 8px!important;flex-wrap:nowrap!important}
   .nav-wrap nav a{padding:9px 10px!important;font-size:14px!important}
@@ -67,7 +67,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
   <div class="nav-wrap" style="position: sticky; top: 16px; z-index: 50; display: flex; justify-content: center">
     <nav style="background: linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,255,255,0.34)); backdrop-filter: blur(22px) saturate(1.8); -webkit-backdrop-filter: blur(22px) saturate(1.8); border: 1px solid rgba(255,255,255,0.75); border-radius: 999px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(255,255,255,0.25), 0 10px 30px rgba(20,20,40,0.08); padding: 8px 10px 8px 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center">
       <a href="index.html" aria-label="Simran Gunsi, home" style="display: block; width: 32px; height: 32px; margin-right: 8px; border-radius: 50%; background: radial-gradient(circle at 32% 58%, #E58AA4 0%, transparent 55%), radial-gradient(circle at 50% 40%, #D474BC 0%, transparent 55%), radial-gradient(circle at 76% 48%, #8FC6E8 0%, transparent 55%), radial-gradient(circle at 60% 78%, #B7B2EE 0%, transparent 60%), #F4EEF8; filter: blur(1.5px)"></a>
-      <a href="index.html#work" style="padding: 12px 16px; border-radius: 999px; background: rgba(255,255,255,0.7); font-size: 15px; font-weight: 500; color: #1C1C1C; text-decoration: none">Work</a>
+      <a href="index.html#work" class="nav-active" style="padding: 12px 16px; border-radius: 999px; background: rgba(255,255,255,0.7); font-size: 15px; font-weight: 500; color: #1C1C1C; text-decoration: none">Work</a>
       <a href="play.html" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Play</a>
       <a href="about.html" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">About</a>
       <a href="#" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Resume ↗</a>
@@ -102,6 +102,9 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
     <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; left: 250px; top: 118px; width: 34px; transform: rotate(-14deg)">
     <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; right: 268px; top: 236px; width: 24px; transform: rotate(12deg)">
     <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; left: 236px; top: 468px; width: 20px; transform: rotate(6deg)">
+    <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; right: 190px; top: 72px; width: 18px; transform: rotate(20deg)">
+    <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; left: 118px; top: 300px; width: 26px; transform: rotate(-8deg)">
+    <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; right: 120px; top: 390px; width: 22px; transform: rotate(10deg)">
     <div class="deco" style="position: absolute; right: 27px; top: 160px; z-index: {{ stampZ }}">
       <a href="about.html" class="sticker" aria-label="Stamp sticker, where I'm from" data-on-mouseenter="{{ stampOn }}" data-on-mouseleave="{{ stampOff }}" data-on-focus="{{ stampOn }}" data-on-blur="{{ stampOff }}" style="position: relative; display: block; transform: rotate(22deg)">
         <img src="images/redesign/stamp.png" alt="" style="display: block; width: 119px; height: auto; filter: drop-shadow(0 4px 8px rgba(40,30,30,0.15))">
@@ -471,6 +474,7 @@ class Component extends DCLogic {
 
 DCLite.mount(document.getElementById('app'), Component);
 </script>
+<script>(function(){ if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; var h=document.querySelector(".name"); if(!h) return; var sec=h.closest("section"); setTimeout(function(){ sec.classList.add("twinkling"); setTimeout(function(){ sec.classList.remove("twinkling"); },1300); },600); })();</script>
 <script src="simran-assistant.js" defer></script>
 </body>
 </html>

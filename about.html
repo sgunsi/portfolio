@@ -18,7 +18,7 @@ a{color:#3B3BF5}
 .caret{display:inline-block;width:2px;height:.9em;margin-left:4px;background:#2B2937;vertical-align:-0.05em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 </style>
-<style>[hidden]{display:none!important}.tw{color:#3B3BF5;position:relative}.tw.final{font-style:italic;font-variation-settings:'SOFT' 100,'WONK' 1}
+<style>[hidden]{display:none!important}@view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}::view-transition-group(nav-pill){animation-duration:.32s;animation-timing-function:cubic-bezier(.3,1,.4,1)}@media (prefers-reduced-motion: reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}.tw{color:#3B3BF5;position:relative}.tw.final{font-style:italic;font-variation-settings:'SOFT' 100,'WONK' 1}
 .tw.striking::after{content:'';position:absolute;left:0;right:0;top:54%;height:3px;background:#2B2937;transform:scaleX(0);transform-origin:left;animation:strike .32s ease forwards}
 @keyframes strike{to{transform:scaleX(1)}}
 .caret{background:#3B3BF5!important}.caret.hide{display:none}
@@ -56,7 +56,7 @@ a{color:#3B3BF5}
       <a href="index.html" aria-label="Simran Gunsi, home" style="display: block; width: 32px; height: 32px; margin-right: 8px; border-radius: 50%; background: radial-gradient(circle at 32% 58%, #E58AA4 0%, transparent 55%), radial-gradient(circle at 50% 40%, #D474BC 0%, transparent 55%), radial-gradient(circle at 76% 48%, #8FC6E8 0%, transparent 55%), radial-gradient(circle at 60% 78%, #B7B2EE 0%, transparent 60%), #F4EEF8; filter: blur(1.5px)"></a>
       <a href="index.html#work" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Work</a>
       <a href="play.html" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Play</a>
-      <a href="about.html" style="padding: 12px 16px; border-radius: 999px; background: rgba(255,255,255,0.7); font-size: 15px; font-weight: 500; color: #1C1C1C; text-decoration: none">About</a>
+      <a href="about.html" class="nav-active" style="padding: 12px 16px; border-radius: 999px; background: rgba(255,255,255,0.7); font-size: 15px; font-weight: 500; color: #1C1C1C; text-decoration: none">About</a>
       <a href="#" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Resume ↗</a>
     </nav>
   </div>
