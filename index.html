@@ -29,7 +29,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 @keyframes pgLook{0%{transform:rotate(90deg)}14%{transform:rotate(58deg)}32%{transform:rotate(58deg)}48%{transform:rotate(122deg)}64%{transform:rotate(122deg)}80%{transform:rotate(84deg)}100%{transform:rotate(90deg)}}
 @keyframes pgLook2{0%{transform:rotate(0)}18%{transform:rotate(-28deg)}38%{transform:rotate(-28deg)}58%{transform:rotate(28deg)}78%{transform:rotate(28deg)}100%{transform:rotate(0)}}
 @keyframes pgLook3{0%{transform:rotate(0)}10%{transform:rotate(-30deg)}24%{transform:rotate(-30deg)}34%{transform:rotate(26deg)}48%{transform:rotate(26deg)}56%{transform:rotate(-12deg)}64%{transform:rotate(-12deg)}72%{transform:rotate(14deg)}82%{transform:rotate(14deg)}100%{transform:rotate(0)}}
-@keyframes pgLook4{0%{transform:rotate(26deg)}12%{transform:rotate(-26deg)}26%{transform:rotate(-26deg)}38%{transform:rotate(30deg)}52%{transform:rotate(30deg)}62%{transform:rotate(-10deg)}72%{transform:rotate(-10deg)}82%{transform:rotate(12deg)}100%{transform:rotate(0)}}
+@keyframes pgLook4{0%{transform:rotate(26deg)}20%{transform:rotate(-26deg)}40%{transform:rotate(-26deg)}62%{transform:rotate(28deg)}80%{transform:rotate(28deg)}100%{transform:rotate(0)}}
 @keyframes pgFade{from{opacity:1}to{opacity:0}}
 @keyframes pgQ{0%{opacity:0;transform:scale(.4) translateY(6px)}15%{opacity:1;transform:scale(1.1)}25%{transform:scale(1)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.6)}}
 @keyframes pgDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
@@ -41,7 +41,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 @keyframes shimmer{from{background-position:120% 0}to{background-position:-120% 0}}
 .arr{display:inline-block;margin-left:6px;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s}.tile:hover .arr{opacity:1;transform:none}
 </style>
-<style>[hidden]{display:none!important}.name span{background:linear-gradient(100deg,#2A2A30 0%,#2A2A30 38%,#E58AA4 52%,#D474BC 64%,#9B8BE6 78%,#8FC6E8 92%) 0 0/280% 100% no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 1s cubic-bezier(.3,.7,.3,1)}.name span:nth-child(2){transition-delay:.08s}.name:hover span{background-position:100% 0}@media (prefers-reduced-motion: reduce){.name span{transition:none}}.deco:not(img){display:none!important}html{scroll-behavior:smooth}#work{scroll-margin-top:112px}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+<style>[hidden]{display:none!important}.cta{background:linear-gradient(100deg,#1C1C1C 0%,#1C1C1C 38%,#D9799A 54%,#B86BC4 66%,#7E76DA 80%,#5FA3D9 94%) 0 0/280% 100% no-repeat!important;transition:background-position .9s cubic-bezier(.3,.7,.3,1)}.cta:hover,.cta:focus-visible{background-position:100% 0!important;color:#FFFFFF}@media (prefers-reduced-motion: reduce){.cta{transition:none}}.name span{background:linear-gradient(100deg,#2A2A30 0%,#2A2A30 38%,#E58AA4 52%,#D474BC 64%,#9B8BE6 78%,#8FC6E8 92%) 0 0/280% 100% no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 1s cubic-bezier(.3,.7,.3,1)}.name span:nth-child(2){transition-delay:.08s}.name:hover span{background-position:100% 0}@media (prefers-reduced-motion: reduce){.name span{transition:none}}.deco:not(img){display:none!important}html{scroll-behavior:smooth}#work{scroll-margin-top:112px}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 @media (max-width: 760px){
   .nav-wrap nav{gap:2px!important;padding:6px 8px!important;flex-wrap:nowrap!important}
   .nav-wrap nav a{padding:9px 10px!important;font-size:14px!important}
@@ -83,7 +83,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
       <p style="margin: 6px 0 0; font-size: 14px; letter-spacing: 0.02em; line-height: 1.5; color: #5E5E5E">Designing AI + health products at Samsung · MDEi at the University of Waterloo</p>
       <p style="margin: 0; max-width: 560px; font-size: 19px; line-height: 1.45; color: #333333; text-wrap: balance">Product designer who loves the complex stuff: platforms, data tools and AI experiences.</p>
       <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px">
-        <a href="#work" style="display: inline-block; padding: 14px 26px; border-radius: 999px; background: #1C1C1C; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none">View work ↓</a>
+        <a href="#work" class="cta" style="display: inline-block; padding: 14px 26px; border-radius: 999px; background: #1C1C1C; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none">View work ↓</a>
       </div>
     </div>
 
@@ -393,27 +393,27 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 <script>
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { fanned: false, book: false, lego: false, stamp: false, hov: null, theme: 0, cx: 0, cy: 0, vi: 0, grat: false, hri: false, pg: false, pgR: false, synced: 295, bump: false, say: false, sx: 190, sy: 280 }; }
-  componentWillUnmount() { clearInterval(this.timer); clearInterval(this.vt); clearTimeout(this.vd); clearTimeout(this.t0); clearInterval(this.iv); clearTimeout(this.tb); clearTimeout(this.tpg); }
+  componentWillUnmount() { clearInterval(this.tre); clearInterval(this.timer); clearInterval(this.vt); clearTimeout(this.vd); clearTimeout(this.t0); clearInterval(this.iv); clearTimeout(this.tb); clearTimeout(this.tpg); }
   tick() { this.setState({ synced: this.state.synced + 1, bump: true }); clearTimeout(this.tb); this.tb = setTimeout(() => this.setState({ bump: false }), 400); }
   renderVals() {
     const f = this.state.fanned;
     const hov = this.state.hov;
     const themes = [{ accent: '#3B6CF5', soft: '#E8EEFF' }, { accent: '#E0618A', soft: '#FDEAF0' }, { accent: '#24936B', soft: '#E1F4EB' }, { accent: '#8A63E6', soft: '#EFE9FD' }];
     const ti = this.state.theme;
-    const m = hov === 'mode', u = hov === 'up', s6 = hov === 'sam';
+    const m = hov === 'mode' && !this.state.re, u = hov === 'up', s6 = hov === 'sam';
     const base = [38, 52, 44, 60, 48, 56, 50], filt = [62, 78, 70, 92, 74, 86, 80];
     return {
       track: (e) => { const el = e.currentTarget, r = el.getBoundingClientRect(), k = el.offsetWidth / r.width; this.setState({ cx: (e.clientX - r.left) * k, cy: (e.clientY - r.top) * k }); },
       samOn: () => { this.setState({ hov: 'sam' }); clearTimeout(this.t0); clearInterval(this.iv); this.t0 = setTimeout(() => { this.tick(); this.iv = setInterval(() => this.tick(), 1600); }, 1740); },
       samOff: () => { clearTimeout(this.t0); clearInterval(this.iv); clearTimeout(this.tb); this.setState({ hov: null, synced: 295, bump: false }); },
-      modeOn: () => this.setState({ hov: 'mode' }),
+      modeOn: () => { this.setState({ hov: 'mode', re: false }); clearInterval(this.tre); this.tre = setInterval(() => this.setState({ re: !this.state.re }), 1500); },
       upOn: () => { clearInterval(this.vt); clearTimeout(this.vd); this.setState({ hov: 'up', vi: 0 }); this.vt = setInterval(() => { const n = this.state.vi + 1; if (n > 4) clearInterval(this.vt); else this.setState({ vi: n }); }, 520); },
       upOff: () => { clearInterval(this.vt); clearTimeout(this.vd); this.setState({ hov: null, vi: 0 }); },
-      hovOff: () => this.setState({ hov: null }),
+      hovOff: () => { clearInterval(this.tre); this.setState({ hov: null, re: false }); },
       cx: this.state.cx, cy: this.state.cy,
       o6: { synced: this.state.synced, numC: this.state.bump ? '#4475E3' : '#2B2B2B', p2: s6 ? 'M0 218 C120 205, 230 143, 440 81 L440 220 L0 220 Z' : 'M0 218 C120 206, 230 150, 440 90 L440 220 L0 220 Z', p3: s6 ? 'M0 219 C140 210, 250 170, 440 124 L440 220 L0 220 Z' : 'M0 219 C140 212, 250 180, 440 140 L440 220 L0 220 Z', cells: Array.from({ length: 245 }, (_, k) => { const r = Math.floor(k / 35), c = k % 35; const v = (Math.sin(r * 2.1 + c * 0.7) + Math.sin(r * 0.9 - c * 0.35) + 2.2) / 4.4; const lvl = Math.max(0, Math.min(4, Math.floor(v * 5 + ((r * 7 + c * 3) % 5 === 0 ? 1 : 0)))); const pal = ['#EEF3FD', '#DAE3F9', '#A9C0F1', '#7699EA', '#4475E3', '#2F5BC4', '#22449A']; const fresh = c >= 29; return { bg: pal[fresh && s6 ? Math.min(6, lvl + 2) : lvl], d: fresh ? (0.3 + (c - 29) * 0.18 + r * 0.03) + 's' : '0s' }; }), ecg: 0, beat: s6 ? 'ecg 1.6s ease-out infinite' : 'none', done: s6 ? 2 : 1, tasks: [['Morning check-in', true, '2 min'], ['Heart rate reading', s6, '1 min'], ['Sleep survey', false, 'Tonight']].map(([label, done, meta], i) => ({ label, meta, bg: done ? '#4475E3' : '#FFFFFF', bd: done ? '#4475E3' : '#CDD3E0', ck: done ? 1 : 0, fg: done ? '#8A8D98' : '#1C1C24', d: i === 1 ? '1.2s' : '0s' })), ping: s6 ? 'ping 1.6s ease-out 0.97s infinite' : 'none', sig: [0, 1].map((i) => ({ anim: s6 ? ('flow 3.2s cubic-bezier(.45,0,.25,1) ' + (0.2 + i * 1.6) + 's infinite') : 'none' })) },
-      pgOn: () => { this.setState({ pg: true }); clearTimeout(this.tpg); this.tpg = setTimeout(() => this.setState({ pgR: true }), 2100); }, pgOff: () => { clearTimeout(this.tpg); this.setState({ pg: false, pgR: false }); },
-      pgLook: this.state.pg ? 'pgLook4 2.1s ease-in-out 0s 1 both' : 'none', pgRouteC: this.state.pgR ? '#5578E6' : '#B8BECB', pgSolid: this.state.pg ? 0.76 : 0.876, pgDist: this.state.pg ? 24 : 12.4, pgMoveDelay: this.state.pg ? 2.1 : 0,
+      pgOn: () => { this.setState({ pg: true }); clearTimeout(this.tpg); this.tpg = setTimeout(() => this.setState({ pgR: true }), 1200); }, pgOff: () => { clearTimeout(this.tpg); this.setState({ pg: false, pgR: false }); },
+      pgLook: this.state.pg ? 'pgLook4 1.2s ease-in-out 0s 1 both' : 'none', pgRouteC: this.state.pgR ? '#5578E6' : '#B8BECB', pgSolid: this.state.pg ? 0.76 : 0.876, pgDist: this.state.pg ? 24 : 12.4, pgMoveDelay: this.state.pg ? 1.2 : 0,
       pgP1: this.state.pgR ? { t: 'En route', bg: '#5578E6', fg: '#FFFFFF', d: '0s' } : { t: 'Waiting 60s', bg: '#3B5B8B', fg: '#7FDDAA', d: '0s' },
       pgP3: this.state.pg ? { t: 'Waiting 60s', bg: '#3B5B8B', fg: '#7FDDAA', d: '1.6s', w: 162 } : { t: 'Pending', bg: '#464D85', fg: '#F2C94C', d: '0s', w: 122 },
       hriOn: () => this.setState({ hri: true }), hriOff: () => this.setState({ hri: false }),
