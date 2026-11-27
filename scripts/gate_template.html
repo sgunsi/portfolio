@@ -1,0 +1,64 @@
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght,SOFT,WONK@9..144,100..900,0..100,0..1&display=swap" rel="stylesheet">
+<style>
+@view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}
+#gate .nav-wrap nav{position:relative!important;top:auto!important;left:auto!important;right:auto!important;width:auto!important;justify-content:flex-start!important}
+#gate{min-height:100vh;box-sizing:border-box;padding:24px 24px 64px;background:radial-gradient(circle at 8% 40%,rgba(185,180,236,.35),transparent 40%),radial-gradient(circle at 95% 15%,rgba(185,180,236,.35),transparent 40%),#F5F4F0;font-family:Inter,system-ui,sans-serif;color:#1C1C1C}
+#gate .g-card{max-width:440px;margin:18vh auto 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+#gate .g-lock{width:44px;height:44px;border-radius:50%;background:#EFEAFB;display:flex;align-items:center;justify-content:center}
+#gate h1{margin:6px 0 0;font-family:'Fraunces',serif;font-weight:340;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:40px;line-height:1.1;letter-spacing:-.01em;color:#2B2937}
+#gate p{margin:0;font-size:16px;line-height:1.6;color:#4A4A52}
+#gate a.g-mail{color:#3B3BF5;text-decoration:none}#gate a.g-mail:hover{text-decoration:underline}
+#gate form{margin-top:10px;display:flex;gap:8px;width:100%}
+#gate input{flex:1;min-width:0;padding:13px 16px;border:1px solid #DDDAD2;border-radius:999px;background:#FFFFFF;font:15px Inter,sans-serif;color:#1C1C1C;outline:none;transition:border-color .2s,box-shadow .2s}
+#gate input:focus{border-color:#9B8BE6;box-shadow:0 0 0 4px rgba(155,139,230,.18)}
+#gate button{padding:13px 22px;border:0;border-radius:999px;background:#1C1C1C;color:#FFFFFF;font:500 15px Inter,sans-serif;cursor:pointer}
+#gate button:disabled{opacity:.6;cursor:default}
+#gate .g-err{min-height:20px;font-size:14px;color:#B23A48}
+#gate .shake{animation:gshake .35s}
+@keyframes gshake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (max-width:520px){#gate h1{font-size:32px}#gate form{flex-direction:column}}
+</style>
+</head>
+<body>
+<div id="gate">
+  {{NAV}}
+  <main class="g-card">
+    <div class="g-lock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4E3FA6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></div>
+    <h1>This one's under NDA</h1>
+    <p>The password is on my résumé, or <a class="g-mail" href="mailto:skgunsi@gmail.com?subject=Case%20study%20access">email me for access</a>.</p>
+    <form id="g-form" autocomplete="off">
+      <label for="g-pw" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Password</label>
+      <input id="g-pw" type="password" placeholder="Password" autofocus>
+      <button id="g-btn" type="submit">Unlock</button>
+    </form>
+    <p class="g-err" id="g-err" role="alert"></p>
+  </main>
+</div>
+<div id="page-content" hidden></div>
+<script>
+(function(){
+  var SALT='{{SALT}}', IV='{{IV}}', CT='{{CT}}', ITER={{ITER}}, KEY='unlock:{{NAME}}';
+  var b=function(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0);});};
+  var gate=document.getElementById('gate'), out=document.getElementById('page-content'), form=document.getElementById('g-form'), pw=document.getElementById('g-pw'), btn=document.getElementById('g-btn'), err=document.getElementById('g-err');
+  async function open(p){
+    var base=await crypto.subtle.importKey('raw',new TextEncoder().encode(p),'PBKDF2',false,['deriveKey']);
+    var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b(SALT),iterations:ITER,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+    var buf=await crypto.subtle.decrypt({name:'AES-GCM',iv:b(IV)},key,b(CT));
+    return new TextDecoder().decode(buf);
+  }
+  function show(html,p){ out.innerHTML=html; out.hidden=false; gate.remove(); try{sessionStorage.setItem(KEY,p);}catch(e){} window.scrollTo(0,0); }
+  var saved=null; try{saved=sessionStorage.getItem(KEY);}catch(e){}
+  if(saved){ open(saved).then(function(h){show(h,saved);}).catch(function(){}); }
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); if(!pw.value) return;
+    btn.disabled=true; btn.textContent='Unlocking…'; err.textContent='';
+    var p=pw.value;
+    open(p).then(function(h){show(h,p);}).catch(function(){
+      err.textContent="That's not it. Try again?"; btn.disabled=false; btn.textContent='Unlock';
+      pw.value=''; form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); pw.focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>
