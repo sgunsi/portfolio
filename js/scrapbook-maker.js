@@ -9,7 +9,15 @@
   var IMG = 'images/redesign/', MK = IMG + 'maker/';
   var LETTERS = {"A":[["a1",1.172],["a2",1.225],["a3",1.007]],"B":[["b1",1.137],["b2",1.223],["b3",1.261]],"C":[["c1",1.042],["c2",1.63],["c3",1.154]],"D":[["d1",0.959],["d2",1.119],["d3",1.327]],"E":[["e1",0.96],["e2",1.172],["e3",1.339]],"F":[["f1",0.98],["f2",1.304],["f3",1.316]],"G":[["g1",0.993],["g2",1.014],["g3",1.923]],"H":[["h1",1.21],["h2",1.189],["h3",1.087]],"I":[["i1",1.875],["i2",2.0],["i3",0.76]],"J":[["j1",1.765],["j2",1.542],["j3",0.993]],"K":[["k1",1.613],["k2",1.456],["k3",1.0]],"L":[["l1",1.181],["l2",1.442],["l3",1.339]],"M":[["m1",1.0],["m2",1.172],["m3",0.68]],"N":[["n1",1.111],["n2",1.1],["n3",0.933]],"O":[["o1",1.306],["o2",1.049],["o3",1.0]],"P":[["p1",1.25],["p2",1.376],["p3",1.21]],"R":[["r1",0.813],["r2",1.096],["r3",1.042]],"S":[["s1",1.087],["s2",1.415],["s3",1.345]],"T":[["t1",1.282],["t2",1.03],["t3",1.154]],"U":[["u1",0.98],["u2",1.22],["u3",1.056]],"V":[["v1",1.027]],"W":[["w1",0.9]],"X":[["x1",1.054]],"Y":[["y1",0.98],["y2",1.145],["y3",1.261]],"Z":[["z1",0.96]]};
   var PATCHES = {"dog":0.7,"denim-heart":0.858,"apple":1.044,"burst-star":0.929,"red-dot-star":0.927,"dachshund":0.542,"bear":0.769,"luck":1.067,"cloud":0.64,"dragonfly":0.798,"sun":0.975,"cards":0.974,"eight-ball":0.995,"red-heart":0.888};
-  var PHOTOS = ['craft', 'friends', 'gokart', 'halloween', 'room', 'sf'].map(function (k) { return MK + 'photo-' + k + '.webp'; });
+  var TINTS = ['#EDE9F8', '#FBE3E8', '#E1ECFA', '#E6F3E4', '#FCF0D6'];
+  var PAPERS = {
+    dots: { label: 'Dot grid', base: '#FBF8F1', css: 'radial-gradient(#E2DCCD 1px,transparent 1.3px) 0 0/18px 18px' },
+    grid: { label: 'Graph paper', base: '#FBFAF5', css: 'linear-gradient(#DCE3EE 1px,transparent 1px) 0 0/18px 18px,linear-gradient(90deg,#DCE3EE 1px,transparent 1px) 0 0/18px 18px' },
+    lined: { label: 'Lined', base: '#FCFBF7', css: 'linear-gradient(90deg,transparent 9%,#F2B8B8 9%,#F2B8B8 calc(9% + 1px),transparent calc(9% + 1px)),repeating-linear-gradient(transparent 0 21px,#CFDDF0 21px 22px)' },
+    kraft: { label: 'Kraft', base: '#D8BE96', css: 'radial-gradient(rgba(120,90,50,.18) 1px,transparent 1.4px) 0 0/7px 9px,radial-gradient(rgba(255,255,255,.18) 1px,transparent 1.4px) 3px 4px/11px 8px' },
+    gingham: { label: 'Pink gingham', base: '#FCF2F4', css: 'linear-gradient(90deg,rgba(236,150,172,.26) 50%,transparent 50%) 0 0/18px 18px,linear-gradient(rgba(236,150,172,.26) 50%,transparent 50%) 0 0/18px 18px' }
+  };
+  var paper = 'dots';
   var WORDS = ['hello', 'yay', 'hi friend', 'xoxo', 'fun', 'smile', 'lucky'];
   var STICKERS = {
     miffy: { type: 'img', src: IMG + 'sticker-miffy.png', ar: 356 / 240, w: 0.1, label: 'Miffy' },
@@ -26,17 +34,18 @@
   Object.keys(PATCHES).forEach(function (k) { STICKERS['p-' + k] = { type: 'img', src: MK + 'patch-' + k + '.webp', ar: PATCHES[k], w: 0.11, label: k.replace(/-/g, ' ') + ' patch' }; });
   STICKERS.word = { type: 'word', ar: 0.3, w: 0.3, label: 'Word' };
   var ORDER = ['photo', 'note', 'miffy', 'lego', 'stamp', 'star'].concat(Object.keys(PATCHES).map(function (k) { return 'p-' + k; }), ['tapePink', 'tapeBlue', 'tapeLav', 'sparkle']);
-  var photoNext = Math.floor(Math.random() * PHOTOS.length);
+
 
   var items = [], sel = null, uid = 0;
 
   root.innerHTML =
     '<div class="mk-page" aria-label="Your scrapbook page">' +
-      '<div class="mk-half mk-l blL"></div><div class="mk-half mk-r blR"></div><div class="mk-spine"></div>' +
+      '<div class="mk-half mk-l"></div><div class="mk-half mk-r"></div><div class="mk-spine"></div>' +
       '<div class="mk-items"></div>' +
       '<p class="mk-empty">Tap a sticker below to start your page ✦</p>' +
     '</div>' +
     '<form class="mk-wordbar" autocomplete="off"><input class="mk-word-in" maxlength="16" placeholder="Type a word in cut-out letters" aria-label="Type a word"><button type="submit" class="mk-btn">Add ✂︎</button></form>' +
+    '<div class="mk-papers" role="group" aria-label="Paper"><span>Paper</span></div>' +
     '<div class="mk-tray" role="toolbar" aria-label="Stickers"></div>' +
     '<div class="mk-actions">' +
       '<button type="button" class="mk-btn" data-act="shuffle">Shuffle ⟳</button>' +
@@ -73,7 +82,7 @@
   function add(k, x, y, r, extra) {
     var d = STICKERS[k];
     var it = Object.assign({ id: ++uid, k: k, x: x, y: y, r: r || 0, w: d.w, text: 'hi from me ✿', photo: null }, extra || {});
-    if (d.type === 'photo' && !it.src && !it.photo) { it.src = PHOTOS[photoNext]; photoNext = (photoNext + 1) % PHOTOS.length; }
+    if (d.type === 'photo' && !it.tint) it.tint = TINTS[Math.floor(Math.random() * TINTS.length)];
     if (d.type === 'word') buildWord(it);
     items.push(it); draw(it); select(it); syncEmpty();
     return it;
@@ -89,13 +98,12 @@
       var f = document.createElement('div'); f.className = 'mk-photo-in'; el.appendChild(f);
       setPhoto(it, f);
       var tools = document.createElement('div'); tools.className = 'mk-ptools';
-      tools.innerHTML = '<button type="button" data-p="next" aria-label="Show another photo">↻</button><button type="button" data-p="own">Use mine +</button>';
+      tools.innerHTML = '<button type="button" data-p="own">Add a photo +</button>';
       el.appendChild(tools);
       tools.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
       tools.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return; e.stopPropagation();
-        if (b.dataset.p === 'next') { it.photo = null; it.src = PHOTOS[photoNext]; photoNext = (photoNext + 1) % PHOTOS.length; setPhoto(it, f); }
-        else pickPhoto(it);
+        pickPhoto(it);
       });
     } else if (d.type === 'word') {
       el.setAttribute('aria-label', it.word);
@@ -171,10 +179,10 @@
   page.addEventListener('pointerdown', function (e) { if (e.target === page || e.target.classList.contains('mk-half') || e.target === layer) select(null); });
 
   function setPhoto(it, box) {
-    box.innerHTML = '';
-    var c = it.photo ? it.photo.cloneNode() : new Image();
-    if (!it.photo) c.src = it.src;
-    c.alt = 'Photo'; c.draggable = false; box.appendChild(c);
+    box.innerHTML = ''; box.style.background = it.tint;
+    if (!it.photo) { box.innerHTML = '<span class="mk-ph">your photo here ✦</span>'; return; }
+    var c = it.photo.cloneNode(); c.alt = 'Your photo'; c.draggable = false; box.appendChild(c);
+    var t = elOf(it) && elOf(it).querySelector('[data-p="own"]'); if (t) t.textContent = 'Change photo';
   }
   var TILE_BG = ['#F3B7C8', '#B9CDF2', '#F6DF73', '#CFC6F3', '#BFE3C0', '#F7C59F'];
   function buildWord(it) {
@@ -234,17 +242,13 @@
     select(null);
     var W = 1800, H = Math.round(W * 1315 / 1800), cv = document.createElement('canvas');
     cv.width = W; cv.height = H; var c = cv.getContext('2d');
-    var bg = c.createLinearGradient(0, 0, W, 0);
-    bg.addColorStop(0, '#FBF8F1'); bg.addColorStop(0.44, '#FBF8F1'); bg.addColorStop(0.5, '#F1ECDF'); bg.addColorStop(0.56, '#FBF8F1'); bg.addColorStop(1, '#FBF8F1');
-    c.fillStyle = bg; c.fillRect(0, 0, W, H);
-    c.fillStyle = '#E2DCCD';
-    for (var yy = 18; yy < H; yy += 36) for (var xx = 18; xx < W; xx += 36) { c.beginPath(); c.arc(xx, yy, 2, 0, 7); c.fill(); }
+    drawPaper(c, W, H);
     var srcs = items.filter(function (i) { return STICKERS[i.k].type === 'img'; }).map(function (i) { return STICKERS[i.k].src; });
     Promise.all(srcs.map(loadImg)).then(function () {
       var jobs = items.map(function (it) {
         var d = STICKERS[it.k];
         if (d.type === 'word') return Promise.all(it.parts.map(function (pt) { return pt.n ? loadImg(MK + 'letter-' + pt.n + '.webp') : Promise.resolve(null); })).then(function (ims) { return { it: it, d: d, ims: ims }; });
-        if (d.type === 'photo') return (it.photo ? Promise.resolve(it.photo) : loadImg(it.src)).then(function (im) { return { it: it, d: d, im: im }; });
+        if (d.type === 'photo') return Promise.resolve({ it: it, d: d, im: it.photo });
         return (d.type === 'img' ? loadImg(d.src) : Promise.resolve(null)).then(function (im) { return { it: it, d: d, im: im }; });
       });
       return Promise.all(jobs);
@@ -262,7 +266,7 @@
           var ph = o.im;
           if (ph) { var s = Math.max(iw / ph.width, ih / ph.height), sw = iw / s, sh = ih / s;
             c.drawImage(ph, (ph.width - sw) / 2, (ph.height - sh) / 2, sw, sh, -w / 2 + p, -h / 2 + p, iw, ih); }
-          else { c.fillStyle = '#EDE9F8'; c.fillRect(-w / 2 + p, -h / 2 + p, iw, ih); }
+          else { c.fillStyle = it.tint; c.fillRect(-w / 2 + p, -h / 2 + p, iw, ih); c.fillStyle = 'rgba(43,41,55,.55)'; c.font = (iw * 0.12) + 'px Caveat, cursive'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('your photo here ✦', 0, -h / 2 + p + ih / 2); }
         } else if (d.type === 'word') {
           var uw = w / it.units, cx = -w / 2;
           it.parts.forEach(function (pt, i) {
@@ -283,6 +287,33 @@
       cv.toBlob(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'my-scrapbook-page.png'; document.body.appendChild(a); a.click(); a.remove(); });
     });
   }
+  function drawPaper(c, W, H) {
+    var P = PAPERS[paper], g = 36, x, y;
+    c.fillStyle = P.base; c.fillRect(0, 0, W, H);
+    if (paper === 'dots') { c.fillStyle = '#E2DCCD'; for (y = 18; y < H; y += g) for (x = 18; x < W; x += g) { c.beginPath(); c.arc(x, y, 2, 0, 7); c.fill(); } }
+    else if (paper === 'grid') { c.fillStyle = '#DCE3EE'; for (y = 0; y < H; y += g) c.fillRect(0, y, W, 2); for (x = 0; x < W; x += g) c.fillRect(x, 0, 2, H); }
+    else if (paper === 'lined') { c.fillStyle = '#CFDDF0'; for (y = 42; y < H; y += 44) c.fillRect(0, y, W, 2); c.fillStyle = '#F2B8B8'; c.fillRect(W * 0.045, 0, 2, H); c.fillRect(W * 0.545, 0, 2, H); }
+    else if (paper === 'kraft') { for (var i = 0; i < 9000; i++) { c.fillStyle = Math.random() < 0.6 ? 'rgba(120,90,50,.16)' : 'rgba(255,255,255,.16)'; c.fillRect(Math.random() * W, Math.random() * H, 2, 2); } }
+    else if (paper === 'gingham') { c.fillStyle = 'rgba(236,150,172,.26)'; for (x = 0; x < W; x += g) c.fillRect(x, 0, g / 2, H); for (y = 0; y < H; y += g) c.fillRect(0, y, W, g / 2); }
+    var sp = c.createLinearGradient(W / 2 - 40, 0, W / 2 + 40, 0);
+    sp.addColorStop(0, 'rgba(60,50,30,0)'); sp.addColorStop(0.5, 'rgba(60,50,30,.16)'); sp.addColorStop(1, 'rgba(60,50,30,0)');
+    c.fillStyle = sp; c.fillRect(W / 2 - 40, 0, 80, H);
+  }
+  function setPaper(k) {
+    paper = k; var P = PAPERS[k];
+    root.querySelectorAll('.mk-half').forEach(function (h) { h.style.background = P.css + ',' + P.base; });
+    root.querySelectorAll('.mk-paper').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.paper === k ? 'true' : 'false'); });
+  }
+  var papersRow = root.querySelector('.mk-papers');
+  Object.keys(PAPERS).forEach(function (k) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'mk-paper'; b.dataset.paper = k;
+    b.title = PAPERS[k].label; b.setAttribute('aria-label', PAPERS[k].label + ' paper');
+    b.style.background = PAPERS[k].css.replace(/18px 18px/g, '8px 8px').replace(/0 21px/, '0 7px').replace(/21px 22px/, '7px 8px') + ',' + PAPERS[k].base;
+    b.addEventListener('click', function () { setPaper(k); });
+    papersRow.appendChild(b);
+  });
+  setPaper('dots');
+
   function wrap(c, text, maxW, lh) {
     var words = String(text || '').split(/\s+/), lines = [], cur = '';
     words.forEach(function (w) { var t = cur ? cur + ' ' + w : w; if (c.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; });
