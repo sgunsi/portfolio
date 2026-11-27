@@ -147,8 +147,8 @@ a{color:#3B3BF5}
 <script src="js/dc-lite.js"></script>
 <script>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { w: 0, n: 0, del: false }; }
-  start() { const words = ['designer', 'creative ✧˖°⟡', 'desi']; this.t = setInterval(() => { const word = words[this.state.w], n = this.state.n; if (!this.state.del) { if (n < word.length) this.setState({ n: n + 1 }); else if (!this.hold) { this.hold = true; setTimeout(() => { this.hold = false; this.setState({ del: true }); }, 1400); } } else { if (n > 0) this.setState({ n: n - 1 }); else this.setState({ del: false, w: (this.state.w + 1) % words.length }); } }, 90); this.words = words; }
+  constructor(props) { super(props); this.state = { w: 0, n: 0, del: false, done: false }; }
+  start() { const words = ['designer', 'creative ✧˖°⟡']; this.words = words; this.t = setInterval(() => { const w = this.state.w, word = Array.from(words[w]), n = this.state.n; if (!this.state.del) { if (n < word.length) this.setState({ n: n + 1 }); else if (w === words.length - 1) { clearInterval(this.t); this.setState({ done: true }); } else if (!this.hold) { this.hold = true; setTimeout(() => { this.hold = false; this.setState({ del: true }); }, 1200); } } else { if (n > 0) this.setState({ n: n - 1 }); else this.setState({ del: false, w: w + 1 }); } }, 90); }
   componentWillUnmount() { clearInterval(this.t); }
   renderVals() { if (!this.t) this.start(); const words = this.words || ['designer']; return { word: Array.from(words[this.state.w] || '').slice(0, this.state.n).join('') }; }
 }
