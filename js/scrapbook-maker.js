@@ -11,18 +11,19 @@
   var PATCHES = {"dog":0.7,"denim-heart":0.858,"apple":1.044,"burst-star":0.929,"red-dot-star":0.927,"dachshund":0.542,"bear":0.769,"luck":1.067,"cloud":0.64,"dragonfly":0.798,"sun":0.975,"cards":0.974,"eight-ball":0.995,"red-heart":0.888};
   var TINTS = ['#EDE9F8', '#FBE3E8', '#E1ECFA', '#E6F3E4', '#FCF0D6'];
   var PAPERS = {
-    dots: { label: 'Dot grid', base: '#FBF8F1', css: 'radial-gradient(#E2DCCD 1px,transparent 1.3px) 0 0/18px 18px' },
-    grid: { label: 'Graph paper', base: '#FBFAF5', css: 'linear-gradient(#DCE3EE 1px,transparent 1px) 0 0/18px 18px,linear-gradient(90deg,#DCE3EE 1px,transparent 1px) 0 0/18px 18px' },
-    lined: { label: 'Lined', base: '#FCFBF7', css: 'linear-gradient(90deg,transparent 9%,#F2B8B8 9%,#F2B8B8 calc(9% + 1px),transparent calc(9% + 1px)),repeating-linear-gradient(transparent 0 21px,#CFDDF0 21px 22px)' },
-    kraft: { label: 'Kraft', base: '#D8BE96', css: 'radial-gradient(rgba(120,90,50,.18) 1px,transparent 1.4px) 0 0/7px 9px,radial-gradient(rgba(255,255,255,.18) 1px,transparent 1.4px) 3px 4px/11px 8px' },
-    gingham: { label: 'Pink gingham', base: '#FCF2F4', css: 'linear-gradient(90deg,rgba(236,150,172,.26) 50%,transparent 50%) 0 0/18px 18px,linear-gradient(rgba(236,150,172,.26) 50%,transparent 50%) 0 0/18px 18px' }
+    dots: { label: 'Cream dot grid', base: '#F6F0E1', css: 'radial-gradient(#DCD3BF 1px,transparent 1.3px) 0 0/18px 18px' },
+    gingham: { label: 'Blue gingham', base: '#EEF0F2', css: 'linear-gradient(90deg,rgba(120,138,170,.28) 50%,transparent 50%) 0 0/22px 22px,linear-gradient(rgba(120,138,170,.28) 50%,transparent 50%) 0 0/22px 22px' },
+    plaid: { label: 'Red plaid', base: '#F3E9E3', css: 'linear-gradient(90deg,transparent 40%,rgba(255,255,255,.55) 40% 46%,transparent 46%) 0 0/30px 30px,linear-gradient(transparent 40%,rgba(255,255,255,.55) 40% 46%,transparent 46%) 0 0/30px 30px,linear-gradient(90deg,rgba(176,38,48,.55) 50%,transparent 50%) 0 0/30px 30px,linear-gradient(rgba(176,38,48,.55) 50%,transparent 50%) 0 0/30px 30px' },
+    stars: { label: 'Navy stars', base: '#2C3452', css: 'radial-gradient(rgba(255,240,200,.85) 1px,transparent 1.6px) 0 0/34px 30px,radial-gradient(rgba(255,240,200,.55) .8px,transparent 1.3px) 17px 15px/34px 30px' },
+    lined: { label: 'Pink lined', base: '#F4E4EA', css: 'linear-gradient(90deg,transparent 9%,#D98C9C 9%,#D98C9C calc(9% + 1px),transparent calc(9% + 1px)),repeating-linear-gradient(transparent 0 21px,#B9C6E0 21px 22px)' },
+    kraft: { label: 'Kraft', base: '#C9A77A', css: 'radial-gradient(rgba(110,80,40,.22) 1px,transparent 1.4px) 0 0/7px 9px,radial-gradient(rgba(255,255,255,.16) 1px,transparent 1.4px) 3px 4px/11px 8px' }
   };
   var paper = 'dots';
   var WORDS = ['hello', 'yay', 'hi friend', 'xoxo', 'fun', 'smile', 'lucky'];
   var STICKERS = {
     miffy: { type: 'img', src: IMG + 'sticker-miffy.png', ar: 356 / 240, w: 0.1, label: 'Miffy' },
     lego: { type: 'img', src: IMG + 'sticker-lego.png', ar: 183 / 260, w: 0.13, label: 'Lego brick' },
-    stamp: { type: 'img', src: IMG + 'stamp.png', ar: 480 / 680, w: 0.17, label: 'Postage stamp' },
+    stamp: { type: 'img', src: IMG + 'stamp.png', ar: 480 / 680, w: 0.17, label: 'SF + Toronto stamp' },
     star: { type: 'img', src: IMG + 'sticker-star.png', ar: 152 / 160, w: 0.07, label: 'Gold star' },
     tapePink: { type: 'tape', color: '#F3B7C8', ar: 0.26, w: 0.16, label: 'Pink washi tape' },
     tapeBlue: { type: 'tape', color: '#B9CDF2', ar: 0.26, w: 0.16, label: 'Blue washi tape' },
@@ -31,7 +32,7 @@
     photo: { type: 'photo', ar: 1.18, w: 0.17, label: 'Photo frame' },
     note: { type: 'note', ar: 0.42, w: 0.2, label: 'Handwritten note' }
   };
-  Object.keys(PATCHES).forEach(function (k) { STICKERS['p-' + k] = { type: 'img', src: MK + 'patch-' + k + '.webp', ar: PATCHES[k], w: 0.11, label: k.replace(/-/g, ' ') + ' patch' }; });
+  Object.keys(PATCHES).forEach(function (k) { STICKERS['p-' + k] = { type: 'img', src: MK + 'patch-' + k + '.webp', ar: PATCHES[k], w: 0.11, label: k.replace(/-/g, ' ').replace(/^./, function (m) { return m.toUpperCase(); }) + ' patch' }; });
   STICKERS.word = { type: 'word', ar: 0.3, w: 0.3, label: 'Word' };
   var ORDER = ['photo', 'note', 'miffy', 'lego', 'stamp', 'star'].concat(Object.keys(PATCHES).map(function (k) { return 'p-' + k; }), ['tapePink', 'tapeBlue', 'tapeLav', 'sparkle']);
 
@@ -39,11 +40,12 @@
   var items = [], sel = null, uid = 0;
 
   root.innerHTML =
+    '<div class="mk-stage"><div class="mk-rail mk-rail-l" role="toolbar" aria-label="Stickers"></div>' +
     '<div class="mk-page" aria-label="Your scrapbook page">' +
       '<div class="mk-half mk-l"></div><div class="mk-half mk-r"></div><div class="mk-spine"></div>' +
       '<div class="mk-items"></div>' +
-      '<p class="mk-empty">Tap a sticker below to start your page ✦</p>' +
-    '</div>' +
+      '<p class="mk-empty">Tap a sticker to start your page ✦</p>' +
+    '</div><div class="mk-rail mk-rail-r" role="toolbar" aria-label="More stickers"></div></div>' +
     '<form class="mk-wordbar" autocomplete="off"><input class="mk-word-in" maxlength="16" placeholder="Type a word in cut-out letters" aria-label="Type a word"><button type="submit" class="mk-btn">Add ✂︎</button></form>' +
     '<div class="mk-papers" role="group" aria-label="Paper"><span>Paper</span></div>' +
     '<div class="mk-tray" role="toolbar" aria-label="Stickers"></div>' +
@@ -59,13 +61,16 @@
       tray = root.querySelector('.mk-tray'), empty = root.querySelector('.mk-empty'),
       file = root.querySelector('.mk-file');
 
-  ORDER.forEach(function (k) {
+  var railL = root.querySelector('.mk-rail-l'), railR = root.querySelector('.mk-rail-r');
+  ORDER.forEach(function (k, n) {
+    [n < Math.ceil(ORDER.length / 2) ? railL : railR, tray].forEach(function (dest) {
     var b = document.createElement('button');
-    b.type = 'button'; b.className = 'mk-chip'; b.title = STICKERS[k].label;
+    b.type = 'button'; b.className = 'mk-chip'; b.dataset.tip = STICKERS[k].label;
     b.setAttribute('aria-label', 'Add ' + STICKERS[k].label);
     b.appendChild(preview(k));
     b.addEventListener('click', function () { add(k, 0.5 + (Math.random() - 0.5) * 0.3, 0.5 + (Math.random() - 0.5) * 0.3, (Math.random() - 0.5) * 16); });
-    tray.appendChild(b);
+    dest.appendChild(b);
+    });
   });
 
   function preview(k) {
@@ -290,11 +295,13 @@
   function drawPaper(c, W, H) {
     var P = PAPERS[paper], g = 36, x, y;
     c.fillStyle = P.base; c.fillRect(0, 0, W, H);
-    if (paper === 'dots') { c.fillStyle = '#E2DCCD'; for (y = 18; y < H; y += g) for (x = 18; x < W; x += g) { c.beginPath(); c.arc(x, y, 2, 0, 7); c.fill(); } }
-    else if (paper === 'grid') { c.fillStyle = '#DCE3EE'; for (y = 0; y < H; y += g) c.fillRect(0, y, W, 2); for (x = 0; x < W; x += g) c.fillRect(x, 0, 2, H); }
-    else if (paper === 'lined') { c.fillStyle = '#CFDDF0'; for (y = 42; y < H; y += 44) c.fillRect(0, y, W, 2); c.fillStyle = '#F2B8B8'; c.fillRect(W * 0.045, 0, 2, H); c.fillRect(W * 0.545, 0, 2, H); }
-    else if (paper === 'kraft') { for (var i = 0; i < 9000; i++) { c.fillStyle = Math.random() < 0.6 ? 'rgba(120,90,50,.16)' : 'rgba(255,255,255,.16)'; c.fillRect(Math.random() * W, Math.random() * H, 2, 2); } }
-    else if (paper === 'gingham') { c.fillStyle = 'rgba(236,150,172,.26)'; for (x = 0; x < W; x += g) c.fillRect(x, 0, g / 2, H); for (y = 0; y < H; y += g) c.fillRect(0, y, W, g / 2); }
+    if (paper === 'dots') { c.fillStyle = '#DCD3BF'; for (y = 18; y < H; y += g) for (x = 18; x < W; x += g) { c.beginPath(); c.arc(x, y, 2, 0, 7); c.fill(); } }
+    else if (paper === 'gingham') { g = 44; c.fillStyle = 'rgba(120,138,170,.28)'; for (x = 0; x < W; x += g) c.fillRect(x, 0, g / 2, H); for (y = 0; y < H; y += g) c.fillRect(0, y, W, g / 2); }
+    else if (paper === 'plaid') { g = 60; c.fillStyle = 'rgba(176,38,48,.55)'; for (x = 0; x < W; x += g) c.fillRect(x, 0, g / 2, H); for (y = 0; y < H; y += g) c.fillRect(0, y, W, g / 2);
+      c.fillStyle = 'rgba(255,255,255,.55)'; for (x = 0; x < W; x += g) c.fillRect(x + g * 0.4, 0, g * 0.06, H); for (y = 0; y < H; y += g) c.fillRect(0, y + g * 0.4, W, g * 0.06); }
+    else if (paper === 'stars') { for (y = 0; y < H; y += 60) for (x = 0; x < W; x += 68) { c.fillStyle = 'rgba(255,240,200,.85)'; c.beginPath(); c.arc(x, y, 2.4, 0, 7); c.fill(); c.fillStyle = 'rgba(255,240,200,.55)'; c.beginPath(); c.arc(x + 34, y + 30, 1.8, 0, 7); c.fill(); } }
+    else if (paper === 'lined') { c.fillStyle = '#B9C6E0'; for (y = 42; y < H; y += 44) c.fillRect(0, y, W, 2); c.fillStyle = '#D98C9C'; c.fillRect(W * 0.045, 0, 2, H); c.fillRect(W * 0.545, 0, 2, H); }
+    else if (paper === 'kraft') { for (var i = 0; i < 9000; i++) { c.fillStyle = Math.random() < 0.6 ? 'rgba(110,80,40,.2)' : 'rgba(255,255,255,.14)'; c.fillRect(Math.random() * W, Math.random() * H, 2, 2); } }
     var sp = c.createLinearGradient(W / 2 - 40, 0, W / 2 + 40, 0);
     sp.addColorStop(0, 'rgba(60,50,30,0)'); sp.addColorStop(0.5, 'rgba(60,50,30,.16)'); sp.addColorStop(1, 'rgba(60,50,30,0)');
     c.fillStyle = sp; c.fillRect(W / 2 - 40, 0, 80, H);
@@ -308,7 +315,7 @@
   Object.keys(PAPERS).forEach(function (k) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'mk-paper'; b.dataset.paper = k;
     b.title = PAPERS[k].label; b.setAttribute('aria-label', PAPERS[k].label + ' paper');
-    b.style.background = PAPERS[k].css.replace(/18px 18px/g, '8px 8px').replace(/0 21px/, '0 7px').replace(/21px 22px/, '7px 8px') + ',' + PAPERS[k].base;
+    b.style.background = PAPERS[k].css.replace(/(18|22|30)px (18|22|30)px/g, '9px 9px').replace(/34px 30px/g, '12px 11px').replace(/0 21px/, '0 7px').replace(/21px 22px/, '7px 8px') + ',' + PAPERS[k].base;
     b.addEventListener('click', function () { setPaper(k); });
     papersRow.appendChild(b);
   });

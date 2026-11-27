@@ -131,9 +131,24 @@ a{color:#3B3BF5}
 .mk-paper:hover{transform:scale(1.1)}
 .mk-paper[aria-pressed="true"]{box-shadow:0 0 0 2px #F5F4F0,0 0 0 4px #7A70D8}
 .mk-ph{font:clamp(10px,1.6vw,17px) Caveat,cursive;color:rgba(43,41,55,.55);text-align:center;padding:0 6px}
+.mk-stage{display:block}
+.mk-rail{display:none}
+.mk-chip{position:relative}
+.mk-chip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);background:#1C1C1C;color:#FFFFFF;font:12px/1.2 Inter,sans-serif;padding:6px 9px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
+.mk-chip:hover::after,.mk-chip:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (min-width:1100px){
+  .pl-maker{max-width:1200px}
+  .mk-stage{display:grid;grid-template-columns:120px 1fr 120px;gap:22px;align-items:center}
+  .mk-rail{display:grid;grid-template-columns:repeat(2,52px);gap:10px;justify-content:center;align-content:center}
+  .mk-tray{display:none!important}
+}
+.why-note{position:relative;margin:0 auto;max-width:300px;background:#FFFDF6;padding:22px 20px 18px;box-shadow:0 10px 24px rgba(20,20,40,.12);transform:rotate(-2.5deg);font:20px/1.25 Caveat,cursive;color:#2B2937;text-align:left;order:-1}
+.why-note::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:repeating-linear-gradient(90deg,rgba(185,180,236,.85) 0 6px,rgba(185,180,236,.6) 6px 9px);transform:rotate(3deg)}
+.why-note b{display:block;font:600 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7A70B8;margin-bottom:6px}
+@media (min-width:1240px){.why-note{position:absolute;left:-166px;top:64px;width:184px;max-width:none;z-index:3;order:0;font-size:18px;padding:20px 16px 16px}}
 .mk-tray{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px}
 .mk-chip{width:52px;height:52px;border-radius:14px;border:1px solid #E4E1D9;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
-.mk-chip:hover{transform:translateY(-3px) rotate(-3deg)}
+.mk-chip:hover{transform:translateY(-3px)}
 .mk-chip img{max-width:100%;max-height:100%;object-fit:contain}
 .mk-mini-photo{width:30px;height:34px;background:#FFFFFF;box-shadow:0 1px 4px rgba(0,0,0,.18);border-top:4px solid #fff;display:block;background-image:linear-gradient(#EDE9F8,#EDE9F8);background-size:24px 24px;background-position:3px 0;background-repeat:no-repeat}
 .mk-mini-note{font:16px Caveat,cursive;color:#2B2937;background:#FFFDF6;padding:2px 6px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
@@ -172,6 +187,7 @@ body.making .sga-root{display:none}
   </section>
 
   <section style="position: relative; max-width: 900px; margin: 48px auto 0; padding: 0 24px; flex-direction: column; align-items: center; gap: 20px; display: {{ bookD }}">
+    <aside class="why-note"><b>Why a scrapbook?</b>Scrapbooking is my analog design practice: collecting little things, then figuring out how they fit together into a story. Make a page and see what I mean ✦</aside>
     <div style="position: relative; width: 100%; aspect-ratio: 1800 / 1315; perspective: 2400px; border-radius: 18px; box-shadow: 0 18px 44px rgba(20,20,40,0.14)">
       <div style="position: absolute; left: 0; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseL }}" style="position: absolute; inset: 0; border-radius: 18px 0 0 18px"></div></div>
       <div style="position: absolute; left: 50%; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseR }}" style="position: absolute; inset: 0; border-radius: 0 18px 18px 0"></div></div>
