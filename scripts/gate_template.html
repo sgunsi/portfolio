@@ -3,12 +3,12 @@
 @view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}
 #gate .nav-wrap nav{position:relative!important;top:auto!important;left:auto!important;right:auto!important;width:auto!important;justify-content:flex-start!important}
 #gate{min-height:100vh;box-sizing:border-box;padding:24px 24px 64px;background:radial-gradient(circle at 8% 40%,rgba(185,180,236,.35),transparent 40%),radial-gradient(circle at 95% 15%,rgba(185,180,236,.35),transparent 40%),#F5F4F0;font-family:Inter,system-ui,sans-serif;color:#1C1C1C}
-#gate .g-card{max-width:440px;margin:18vh auto 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+#gate .g-card{max-width:760px;margin:18vh auto 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
 #gate .g-lock{width:44px;height:44px;border-radius:50%;background:#EFEAFB;display:flex;align-items:center;justify-content:center}
 #gate h1{margin:6px 0 0;font-family:'Fraunces',serif;font-weight:340;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:40px;line-height:1.1;letter-spacing:-.01em;color:#2B2937}
 #gate p{margin:0;font-size:16px;line-height:1.6;color:#4A4A52}
 #gate a.g-mail{color:#3B3BF5;text-decoration:none}#gate a.g-mail:hover{text-decoration:underline}
-#gate form{margin-top:10px;display:flex;gap:8px;width:100%}
+#gate form{margin-top:10px;display:flex;gap:8px;width:100%;max-width:440px}
 #gate input{flex:1;min-width:0;padding:13px 16px;border:1px solid #DDDAD2;border-radius:999px;background:#FFFFFF;font:15px Inter,sans-serif;color:#1C1C1C;outline:none;transition:border-color .2s,box-shadow .2s}
 #gate input:focus{border-color:#9B8BE6;box-shadow:0 0 0 4px rgba(155,139,230,.18)}
 #gate button{padding:13px 22px;border:0;border-radius:999px;background:#1C1C1C;color:#FFFFFF;font:500 15px Inter,sans-serif;cursor:pointer}
@@ -18,14 +18,15 @@
 @keyframes gshake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 #gate .g-more{max-width:760px;margin:56px auto 0}
 #gate .g-more-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5E5E66;margin:0 0 14px}
-#gate .g-row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 12px;margin:0 -4px;scrollbar-width:none}
+#gate .g-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:4px 0 12px}
 #gate .g-row::-webkit-scrollbar{display:none}
-#gate .g-tile{flex:0 0 220px;scroll-snap-align:start;background:#FFFFFF;border-radius:18px;padding:10px 10px 16px;text-decoration:none;color:#1C1C1C;box-shadow:0 6px 18px rgba(20,20,40,.05);transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease}
+#gate .g-tile{min-width:0;background:#FFFFFF;border-radius:18px;padding:10px 10px 16px;text-decoration:none;color:#1C1C1C;box-shadow:0 6px 18px rgba(20,20,40,.05);transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease}
 #gate .g-tile:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(20,20,40,.09)}
-#gate .g-img{height:124px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#gate .g-img{aspect-ratio:4/3;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 #gate .g-img img{width:100%;height:100%;object-fit:cover;display:block}
 #gate .g-tile p{margin:12px 6px 0;font-size:12px;color:#6B6B73;line-height:1.3;text-align:left}
 #gate .g-tile h3{margin:4px 6px 0;font-family:'Fraunces',serif;font-weight:400;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:18px;line-height:1.2;color:#2B2937;text-align:left}
+@media (max-width:760px){#gate .g-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0;padding:4px 0 12px}#gate .g-tile{flex:0 0 200px;scroll-snap-align:start}}
 @media (max-width:520px){#gate h1{font-size:32px}#gate form{flex-direction:column}}
 </style>
 </head>
@@ -34,7 +35,7 @@
   {{NAV}}
   <main class="g-card">
     <div class="g-lock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4E3FA6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></div>
-    <h1>Psst. This one's top secret.</h1>
+    <h1>You found the secret door.</h1>
     <p>The password is on my résumé, or <a class="g-mail" href="mailto:skgunsi@gmail.com?subject=Case%20study%20access">email me for access</a>.</p>
     <form id="g-form" autocomplete="off">
       <label for="g-pw" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Password</label>
@@ -46,7 +47,7 @@
   <section class="g-more" aria-label="Other case studies">
     <p class="g-more-label">In the meantime:</p>
     <div class="g-row">
-      <a class="g-tile" href="mode.html"><div class="g-img" style="background:#EEF1FB"><img src="images/redesign/mode-menu.png" alt=""></div><p>Mode + ThoughtSpot</p><h3>Rethinking report filters</h3></a>
+      <a class="g-tile" href="mode.html"><div class="g-img" style="background:#EEF1FB"><img src="images/redesign/mode-menu.png" alt="" style="object-fit:contain;padding:12px;box-sizing:border-box"></div><p>Mode + ThoughtSpot</p><h3>Rethinking report filters</h3></a>
       <a class="g-tile" href="playground-ux.html"><div class="g-img" style="background:#EEF0F4"><img src="images/redesign/playground-fleet-ui.jpg" alt=""></div><p>Playground Global</p><h3>Robot fleet management</h3></a>
       <a class="g-tile" href="gratitude.html"><div class="g-img" style="background:#FBF3E6"><svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#F6DF73"/><circle cx="23" cy="26" r="3.2" fill="#3A3A40"/><circle cx="41" cy="24" r="3.2" fill="#3A3A40"/><path d="M19 38c6 7 18 7 26-2" stroke="#3A3A40" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div><p>Gratitude · Tech4Good</p><h3>Social connection platform</h3></a>
       <a class="g-tile" href="playground-hri.html"><div class="g-img" style="background:#DCE6F8"><img src="images/redesign/hri-cart.png" alt="" style="object-fit:contain;padding:8px;box-sizing:border-box"></div><p>Playground Global</p><h3>Human-robot interaction</h3></a>
