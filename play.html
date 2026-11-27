@@ -104,8 +104,6 @@ a{color:#3B3BF5}
 .mk-glyph span{font-family:Fraunces,serif;line-height:1}
 .mk-photo{background:#FFFFFF;box-shadow:0 8px 18px rgba(20,20,40,.16)}
 .mk-photo-in{position:absolute;left:7%;right:7%;top:5.9%;height:72.9%;background:#EDE9F8;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.mk-photo-in span{font:12px Inter,sans-serif;color:#7A70B8;opacity:0;transition:opacity .2s}
-.mk-sel .mk-photo-in span{opacity:1;cursor:pointer}
 .mk-photo-in img{width:100%;height:100%;object-fit:cover;filter:none}
 .mk-note{background:#FFFDF6;box-shadow:0 6px 14px rgba(20,20,40,.12);display:flex;align-items:center;justify-content:center}
 .mk-note-text{font-family:Caveat,cursive;color:#2B2937;text-align:center;padding:4px 8px;outline:none;line-height:1.15;cursor:text;max-width:100%;word-break:break-word}
@@ -115,6 +113,18 @@ a{color:#3B3BF5}
 .mk-sel{box-shadow:0 0 0 1.5px #7A70D8}
 .mk-sel.mk-photo{box-shadow:0 0 0 1.5px #7A70D8,0 8px 18px rgba(20,20,40,.16)}
 .mk-sel .mk-handle,.mk-sel .mk-del{display:flex}
+.mk-wordbar{display:flex;gap:8px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.mk-word-in{width:min(320px,100%);padding:10px 16px;border:1px solid #DDDAD2;border-radius:999px;background:#FFFFFF;font:14px Inter,sans-serif;color:#1C1C1C;outline:none}
+.mk-word-in:focus{border-color:#9B8BE6;box-shadow:0 0 0 4px rgba(155,139,230,.18)}
+.mk-tray{margin-top:14px!important}
+.mk-item.mk-word{display:flex;align-items:center}
+.mk-word img{height:auto;object-fit:contain;flex:none;filter:drop-shadow(0 2px 3px rgba(20,20,40,.14))}
+.mk-wspace{flex:none;height:1px}
+.mk-wtile{flex:none;display:flex;align-items:center;justify-content:center;height:80%;font-family:Fraunces,serif;color:#2B2937;box-shadow:0 2px 3px rgba(20,20,40,.14)}
+.mk-photo-in img{pointer-events:none}
+.mk-ptools{position:absolute;left:0;right:0;bottom:4%;display:none;justify-content:center;gap:6px}
+.mk-sel .mk-ptools{display:flex}
+.mk-ptools button{border:0;border-radius:999px;background:#1C1C1C;color:#FFFFFF;font:11px/1 Inter,sans-serif;padding:5px 9px;cursor:pointer;white-space:nowrap}
 .mk-tray{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px}
 .mk-chip{width:52px;height:52px;border-radius:14px;border:1px solid #E4E1D9;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .mk-chip:hover{transform:translateY(-3px) rotate(-3deg)}
