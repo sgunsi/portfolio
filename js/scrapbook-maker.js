@@ -62,7 +62,7 @@
     pat: function () { tone(880, 1320, 0.09, 0.06); },
     tape: function () { notes([1046, 1318], 0.06, 0.08, 0.045); },
     snip: function () { notes([1568, 2093], 0.07, 0.06, 0.04); },
-    flip: function () { burst('lowpass', 2400, 0.5, 0.34, 0.05, 0, 500); burst('bandpass', 1200, 0.7, 0.12, 0.025, 0.05, 2600); burst('lowpass', 220, 0.8, 0.09, 0.05, 0.3); },
+    flip: function () { burst('lowpass', 1100, 0.4, 0.3, 0.018, 0, 350); tone(392, 523, 0.18, 0.02, 0.12); },
     shutter: function () { notes([1046, 1318, 1568, 2093], 0.07, 0.16, 0.045); },
     rustle: function () { notes([784, 659], 0.07, 0.09, 0.04); },
     pop: function () { tone(440, 990, 0.07, 0.05); },
@@ -162,8 +162,8 @@
         el.appendChild(c);
       });
     } else {
-      var t = document.createElement('div'); t.className = 'mk-note-text'; t.contentEditable = 'true'; t.spellcheck = false; t.style.textAlign = it.align || 'center'; if (it.clean) t.classList.add('mk-clean'); t.textContent = it.text;
-      t.addEventListener('input', function () { it.text = t.innerText; });
+      var t = document.createElement('div'); t.className = 'mk-note-text'; t.contentEditable = 'true'; t.spellcheck = false; t.style.textAlign = it.align || 'center'; if (it.clean) t.classList.add('mk-clean'); if (/\*\*/.test(it.text)) { it.text.split(/\*\*/).forEach(function (seg, k) { var n = k % 2 ? document.createElement('b') : document.createTextNode(seg); if (k % 2) n.textContent = seg; t.appendChild(n); }); } else t.textContent = it.text;
+      t.addEventListener('input', function () { it.text = noteMarkup(t); });
       t.addEventListener('pointerdown', function (e) { if (sel === it) e.stopPropagation(); });
       el.appendChild(t);
     }
@@ -271,6 +271,7 @@
     add('word', 0.27 + Math.random() * 0.06, 0.13, (Math.random() - 0.5) * 6, { word: WORDS[Math.floor(Math.random() * WORDS.length)] });
     picks.slice(1).forEach(function (k, i) { var s = spots[i]; add(k, s[0] + (Math.random() - 0.5) * 0.05, s[1] + (Math.random() - 0.5) * 0.05, (Math.random() - 0.5) * 22); });
     select(null);
+    var pk2 = Object.keys(PAPERS); setPaper(pk2[Math.floor(Math.random() * pk2.length)]);
     quiet = false; sfx('shuffle');
   }
 
@@ -326,7 +327,8 @@
         } else {
           c.fillStyle = '#FFFDF6'; c.fillRect(-w / 2, -h / 2, w, h);
           var fs = it.fs || 0.12; c.fillStyle = '#2B2937'; c.font = (w * fs) + (it.clean ? 'px Inter, sans-serif' : 'px Caveat, cursive'); c.textAlign = it.align === 'left' ? 'left' : 'center'; c.textBaseline = 'middle';
-          wrap(c, it.text, w * 0.86, w * fs * (it.clean ? 1.5 : 1.17), it.align === 'left' ? -w * 0.43 : 0);
+          var face = it.clean ? 'Inter, sans-serif' : 'Caveat, cursive';
+          richWrap(c, it.text, w * 0.86, w * fs * (it.clean ? 1.5 : 1.17), it.align === 'left' ? -w * 0.43 : 0, w * fs, face, it.align === 'left');
         }
         c.restore();
       });
@@ -364,6 +366,38 @@
   });
   setPaper('dots');
 
+  function noteMarkup(el) {
+    var out = '';
+    (function walk(n, bold) {
+      n.childNodes.forEach(function (ch) {
+        if (ch.nodeType === 3) out += bold ? '**' + ch.nodeValue + '**' : ch.nodeValue;
+        else if (ch.nodeName === 'BR') out += '\n';
+        else { var blk = ch.nodeName === 'DIV' || ch.nodeName === 'P'; if (blk && out && !/\n$/.test(out)) out += '\n'; walk(ch, bold || ch.nodeName === 'B' || ch.nodeName === 'STRONG'); }
+      });
+    })(el, false);
+    return out.replace(/\*\*\*\*/g, '');
+  }
+  function richWrap(c, text, maxW, lh, x0, size, face, left) {
+    var lines = [];
+    String(text || '').split(/\n/).forEach(function (para) {
+      var toks = [];
+      para.split(/\*\*/).forEach(function (seg, k) { seg.split(/\s+/).filter(Boolean).forEach(function (w) { toks.push({ w: w, b: k % 2 === 1 }); }); });
+      var cur = [], cw = 0;
+      toks.forEach(function (tk) {
+        c.font = (tk.b ? '600 ' : '') + size + 'px ' + face; tk.wd = c.measureText(tk.w).width;
+        c.font = size + 'px ' + face; var sp = cur.length ? c.measureText(' ').width : 0;
+        if (cur.length && cw + sp + tk.wd > maxW) { lines.push({ t: cur, w: cw }); cur = []; cw = 0; sp = 0; }
+        tk.sp = sp; cur.push(tk); cw += sp + tk.wd;
+      });
+      lines.push({ t: cur, w: cw });
+    });
+    c.textAlign = 'left';
+    var y0 = -(lines.length - 1) * lh / 2;
+    lines.forEach(function (ln, i) {
+      var x = left ? x0 : -ln.w / 2;
+      ln.t.forEach(function (tk) { x += tk.sp; c.font = (tk.b ? '600 ' : '') + size + 'px ' + face; c.fillText(tk.w, x, y0 + i * lh); x += tk.wd; });
+    });
+  }
   function wrap(c, text, maxW, lh, x0) {
     var lines = [];
     String(text || '').split(/\n/).forEach(function (para) {
@@ -387,7 +421,7 @@
   function starter() {
     quiet = true; clearAll();
     add('word', 0.25, 0.13, -3, { word: 'yippee!' });
-    add('note', 0.25, 0.55, -1.5, { w: 0.4, ar: 0.8, fs: 0.043, align: 'left', clean: true, text: 'you found my little craft corner.\n\ngrowing up, i dabbled in a lot of crafts, but scrapbooking has a special place in my heart. it was my first time asking a design question: how do you tell a story with just visuals and a few constraints?\n\nmake your own virtual scrapbook, play around with the elements, and save it to your device!' });
+    add('note', 0.25, 0.55, -1.5, { w: 0.4, ar: 0.8, fs: 0.043, align: 'left', clean: true, text: 'you found my little craft corner ✧˖°⟡\n\ngrowing up, i dabbled in a lot of crafts, but scrapbooking has a special place in my heart. it was my first time asking a design question: **how do you tell a story with just visuals and a few constraints?**\n\nmake your own virtual scrapbook, play around with the elements, and save it to your device!' });
     add('tapeLav', 0.25, 0.2, 2, { w: 0.12 });
     add('photo', 0.7, 0.42, 4);
     add('star', 0.86, 0.2, 12);
