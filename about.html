@@ -18,7 +18,18 @@ a{color:#3B3BF5}
 .caret{display:inline-block;width:2px;height:.9em;margin-left:4px;background:#2B2937;vertical-align:-0.05em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 </style>
-<style>[hidden]{display:none!important}.stk{z-index:2;transition:transform .25s ease;outline:none}.stk:hover,.stk:focus-visible{z-index:6}.stk>img{transition:transform .25s ease}.stk:hover>img,.stk:focus-visible>img{transform:scale(1.1)}.tip{opacity:0;visibility:hidden;transition:opacity .2s}.stk:hover .tip,.stk:focus-visible .tip{opacity:1;visibility:visible}@media (max-width:760px){.photo-col{max-width:340px;margin:0 auto}}
+<style>[hidden]{display:none!important}.tw{color:#3B3BF5;position:relative}.tw.final{font-style:italic;font-variation-settings:'SOFT' 100,'WONK' 1}
+.tw.striking::after{content:'';position:absolute;left:0;right:0;top:54%;height:3px;background:#2B2937;transform:scaleX(0);transform-origin:left;animation:strike .32s ease forwards}
+@keyframes strike{to{transform:scaleX(1)}}
+.caret{background:#3B3BF5!important}.caret.hide{display:none}
+.sparks{font-size:.5em;color:#3B3BF5;margin-left:10px;letter-spacing:3px;vertical-align:middle;opacity:0;transition:opacity .5s}.sparks.on{opacity:1}
+@keyframes sparkFloat{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx,0px),-50px) scale(.5)}}
+.hl{position:relative;z-index:0}.hl::after{content:'';position:absolute;bottom:1px;left:-2px;right:-2px;height:8px;background:rgba(220,255,0,0.55);z-index:-1;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}.hl:hover::after{transform:scaleX(1)}
+.exp{transition:padding-left .25s}.exp:hover{padding-left:10px!important}
+.exp-l{display:flex;align-items:center;gap:12px}.exp-dot{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.15);flex-shrink:0;transition:background .2s,transform .2s}
+.exp:hover .exp-dot{background:#3B3BF5;transform:scale(1.4)}.exp-role{transition:color .2s}.exp:hover .exp-role{color:#3B3BF5!important}
+@media (prefers-reduced-motion: reduce){.exp,.exp-dot,.hl::after{transition:none}}
+.stk{z-index:2;transition:transform .25s ease;outline:none}.stk:hover,.stk:focus-visible{z-index:6}.stk>img{transition:transform .25s ease}.stk:hover>img,.stk:focus-visible>img{transform:scale(1.1)}.tip{opacity:0;visibility:hidden;transition:opacity .2s}.stk:hover .tip,.stk:focus-visible .tip{opacity:1;visibility:visible}@media (max-width:760px){.photo-col{max-width:340px;margin:0 auto}}
 @media (max-width: 760px){
   .nav-wrap nav{gap:2px!important;padding:6px 8px!important;flex-wrap:nowrap!important}
   .nav-wrap nav a{padding:9px 10px!important;font-size:14px!important}
@@ -71,30 +82,30 @@ a{color:#3B3BF5}
     <div style="display: flex; flex-direction: column; gap: 36px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <p style="margin: 0; font-size: 16px; color: #6A6A72">I am a:</p>
-        <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 56px; line-height: 1">{{ word }}<span class="caret" aria-hidden="true"></span></h1>
-        <p style="margin: 6px 0 0; font-size: 17px; line-height: 1.6; color: #4A4A52">Passionate about social impact, education, and crafting memorable experiences. I care about the details that make complex things feel simple.</p>
+        <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 56px; line-height: 1; min-height: 1.1em" aria-label="I am a designer, scrapbooker, and creative"><span class="tw" id="tw" aria-hidden="true"></span><span class="caret" id="cursor" aria-hidden="true"></span><span class="sparks" id="sparks" aria-hidden="true"></span></h1>
+        <p style="margin: 6px 0 0; font-size: 17px; line-height: 1.6; color: #4A4A52">Passionate about <span class="hl">social impact</span>, <span class="hl">education</span>, and <span class="hl">crafting memorable experiences</span>. I care about the details that make <span class="hl">complex things feel simple</span>.</p>
       </div>
       <div>
         <p style="margin: 0; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5E5E">Experience</p>
         <div style="margin-top: 10px; border-top: 1px solid #E4E1D9">
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
-            <div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">University of Waterloo</p><p style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">Master of Digital Experience Innovation · Part-time</p></div>
+          <div class="exp" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
+            <div class="exp-l"><span class="exp-dot" aria-hidden="true"></span><div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">University of Waterloo</p><p class="exp-role" style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">Master of Digital Experience Innovation · Part-time</p></div></div>
             <p style="margin: 0; font-size: 14px; color: #6A6A72; white-space: nowrap; text-align: right">Sep 2026 – Now</p>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
-            <div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Samsung Research America</p><p style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">Product Designer</p></div>
+          <div class="exp" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
+            <div class="exp-l"><span class="exp-dot" aria-hidden="true"></span><div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Samsung Research America</p><p class="exp-role" style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">Product Designer</p></div></div>
             <p style="margin: 0; font-size: 14px; color: #6A6A72; white-space: nowrap; text-align: right">Aug 2024 – Now</p>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
-            <div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">ThoughtSpot (Mode)</p><p style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">Product Designer</p></div>
+          <div class="exp" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
+            <div class="exp-l"><span class="exp-dot" aria-hidden="true"></span><div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">ThoughtSpot (Mode)</p><p class="exp-role" style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">Product Designer</p></div></div>
             <p style="margin: 0; font-size: 14px; color: #6A6A72; white-space: nowrap; text-align: right">Jun 2022 – May 2024</p>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
-            <div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Playground Global</p><p style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">UX Design Intern</p></div>
+          <div class="exp" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
+            <div class="exp-l"><span class="exp-dot" aria-hidden="true"></span><div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Playground Global</p><p class="exp-role" style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">UX Design Intern</p></div></div>
             <p style="margin: 0; font-size: 14px; color: #6A6A72; white-space: nowrap; text-align: right">Jun 2021 – Dec 2021</p>
           </div>
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
-            <div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Tech4Good</p><p style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">UX Designer</p></div>
+          <div class="exp" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid #E4E1D9">
+            <div class="exp-l"><span class="exp-dot" aria-hidden="true"></span><div><p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Tech4Good</p><p class="exp-role" style="margin: 3px 0 0; font-size: 16px; font-weight: 500; color: #1C1C1C">UX Designer</p></div></div>
             <p style="margin: 0; font-size: 14px; color: #6A6A72; white-space: nowrap; text-align: right">Mar 2020 – Jun 2021</p>
           </div>
         </div>
@@ -148,12 +159,28 @@ a{color:#3B3BF5}
 <script>
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { w: 0, n: 0, del: false, done: false }; }
-  start() { const words = ['designer', 'creative ✧˖°⟡']; this.words = words; this.t = setInterval(() => { const w = this.state.w, word = Array.from(words[w]), n = this.state.n; if (!this.state.del) { if (n < word.length) this.setState({ n: n + 1 }); else if (w === words.length - 1) { clearInterval(this.t); this.setState({ done: true }); } else if (!this.hold) { this.hold = true; setTimeout(() => { this.hold = false; this.setState({ del: true }); }, 1200); } } else { if (n > 0) this.setState({ n: n - 1 }); else this.setState({ del: false, w: w + 1 }); } }, 90); }
   componentWillUnmount() { clearInterval(this.t); }
-  renderVals() { if (!this.t) this.start(); const words = this.words || ['designer']; return { word: Array.from(words[this.state.w] || '').slice(0, this.state.n).join('') }; }
+  renderVals() { return {}; }
 }
 
 DCLite.mount(document.getElementById('app'), Component);
+</script>
+<script>
+(function(){
+  var words=['designer','scrapbooker','creative'], last=words.length-1, wi=0, ci=0;
+  var tw=document.getElementById('tw'), cur=document.getElementById('cursor'), sp=document.getElementById('sparks');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function finish(){ cur.classList.add('hide'); sp.textContent='\u2727\u02d6\u00b0\u27e1'; sp.classList.add('on'); if(!reduce) burst(); }
+  if(reduce){ tw.textContent='creative'; tw.classList.add('final'); finish(); return; }
+  function type(){ var w=words[wi]; if(ci<=w.length){ tw.textContent=w.slice(0,ci); if(wi===last) tw.classList.add('final'); ci++; setTimeout(type,85); } else if(wi===last){ finish(); } else setTimeout(strike,800); }
+  function strike(){ tw.classList.add('striking'); setTimeout(del,380); }
+  function del(){ tw.classList.remove('striking'); var w=words[wi]; if(ci>0){ ci--; tw.textContent=w.slice(0,ci); setTimeout(del,38); } else { wi++; setTimeout(type,180); } }
+  function burst(){ var ch=['\u2727','\u02d6','\u00b0','\u27e1','\u2726','\u22c6','\u263d','\u2729'], r=tw.getBoundingClientRect();
+    for(var i=0;i<12;i++) setTimeout(function(){ var e=document.createElement('span'); e.textContent=ch[Math.floor(Math.random()*ch.length)];
+      e.style.cssText='position:fixed;left:'+(r.left+Math.random()*r.width)+'px;top:'+(r.top+Math.random()*r.height)+'px;font-size:'+(14+Math.random()*14)+'px;color:#3B3BF5;pointer-events:none;z-index:999;--dx:'+((Math.random()-.5)*60)+'px;animation:sparkFloat 1.2s ease forwards';
+      document.body.appendChild(e); setTimeout(function(){e.remove();},1200); }, i*60); }
+  setTimeout(type,700);
+})();
 </script>
 <script src="simran-assistant.js" defer></script>
 </body>
