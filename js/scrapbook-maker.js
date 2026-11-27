@@ -65,6 +65,7 @@
     shutter: function () { notes([1046, 1318, 1568, 2093], 0.07, 0.16, 0.045); },
     rustle: function () { notes([784, 659], 0.07, 0.09, 0.04); },
     pop: function () { tone(440, 990, 0.07, 0.05); },
+    tada: function () { notes([784, 988, 1175, 1568], 0.08, 0.22, 0.04); setTimeout(function () { notes([2093, 2637], 0.09, 0.3, 0.018); }, 300); },
     shuffle: function () { notes([659, 784, 988, 1318], 0.05, 0.08, 0.04); }
   };
   function sfx(n) { if (soundOn && ready && !quiet && SFX[n]) try { SFX[n](); } catch (e) {} }

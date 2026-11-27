@@ -314,7 +314,7 @@ class Component extends DCLogic {
   constructor(props) { super(props); this.state = { a: -1, i: 0, flip: null, make: false }; }
   componentWillUnmount() { clearTimeout(this.ft); }
   renderVals() { const a = this.state.a, v = { off: () => this.setState({ a: -1 }) }; for (let i = 0; i < 9; i++) { v['on' + i] = () => this.setState({ a: i }); v['s' + i] = a === i; v['z' + i] = a === i ? 5 : 1; } const N = 3, i = this.state.i, f = this.state.flip, L = (k) => k === N - 1 ? 'spL' : 'blL', R = (k) => k === N - 1 ? 'spR' : 'blR';
-    const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
+    const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n === N - 1 && window.ScrapbookMaker) window.ScrapbookMaker.sfx('tada'); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
     const run = () => { clearTimeout(this.ft); this.setState({ i: 0, flip: null, a: -1 }); this.ft = setTimeout(step, 600); };
     if (!this.started) { this.started = true; run(); }
     const mk = this.state.make;
