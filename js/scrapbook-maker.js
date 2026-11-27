@@ -37,6 +37,38 @@
   var ORDER = ['photo', 'note', 'miffy', 'lego', 'stamp', 'star'].concat(Object.keys(PATCHES).map(function (k) { return 'p-' + k; }), ['tapePink', 'tapeBlue', 'tapeLav', 'sparkle']);
 
 
+  /* ---------- sounds: generated, no files ---------- */
+  var AC = null, soundOn = true, quiet = false, ready = false;
+  try { if (localStorage.getItem('mk-sound') === 'off') soundOn = false; } catch (e) {}
+  function actx() { if (!AC) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; AC = new C(); } if (AC.state === 'suspended') AC.resume(); return AC; }
+  function burst(type, freq, q, dur, peak, delay, sweepTo) {
+    var c = actx(); if (!c) return;
+    var t = c.currentTime + (delay || 0), len = Math.ceil(c.sampleRate * (dur + 0.05)), b = c.createBuffer(1, len, c.sampleRate), d = b.getChannelData(0);
+    for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    var src = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+    src.buffer = b; f.type = type; f.frequency.setValueAtTime(freq, t); if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t + dur); f.Q.value = q;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + 0.004); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(f); f.connect(g); g.connect(c.destination); src.start(t); src.stop(t + dur + 0.05);
+  }
+  function tone(f0, f1, dur, peak, delay) {
+    var c = actx(); if (!c) return;
+    var t = c.currentTime + (delay || 0), o = c.createOscillator(), g = c.createGain();
+    o.type = 'triangle'; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + 0.02);
+  }
+  var SFX = {
+    pat: function () { burst('lowpass', 900, 0.7, 0.07, 0.35); },
+    tape: function () { for (var i = 0; i < 6; i++) burst('bandpass', 2500 + Math.random() * 1500, 1.2, 0.025, 0.12, i * 0.022); },
+    snip: function () { burst('highpass', 4000, 1, 0.035, 0.28); burst('highpass', 4600, 1, 0.035, 0.28, 0.1); },
+    flip: function () { burst('bandpass', 700, 0.8, 0.32, 0.2, 0, 3200); },
+    shutter: function () { burst('bandpass', 2200, 2, 0.03, 0.3); burst('lowpass', 1200, 0.7, 0.06, 0.25, 0.07); tone(880, 1320, 0.14, 0.05, 0.14); },
+    rustle: function () { burst('bandpass', 1400, 0.6, 0.18, 0.1, 0, 4200); },
+    pop: function () { tone(560, 260, 0.09, 0.1); },
+    shuffle: function () { for (var i = 0; i < 5; i++) burst('lowpass', 900, 0.7, 0.05, 0.25, i * 0.06); }
+  };
+  function sfx(n) { if (soundOn && ready && !quiet && SFX[n]) try { SFX[n](); } catch (e) {} }
+
   var items = [], sel = null, uid = 0;
 
   root.innerHTML =
@@ -50,11 +82,12 @@
     '<div class="mk-word-demo" aria-hidden="true"><img src="' + MK + 'letter-a1.webp" alt=""><img src="' + MK + 'letter-b3.webp" alt=""><img src="' + MK + 'letter-c3.webp" alt=""></div>' +
     '<p class="mk-sub">Type anything and it shows up as magazine cutouts</p>' +
     '<form class="mk-wordbar" autocomplete="off"><input class="mk-word-in" maxlength="16" placeholder="e.g. hello" aria-label="Word to spell in cut-out letters"><button type="submit" class="mk-btn">Cut it out ✂︎</button></form>' +
-    '<div class="mk-sep"></div><p class="mk-box-title">Paper</p><div class="mk-papers" role="group" aria-label="Paper"></div></div>' +
+    '</div><div class="mk-box mk-box-p"><p class="mk-box-title">Paper</p><div class="mk-papers" role="group" aria-label="Paper"></div></div>' +
     '<div class="mk-tray" role="toolbar" aria-label="Stickers"></div>' +
     '<div class="mk-box mk-box-r"><p class="mk-box-title">Your page</p><div class="mk-actions">' +
       '<button type="button" class="mk-btn" data-act="shuffle">Shuffle ⟳</button>' +
       '<button type="button" class="mk-btn" data-act="clear">Clear</button>' +
+      '<button type="button" class="mk-btn mk-sound" data-act="sound" aria-pressed="true">🔈 Sound on</button>' +
       '<button type="button" class="mk-btn mk-dark" data-act="save">Save my page ↓</button>' +
     '</div>' +
     '<p class="mk-hint">Drag to move. Use the corner handle to resize and rotate. Your page stays on your device.</p></div>' +
@@ -69,7 +102,7 @@
   railL.querySelector('.mk-back').addEventListener('click', function () { var b = document.querySelector('.pl-actions .pl-dark'); if (b) b.click(); });
   var skL = railL.querySelector('.mk-rail-sk'), skR = railR.querySelector('.mk-rail-sk');
   ORDER.forEach(function (k, n) {
-    [n < Math.ceil(ORDER.length / 2) ? skL : skR, tray].forEach(function (dest) {
+    [n < 9 ? skL : skR, tray].forEach(function (dest) {
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'mk-chip'; b.dataset.tip = STICKERS[k].label;
     b.setAttribute('aria-label', 'Add ' + STICKERS[k].label);
@@ -96,6 +129,7 @@
     if (d.type === 'photo' && !it.tint) it.tint = TINTS[Math.floor(Math.random() * TINTS.length)];
     if (d.type === 'word') buildWord(it);
     items.push(it); draw(it); select(it); syncEmpty();
+    sfx(d.type === 'tape' ? 'tape' : d.type === 'word' ? 'snip' : 'pat');
     return it;
   }
 
@@ -127,15 +161,15 @@
         el.appendChild(c);
       });
     } else {
-      var t = document.createElement('div'); t.className = 'mk-note-text'; t.contentEditable = 'true'; t.spellcheck = false; t.textContent = it.text;
-      t.addEventListener('input', function () { it.text = t.textContent; });
+      var t = document.createElement('div'); t.className = 'mk-note-text'; t.contentEditable = 'true'; t.spellcheck = false; t.style.textAlign = it.align || 'center'; t.textContent = it.text;
+      t.addEventListener('input', function () { it.text = t.innerText; });
       t.addEventListener('pointerdown', function (e) { if (sel === it) e.stopPropagation(); });
       el.appendChild(t);
     }
     var h = document.createElement('span'); h.className = 'mk-handle'; h.setAttribute('aria-hidden', 'true'); el.appendChild(h);
     var x = document.createElement('button'); x.type = 'button'; x.className = 'mk-del'; x.setAttribute('aria-label', 'Remove'); x.textContent = '×'; el.appendChild(x);
     x.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
-    x.addEventListener('click', function (e) { e.stopPropagation(); remove(it); });
+    x.addEventListener('click', function (e) { e.stopPropagation(); remove(it); sfx('pop'); });
     el.addEventListener('pointerdown', function (e) { startMove(e, it); });
     h.addEventListener('pointerdown', function (e) { startScale(e, it); });
     el.addEventListener('keydown', function (e) { if (e.key === 'Delete' || e.key === 'Backspace') { if (e.target === el) { e.preventDefault(); remove(it); } } });
@@ -150,7 +184,7 @@
     el.style.left = (it.x * W - wpx / 2) + 'px'; el.style.top = (it.y * H - hpx / 2) + 'px';
     el.style.transform = 'rotate(' + it.r + 'deg)';
     if (d.type === 'glyph') el.firstChild.style.fontSize = hpx + 'px';
-    if (d.type === 'note') el.firstChild.style.fontSize = Math.max(11, wpx * 0.12) + 'px';
+    if (d.type === 'note') el.firstChild.style.fontSize = Math.max(10, wpx * (it.fs || 0.12)) + 'px';
     if (d.type === 'word') Array.prototype.forEach.call(el.querySelectorAll('.mk-wtile'), function (t) { t.style.fontSize = (hpx * 0.62) + 'px'; });
   }
   function select(it) {
@@ -221,13 +255,14 @@
   file.addEventListener('change', function () {
     var f = file.files && file.files[0]; if (!f || !photoFor) return;
     var it = photoFor, url = URL.createObjectURL(f), im = new Image();
-    im.onload = function () { it.photo = im; setPhoto(it, elOf(it).querySelector('.mk-photo-in')); };
+    im.onload = function () { it.photo = im; setPhoto(it, elOf(it).querySelector('.mk-photo-in')); sfx('pat'); };
     im.src = url;
   });
 
   function clearAll() { items.slice().forEach(remove); }
+  function clearBtn() { clearAll(); sfx('rustle'); }
   function shuffle() {
-    clearAll();
+    quiet = true; clearAll();
     var pk = Object.keys(PATCHES).sort(function () { return Math.random() - 0.5; }).slice(0, 3).map(function (k) { return 'p-' + k; });
     var picks = ['word', 'photo', 'photo', 'note', ['miffy', 'lego'][Math.floor(Math.random() * 2)], 'stamp', 'star', ['tapePink', 'tapeBlue', 'tapeLav'][Math.floor(Math.random() * 3)]].concat(pk);
     var spots = [[0.22, 0.34], [0.7, 0.36], [0.33, 0.74], [0.13, 0.64], [0.85, 0.72], [0.6, 0.76], [0.44, 0.44], [0.87, 0.18], [0.14, 0.16], [0.6, 0.12], [0.42, 0.9]];
@@ -235,10 +270,11 @@
     add('word', 0.27 + Math.random() * 0.06, 0.13, (Math.random() - 0.5) * 6, { word: WORDS[Math.floor(Math.random() * WORDS.length)] });
     picks.slice(1).forEach(function (k, i) { var s = spots[i]; add(k, s[0] + (Math.random() - 0.5) * 0.05, s[1] + (Math.random() - 0.5) * 0.05, (Math.random() - 0.5) * 22); });
     select(null);
+    quiet = false; sfx('shuffle');
   }
 
   root.querySelector('[data-act="shuffle"]').addEventListener('click', shuffle);
-  root.querySelector('[data-act="clear"]').addEventListener('click', clearAll);
+  root.querySelector('[data-act="clear"]').addEventListener('click', clearBtn);
   root.querySelector('[data-act="save"]').addEventListener('click', save);
   window.addEventListener('resize', function () { items.forEach(place); });
 
@@ -249,6 +285,7 @@
     return cache[src];
   }
   function save() {
+    sfx('shutter');
     select(null);
     var W = 1800, H = Math.round(W * 1265 / 1800), cv = document.createElement('canvas');
     cv.width = W; cv.height = H; var c = cv.getContext('2d');
@@ -287,8 +324,8 @@
           });
         } else {
           c.fillStyle = '#FFFDF6'; c.fillRect(-w / 2, -h / 2, w, h);
-          c.fillStyle = '#2B2937'; c.font = (w * 0.12) + 'px Caveat, cursive'; c.textAlign = 'center'; c.textBaseline = 'middle';
-          wrap(c, it.text, w * 0.86, w * 0.14);
+          var fs = it.fs || 0.12; c.fillStyle = '#2B2937'; c.font = (w * fs) + 'px Caveat, cursive'; c.textAlign = it.align === 'left' ? 'left' : 'center'; c.textBaseline = 'middle';
+          wrap(c, it.text, w * 0.86, w * fs * 1.17, it.align === 'left' ? -w * 0.43 : 0);
         }
         c.restore();
       });
@@ -312,7 +349,7 @@
     c.fillStyle = sp; c.fillRect(W / 2 - 40, 0, 80, H);
   }
   function setPaper(k) {
-    paper = k; var P = PAPERS[k];
+    paper = k; sfx('rustle'); var P = PAPERS[k];
     root.querySelectorAll('.mk-half').forEach(function (h) { h.style.background = P.css + ',' + P.base; });
     root.querySelectorAll('.mk-paper').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.paper === k ? 'true' : 'false'); });
   }
@@ -326,26 +363,42 @@
   });
   setPaper('dots');
 
-  function wrap(c, text, maxW, lh) {
-    var words = String(text || '').split(/\s+/), lines = [], cur = '';
-    words.forEach(function (w) { var t = cur ? cur + ' ' + w : w; if (c.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; });
-    if (cur) lines.push(cur);
-    var y0 = -(lines.length - 1) * lh / 2; lines.forEach(function (l, i) { c.fillText(l, 0, y0 + i * lh); });
+  function wrap(c, text, maxW, lh, x0) {
+    var lines = [];
+    String(text || '').split(/\n/).forEach(function (para) {
+      var cur = '';
+      para.split(/\s+/).filter(Boolean).forEach(function (w) { var t = cur ? cur + ' ' + w : w; if (c.measureText(t).width > maxW && cur) { lines.push(cur); cur = w; } else cur = t; });
+      lines.push(cur);
+    });
+    var y0 = -(lines.length - 1) * lh / 2; lines.forEach(function (l, i) { c.fillText(l, x0 || 0, y0 + i * lh); });
   }
 
-  var why = document.createElement('details'); why.className = 'mk-why';
-  var srcNote = document.querySelector('.why-note'), noteText = '';
-  if (srcNote) { var cl = srcNote.cloneNode(true); cl.querySelectorAll('b,button').forEach(function (n) { n.remove(); }); noteText = cl.textContent.trim(); }
-  why.innerHTML = '<summary>Why a scrapbook? ✦</summary><p></p>'; why.querySelector('p').textContent = noteText;
-  var mq = window.matchMedia('(min-width: 1100px)'), boxL = root.querySelector('.mk-box-l'), boxR = root.querySelector('.mk-box-r');
+
+  var mq = window.matchMedia('(min-width: 1100px)'), boxL = root.querySelector('.mk-box-l'), boxP = root.querySelector('.mk-box-p'), boxR = root.querySelector('.mk-box-r');
   function layout() {
     var tr = root.querySelector('.mk-tray');
-    if (mq.matches) { railL.insertBefore(boxL, skL); railR.appendChild(boxR); railR.appendChild(why); }
-    else { tr.parentNode.insertBefore(boxL, tr); tr.parentNode.insertBefore(boxR, tr.nextSibling); boxR.parentNode.insertBefore(why, boxR.nextSibling); }
+    if (mq.matches) { railL.insertBefore(boxL, skL); railL.insertBefore(boxP, skL); railR.appendChild(boxR); }
+    else { tr.parentNode.insertBefore(boxL, tr); tr.parentNode.insertBefore(boxP, tr); tr.parentNode.insertBefore(boxR, tr.nextSibling); }
     items.forEach(place);
   }
   (mq.addEventListener ? mq.addEventListener('change', layout) : mq.addListener(layout)); layout();
 
-  window.ScrapbookMaker = { refresh: function () { items.forEach(place); } };
+  function starter() {
+    quiet = true; clearAll();
+    add('word', 0.25, 0.13, -3, { word: 'yippee!' });
+    add('note', 0.25, 0.55, -1.5, { w: 0.4, ar: 0.82, fs: 0.05, align: 'left', text: 'you found my little craft corner.\n\ngrowing up, i dabbled in a lot of crafts, but scrapbooking has a special place in my heart. it was my first time asking a design question: how do you tell a story with just visuals and a few constraints?\n\nmake your own virtual scrapbook, play around with the elements, and save it to your device!' });
+    add('tapeLav', 0.25, 0.2, 2, { w: 0.12 });
+    add('photo', 0.7, 0.42, 4);
+    add('star', 0.86, 0.2, 12);
+    add('p-denim-heart', 0.86, 0.74, -8);
+    add('miffy', 0.6, 0.78, -6, { w: 0.08 });
+    select(null); quiet = false;
+  }
+  var sBtn = root.querySelector('[data-act="sound"]');
+  function syncSound() { sBtn.textContent = soundOn ? '🔈 Sound on' : '🔇 Sound off'; sBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); }
+  sBtn.addEventListener('click', function () { soundOn = !soundOn; try { localStorage.setItem('mk-sound', soundOn ? 'on' : 'off'); } catch (e) {} syncSound(); sfx('pop'); });
+  syncSound(); ready = true;
+
+  window.ScrapbookMaker = { starter: starter, sfx: function (n) { sfx(n); }, refresh: function () { items.forEach(place); } };
   syncEmpty();
 })();
