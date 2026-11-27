@@ -286,8 +286,22 @@
     if (!cache[src]) cache[src] = new Promise(function (res) { var i = new Image(); i.onload = function () { res(i); }; i.onerror = function () { res(null); }; i.src = src; });
     return cache[src];
   }
+  function showSaved(url) {
+    var old = document.querySelector('.mk-saved'); if (old) old.remove();
+    var m = document.createElement('div'); m.className = 'mk-saved'; m.setAttribute('role', 'dialog'); m.setAttribute('aria-label', 'Your saved page');
+    m.innerHTML = url
+      ? '<div class="mk-saved-card"><p class="mk-saved-t">Your page is ready ✧˖°⟡</p><img alt="Your scrapbook page"><p class="mk-saved-s">It should be downloading. If not, right-click (or press and hold) the image to save it.</p><div class="mk-saved-b"><a class="mk-btn mk-dark" download="my-scrapbook-page.png">Download again ↓</a><button type="button" class="mk-btn">Keep making</button></div></div>'
+      : '<div class="mk-saved-card"><p class="mk-saved-t">Hmm, that didn\'t work</p><p class="mk-saved-s">Try a screenshot instead, sorry!</p><div class="mk-saved-b"><button type="button" class="mk-btn">Close</button></div></div>';
+    if (url) { m.querySelector('img').src = url; m.querySelector('a').href = url; }
+    m.addEventListener('click', function (e) { if (e.target === m || e.target.closest('button')) m.remove(); });
+    document.body.appendChild(m);
+  }
   function save() {
     sfx('shutter');
+    var fr = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    fr.then(doSave);
+  }
+  function doSave() {
     select(null);
     var W = 1800, H = Math.round(W * 1265 / 1800), cv = document.createElement('canvas');
     cv.width = W; cv.height = H; var c = cv.getContext('2d');
@@ -334,7 +348,10 @@
       });
       c.fillStyle = 'rgba(43,41,55,.45)'; c.font = '28px Inter, sans-serif'; c.textAlign = 'right'; c.textBaseline = 'alphabetic';
       c.fillText('made on simrangunsi.com ✦', W - 40, H - 34);
-      cv.toBlob(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'my-scrapbook-page.png'; document.body.appendChild(a); a.click(); a.remove(); });
+      var url;
+      try { url = cv.toDataURL('image/png'); } catch (e) { showSaved(null); return; }
+      try { var a = document.createElement('a'); a.href = url; a.download = 'my-scrapbook-page.png'; document.body.appendChild(a); a.click(); a.remove(); } catch (e) {}
+      showSaved(url);
     });
   }
   function drawPaper(c, W, H) {
