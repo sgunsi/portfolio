@@ -62,7 +62,7 @@
     pat: function () { tone(880, 1320, 0.09, 0.06); },
     tape: function () { notes([1046, 1318], 0.06, 0.08, 0.045); },
     snip: function () { notes([1568, 2093], 0.07, 0.06, 0.04); },
-    flip: function () { tone(523, 784, 0.22, 0.035); },
+    flip: function () { burst('lowpass', 2400, 0.5, 0.34, 0.05, 0, 500); burst('bandpass', 1200, 0.7, 0.12, 0.025, 0.05, 2600); burst('lowpass', 220, 0.8, 0.09, 0.05, 0.3); },
     shutter: function () { notes([1046, 1318, 1568, 2093], 0.07, 0.16, 0.045); },
     rustle: function () { notes([784, 659], 0.07, 0.09, 0.04); },
     pop: function () { tone(440, 990, 0.07, 0.05); },
