@@ -203,6 +203,8 @@ body.making .sga-root{display:none}
 .mk-hint{margin:12px 0 0;text-align:center;font-size:13px;color:#7A7A82}
 @media (max-width:760px){.pl-maker{padding:0 4px}.mk-handle,.mk-del{width:28px;height:28px;right:-14px;bottom:-14px}.mk-del{left:-14px;top:-14px;right:auto;bottom:auto}.mk-chip{width:46px;height:46px}}
 @media (max-width:760px){.deco{display:none!important}}
+.burst-star{position:absolute;width:26px;margin:-13px 0 0 -13px;z-index:20;pointer-events:none;opacity:0;animation:starpop 1.1s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes starpop{0%{opacity:0;transform:scale(.2) rotate(0)}35%{opacity:1;transform:scale(1.15) rotate(var(--r))}70%{opacity:1;transform:scale(1) rotate(var(--r))}100%{opacity:0;transform:scale(.9) translateY(-8px) rotate(var(--r))}}
 </style>
 </head>
 <body>
@@ -318,7 +320,7 @@ class Component extends DCLogic {
   constructor(props) { super(props); this.state = { a: -1, i: 0, flip: null, make: false }; }
   componentWillUnmount() { clearTimeout(this.ft); }
   renderVals() { const a = this.state.a, v = { off: () => this.setState({ a: -1 }) }; for (let i = 0; i < 9; i++) { v['on' + i] = () => this.setState({ a: i }); v['s' + i] = a === i; v['z' + i] = a === i ? 5 : 1; } const N = 3, i = this.state.i, f = this.state.flip, L = (k) => k === N - 1 ? 'spL' : 'blL', R = (k) => k === N - 1 ? 'spR' : 'blR';
-    const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
+    const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n === N - 1) starBurst(); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
     const run = () => { clearTimeout(this.ft); this.setState({ i: 0, flip: null, a: -1 }); this.ft = setTimeout(step, 600); };
     if (!this.started) { this.started = true; run(); }
     const mk = this.state.make;
@@ -327,6 +329,18 @@ class Component extends DCLogic {
 }
 
 DCLite.mount(document.getElementById('app'), Component);
+</script>
+<script>
+function starBurst(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var book = document.querySelector('.pl-book [style*=perspective]'); if (!book) return;
+  var spots = [[-3,12,-14],[103,8,16],[-4,78,10],[102,70,-12],[48,-5,8]];
+  spots.forEach(function (p, k) {
+    var s = document.createElement('img'); s.src = 'images/redesign/sticker-star.png'; s.alt = ''; s.className = 'burst-star';
+    s.style.left = p[0] + '%'; s.style.top = p[1] + '%'; s.style.setProperty('--r', p[2] + 'deg'); s.style.animationDelay = (k * 70) + 'ms';
+    book.appendChild(s); setTimeout(function () { s.remove(); }, 1400);
+  });
+}
 </script>
 <script src="js/scrapbook-maker.js"></script>
 <script src="simran-assistant.js" defer></script>
