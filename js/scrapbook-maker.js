@@ -53,19 +53,20 @@
   function tone(f0, f1, dur, peak, delay) {
     var c = actx(); if (!c) return;
     var t = c.currentTime + (delay || 0), o = c.createOscillator(), g = c.createGain();
-    o.type = 'triangle'; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+    o.type = 'sine'; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur);
     g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
     o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + 0.02);
   }
+  function notes(list, gap, dur, peak) { list.forEach(function (f, k) { tone(f, f * 1.01, dur, peak, k * gap); }); }
   var SFX = {
-    pat: function () { burst('lowpass', 900, 0.7, 0.07, 0.35); },
-    tape: function () { for (var i = 0; i < 6; i++) burst('bandpass', 2500 + Math.random() * 1500, 1.2, 0.025, 0.12, i * 0.022); },
-    snip: function () { burst('highpass', 4000, 1, 0.035, 0.28); burst('highpass', 4600, 1, 0.035, 0.28, 0.1); },
-    flip: function () { burst('bandpass', 700, 0.8, 0.32, 0.2, 0, 3200); },
-    shutter: function () { burst('bandpass', 2200, 2, 0.03, 0.3); burst('lowpass', 1200, 0.7, 0.06, 0.25, 0.07); tone(880, 1320, 0.14, 0.05, 0.14); },
-    rustle: function () { burst('bandpass', 1400, 0.6, 0.18, 0.1, 0, 4200); },
-    pop: function () { tone(560, 260, 0.09, 0.1); },
-    shuffle: function () { for (var i = 0; i < 5; i++) burst('lowpass', 900, 0.7, 0.05, 0.25, i * 0.06); }
+    pat: function () { tone(880, 1320, 0.09, 0.06); },
+    tape: function () { notes([1046, 1318], 0.06, 0.08, 0.045); },
+    snip: function () { notes([1568, 2093], 0.07, 0.06, 0.04); },
+    flip: function () { tone(523, 784, 0.22, 0.035); },
+    shutter: function () { notes([1046, 1318, 1568, 2093], 0.07, 0.16, 0.045); },
+    rustle: function () { notes([784, 659], 0.07, 0.09, 0.04); },
+    pop: function () { tone(440, 990, 0.07, 0.05); },
+    shuffle: function () { notes([659, 784, 988, 1318], 0.05, 0.08, 0.04); }
   };
   function sfx(n) { if (soundOn && ready && !quiet && SFX[n]) try { SFX[n](); } catch (e) {} }
 
@@ -161,7 +162,7 @@
         el.appendChild(c);
       });
     } else {
-      var t = document.createElement('div'); t.className = 'mk-note-text'; t.contentEditable = 'true'; t.spellcheck = false; t.style.textAlign = it.align || 'center'; t.textContent = it.text;
+      var t = document.createElement('div'); t.className = 'mk-note-text'; t.contentEditable = 'true'; t.spellcheck = false; t.style.textAlign = it.align || 'center'; if (it.clean) t.classList.add('mk-clean'); t.textContent = it.text;
       t.addEventListener('input', function () { it.text = t.innerText; });
       t.addEventListener('pointerdown', function (e) { if (sel === it) e.stopPropagation(); });
       el.appendChild(t);
@@ -324,8 +325,8 @@
           });
         } else {
           c.fillStyle = '#FFFDF6'; c.fillRect(-w / 2, -h / 2, w, h);
-          var fs = it.fs || 0.12; c.fillStyle = '#2B2937'; c.font = (w * fs) + 'px Caveat, cursive'; c.textAlign = it.align === 'left' ? 'left' : 'center'; c.textBaseline = 'middle';
-          wrap(c, it.text, w * 0.86, w * fs * 1.17, it.align === 'left' ? -w * 0.43 : 0);
+          var fs = it.fs || 0.12; c.fillStyle = '#2B2937'; c.font = (w * fs) + (it.clean ? 'px Inter, sans-serif' : 'px Caveat, cursive'); c.textAlign = it.align === 'left' ? 'left' : 'center'; c.textBaseline = 'middle';
+          wrap(c, it.text, w * 0.86, w * fs * (it.clean ? 1.5 : 1.17), it.align === 'left' ? -w * 0.43 : 0);
         }
         c.restore();
       });
@@ -386,7 +387,7 @@
   function starter() {
     quiet = true; clearAll();
     add('word', 0.25, 0.13, -3, { word: 'yippee!' });
-    add('note', 0.25, 0.55, -1.5, { w: 0.4, ar: 0.82, fs: 0.05, align: 'left', text: 'you found my little craft corner.\n\ngrowing up, i dabbled in a lot of crafts, but scrapbooking has a special place in my heart. it was my first time asking a design question: how do you tell a story with just visuals and a few constraints?\n\nmake your own virtual scrapbook, play around with the elements, and save it to your device!' });
+    add('note', 0.25, 0.55, -1.5, { w: 0.4, ar: 0.8, fs: 0.043, align: 'left', clean: true, text: 'you found my little craft corner.\n\ngrowing up, i dabbled in a lot of crafts, but scrapbooking has a special place in my heart. it was my first time asking a design question: how do you tell a story with just visuals and a few constraints?\n\nmake your own virtual scrapbook, play around with the elements, and save it to your device!' });
     add('tapeLav', 0.25, 0.2, 2, { w: 0.12 });
     add('photo', 0.7, 0.42, 4);
     add('star', 0.86, 0.2, 12);
