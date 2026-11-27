@@ -74,6 +74,16 @@ a{color:#3B3BF5}
   .stack{grid-template-columns:1fr!important;gap:32px!important;margin-top:40px!important}
 }
 </style>
+<style>
+.site-foot{margin:88px 24px -48px;padding:28px 0 0;border-top:1px solid #E4E1D9;font-family:Inter,system-ui,sans-serif}
+.sf-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.sf-name{margin:0;font-family:'Fraunces',serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:20px;color:#2B2937}
+.sf-note{margin:4px 0 0;font-size:14px;color:#6B6B73}
+.sf-links{display:flex;gap:22px;flex-wrap:wrap;padding-right:80px}
+.sf-links a{font-size:14px;color:#4A4A52;text-decoration:none;text-underline-offset:4px}
+.sf-links a:hover{color:#1C1C1C;text-decoration:underline}
+@media (max-width:760px){.site-foot{margin-top:64px;margin-bottom:-24px}.sf-inner{flex-direction:column;align-items:flex-start;gap:16px}.sf-links{padding-right:0}}
+</style>
 </head>
 <body>
 <div id="app" hidden>
@@ -158,6 +168,19 @@ a{color:#3B3BF5}
     </div>
     <button type="button" data-on-click="{{ replay }}" style="padding: 10px 18px; border: 1px solid #DDDAD2; border-radius: 999px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; color: #4A4A52; cursor: pointer; opacity: {{ replayO }}; transition: opacity .3s">Flip through again ↺</button>
   </section>
+  <footer class="site-foot">
+    <div class="sf-inner">
+      <div>
+        <p class="sf-name">Simran Gunsi</p>
+        <p class="sf-note">Thanks for stopping by ✦</p>
+      </div>
+      <nav class="sf-links" aria-label="Contact">
+        <a href="mailto:skgunsi@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/simrangunsi/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://medium.com/@simrxnk" target="_blank" rel="noopener">Medium ↗</a>
+      </nav>
+    </div>
+  </footer>
 </div>
 </div>
 <script src="js/dc-lite.js"></script>
