@@ -21,7 +21,7 @@
   var paper = 'dots';
   var WORDS = ['hello', 'yay', 'hi friend', 'xoxo', 'fun', 'smile', 'lucky'];
   var STICKERS = {
-    miffy: { type: 'img', src: IMG + 'sticker-miffy.png', ar: 356 / 240, w: 0.1, label: 'Miffy' },
+    miffy: { type: 'img', src: IMG + 'sticker-miffy.webp', ar: 356 / 240, w: 0.1, label: 'Miffy' },
     lego: { type: 'img', src: IMG + 'sticker-lego.png', ar: 183 / 260, w: 0.13, label: 'Lego brick' },
     stamp: { type: 'img', src: IMG + 'stamp.png', ar: 480 / 680, w: 0.17, label: 'SF + Toronto stamp' },
     star: { type: 'img', src: IMG + 'sticker-star.png', ar: 152 / 160, w: 0.07, label: 'Gold star' },

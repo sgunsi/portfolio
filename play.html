@@ -31,8 +31,8 @@ a{color:#3B3BF5}
 .tile:hover .arr{opacity:1;transform:none}.arr{display:inline-block;margin-left:6px;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s}
 .caret{display:inline-block;width:2px;height:.9em;margin-left:4px;background:#2B2937;vertical-align:-0.05em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.spL{background:url(images/redesign/scrapbook-spread.jpg) 0 0/200% 100% no-repeat}
-.spR{background:url(images/redesign/scrapbook-spread.jpg) 100% 0/200% 100% no-repeat}
+.spL{background:url(images/redesign/scrapbook-spread.webp) 0 0/200% 100% no-repeat}
+.spR{background:url(images/redesign/scrapbook-spread.webp) 100% 0/200% 100% no-repeat}
 .blL{background:radial-gradient(#E2DCCD 1px,transparent 1.3px) 0 0/18px 18px,linear-gradient(90deg,#FBF8F1 88%,#F1ECDF);}
 .blR{background:radial-gradient(#E2DCCD 1px,transparent 1.3px) 0 0/18px 18px,linear-gradient(90deg,#F1ECDF,#FBF8F1 12%);}
 @keyframes leafF{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
@@ -318,7 +318,7 @@ class Component extends DCLogic {
   constructor(props) { super(props); this.state = { a: -1, i: 0, flip: null, make: false }; }
   componentWillUnmount() { clearTimeout(this.ft); }
   renderVals() { const a = this.state.a, v = { off: () => this.setState({ a: -1 }) }; for (let i = 0; i < 9; i++) { v['on' + i] = () => this.setState({ a: i }); v['s' + i] = a === i; v['z' + i] = a === i ? 5 : 1; } const N = 3, i = this.state.i, f = this.state.flip, L = (k) => k === N - 1 ? 'spL' : 'blL', R = (k) => k === N - 1 ? 'spR' : 'blR';
-    const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n === N - 1 && window.ScrapbookMaker) window.ScrapbookMaker.sfx('tada'); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
+    const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
     const run = () => { clearTimeout(this.ft); this.setState({ i: 0, flip: null, a: -1 }); this.ft = setTimeout(step, 600); };
     if (!this.started) { this.started = true; run(); }
     const mk = this.state.make;
