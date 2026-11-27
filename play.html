@@ -166,7 +166,7 @@ a{color:#3B3BF5}
 }
 .why-note{position:relative;margin:0 auto;max-width:300px;background:#FFFDF6;padding:22px 20px 18px;box-shadow:0 10px 24px rgba(20,20,40,.12);transform:rotate(-2.5deg);font:20px/1.25 Caveat,cursive;color:#2B2937;text-align:left;order:-1}
 .why-note::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:repeating-linear-gradient(90deg,rgba(185,180,236,.85) 0 6px,rgba(185,180,236,.6) 6px 9px);transform:rotate(3deg)}
-.why-note{font-family:Inter,system-ui,sans-serif!important;font-size:14px!important;line-height:1.55!important;color:#3A3A44!important}
+.why-note{text-align:center!important;font-family:Inter,system-ui,sans-serif!important;font-size:14px!important;line-height:1.55!important;color:#3A3A44!important}
 .why-note strong{font-weight:inherit;color:inherit;background:linear-gradient(transparent 52%,rgba(185,170,240,.55) 52%,rgba(185,170,240,.55) 92%,transparent 92%);padding:0 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .mk-note-text b{font-weight:600;color:#1C1C1C}
 .why-note b{display:block;font:600 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7A70B8;margin-bottom:6px}
@@ -202,6 +202,7 @@ a{color:#3B3BF5}
 body.making .sga-root{display:none}
 .mk-hint{margin:12px 0 0;text-align:center;font-size:13px;color:#7A7A82}
 @media (max-width:760px){.pl-maker{padding:0 4px}.mk-handle,.mk-del{width:28px;height:28px;right:-14px;bottom:-14px}.mk-del{left:-14px;top:-14px;right:auto;bottom:auto}.mk-chip{width:46px;height:46px}}
+@media (max-width:760px){.deco{display:none!important}}
 </style>
 </head>
 <body>
@@ -221,6 +222,7 @@ body.making .sga-root{display:none}
 
   <section style="position: relative; max-width: 1080px; margin: 72px auto 0; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
     
+    <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; left: calc(50% - 340px); top: -18px; width: 30px; transform: rotate(-14deg)">
     <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 56px; line-height: 1.05">Outside of design, I love...</h1>
     <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4A52">{{ sub }}</p>
     <div class="pl-actions">
@@ -289,6 +291,7 @@ body.making .sga-root{display:none}
         </div>
       </sc-if>
     </div>
+    <img class="deco" src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; left: -22px; bottom: 150px; width: 30px; transform: rotate(16deg); z-index: 4">
     <button type="button" class="pl-btn" data-on-click="{{ replay }}" style="opacity: {{ replayO }}">Flip through again ↺</button>
   </section>
   <section class="pl-maker" style="display: {{ makerD }}">
