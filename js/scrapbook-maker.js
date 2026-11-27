@@ -46,9 +46,11 @@
       '<div class="mk-items"></div>' +
       '<p class="mk-empty">Tap a sticker to start your page ✦</p>' +
     '</div><div class="mk-rail mk-rail-r" role="toolbar" aria-label="More stickers"></div></div>' +
-    '<div class="mk-box mk-box-l"><p class="mk-box-title">Make it yours</p>' +
-    '<form class="mk-wordbar" autocomplete="off"><input class="mk-word-in" maxlength="16" placeholder="Type a word in cut-out letters" aria-label="Type a word"><button type="submit" class="mk-btn">Add ✂︎</button></form>' +
-    '<div class="mk-papers" role="group" aria-label="Paper"><span>Paper</span></div></div>' +
+    '<div class="mk-box mk-box-l"><p class="mk-box-title">Cut-out letters</p>' +
+    '<div class="mk-word-demo" aria-hidden="true"><img src="' + MK + 'letter-a1.webp" alt=""><img src="' + MK + 'letter-b3.webp" alt=""><img src="' + MK + 'letter-c3.webp" alt=""></div>' +
+    '<p class="mk-sub">Type anything and it shows up as magazine cutouts</p>' +
+    '<form class="mk-wordbar" autocomplete="off"><input class="mk-word-in" maxlength="16" placeholder="e.g. hello" aria-label="Word to spell in cut-out letters"><button type="submit" class="mk-btn">Cut it out ✂︎</button></form>' +
+    '<div class="mk-sep"></div><p class="mk-box-title">Paper</p><div class="mk-papers" role="group" aria-label="Paper"></div></div>' +
     '<div class="mk-tray" role="toolbar" aria-label="Stickers"></div>' +
     '<div class="mk-box mk-box-r"><p class="mk-box-title">Your page</p><div class="mk-actions">' +
       '<button type="button" class="mk-btn" data-act="shuffle">Shuffle ⟳</button>' +
@@ -63,7 +65,8 @@
       file = root.querySelector('.mk-file');
 
   var railL = root.querySelector('.mk-rail-l'), railR = root.querySelector('.mk-rail-r');
-  railL.innerHTML = '<div class="mk-rail-sk"></div>'; railR.innerHTML = '<div class="mk-rail-sk"></div>';
+  railL.innerHTML = '<button type="button" class="mk-btn mk-back">← Back to my scrapbook</button><div class="mk-rail-sk"></div>'; railR.innerHTML = '<div class="mk-rail-sk"></div>';
+  railL.querySelector('.mk-back').addEventListener('click', function () { var b = document.querySelector('.pl-actions .pl-dark'); if (b) b.click(); });
   var skL = railL.querySelector('.mk-rail-sk'), skR = railR.querySelector('.mk-rail-sk');
   ORDER.forEach(function (k, n) {
     [n < Math.ceil(ORDER.length / 2) ? skL : skR, tray].forEach(function (dest) {
@@ -104,10 +107,9 @@
     else if (d.type === 'glyph') { var g = document.createElement('span'); g.textContent = d.ch; g.style.color = d.color; el.appendChild(g); }
     else if (d.type === 'photo') {
       var f = document.createElement('div'); f.className = 'mk-photo-in'; el.appendChild(f);
-      setPhoto(it, f);
       var tools = document.createElement('div'); tools.className = 'mk-ptools';
       tools.innerHTML = '<button type="button" data-p="own">Add a photo +</button>';
-      el.appendChild(tools);
+      it.tools = tools; setPhoto(it, f);
       tools.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
       tools.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return; e.stopPropagation();
@@ -188,9 +190,9 @@
 
   function setPhoto(it, box) {
     box.innerHTML = ''; box.style.background = it.tint;
-    if (!it.photo) { box.innerHTML = '<span class="mk-ph">your photo here ✦</span>'; return; }
-    var c = it.photo.cloneNode(); c.alt = 'Your photo'; c.draggable = false; box.appendChild(c);
-    var t = elOf(it) && elOf(it).querySelector('[data-p="own"]'); if (t) t.textContent = 'Change photo';
+    if (!it.photo) { box.innerHTML = '<span class="mk-ph">your photo here ✦</span>'; }
+    else { var c = it.photo.cloneNode(); c.alt = 'Your photo'; c.draggable = false; box.appendChild(c); it.tools.firstChild.textContent = 'Change photo'; }
+    box.appendChild(it.tools);
   }
   var TILE_BG = ['#F3B7C8', '#B9CDF2', '#F6DF73', '#CFC6F3', '#BFE3C0', '#F7C59F'];
   function buildWord(it) {
@@ -331,11 +333,15 @@
     var y0 = -(lines.length - 1) * lh / 2; lines.forEach(function (l, i) { c.fillText(l, 0, y0 + i * lh); });
   }
 
+  var why = document.createElement('details'); why.className = 'mk-why';
+  var srcNote = document.querySelector('.why-note'), noteText = '';
+  if (srcNote) { var cl = srcNote.cloneNode(true); cl.querySelectorAll('b,button').forEach(function (n) { n.remove(); }); noteText = cl.textContent.trim(); }
+  why.innerHTML = '<summary>Why a scrapbook? ✦</summary><p></p>'; why.querySelector('p').textContent = noteText;
   var mq = window.matchMedia('(min-width: 1100px)'), boxL = root.querySelector('.mk-box-l'), boxR = root.querySelector('.mk-box-r');
   function layout() {
     var tr = root.querySelector('.mk-tray');
-    if (mq.matches) { railL.insertBefore(boxL, skL); railR.appendChild(boxR); }
-    else { tr.parentNode.insertBefore(boxL, tr); tr.parentNode.insertBefore(boxR, tr.nextSibling); }
+    if (mq.matches) { railL.insertBefore(boxL, skL); railR.appendChild(boxR); railR.appendChild(why); }
+    else { tr.parentNode.insertBefore(boxL, tr); tr.parentNode.insertBefore(boxR, tr.nextSibling); boxR.parentNode.insertBefore(why, boxR.nextSibling); }
     items.forEach(place);
   }
   (mq.addEventListener ? mq.addEventListener('change', layout) : mq.addListener(layout)); layout();
