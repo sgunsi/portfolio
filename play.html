@@ -214,7 +214,7 @@ body.making .sga-root{display:none}
       <a href="index.html#work" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Work</a>
       <a href="play.html" class="nav-active" style="padding: 12px 16px; border-radius: 999px; background: rgba(255,255,255,0.7); font-size: 15px; font-weight: 500; color: #1C1C1C; text-decoration: none">Play</a>
       <a href="about.html" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">About</a>
-      <a href="#" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Résumé ↗</a>
+      <a href="#" style="padding: 12px 16px; font-size: 15px; color: #555555; text-decoration: none">Resume ↗</a>
     </nav>
   </div>
 
@@ -229,7 +229,7 @@ body.making .sga-root{display:none}
   </section>
 
   <section class="pl-book" style="position: relative; max-width: 900px; margin: 48px auto 0; padding: 0 24px; flex-direction: column; align-items: center; gap: 20px; display: {{ bookD }}">
-    <aside class="why-note"><b>Why a scrapbook?</b>it was the first time i asked the question i now ask every day as a product designer: <strong>how do you tell a story with just visuals and a few constraints?</strong><button type="button" class="note-cta" data-on-click="{{ toggleMake }}">Make your own page ✦</button></aside>
+    <aside class="why-note"><b>Why scrapbooking?</b>before figma, i had a glue stick. it taught me that <strong>constraints make better stories</strong>.<button type="button" class="note-cta" data-on-click="{{ toggleMake }}">try making your own ✦</button></aside>
     <div style="position: relative; width: 100%; aspect-ratio: 1800 / 1265; perspective: 2400px; border-radius: 18px; box-shadow: 0 18px 44px rgba(20,20,40,0.14)">
       <div style="position: absolute; left: 0; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseL }}" style="position: absolute; inset: 0; border-radius: 18px 0 0 18px"></div></div>
       <div style="position: absolute; left: 50%; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseR }}" style="position: absolute; inset: 0; border-radius: 0 18px 18px 0"></div></div>
@@ -314,7 +314,7 @@ class Component extends DCLogic {
   constructor(props) { super(props); this.state = { a: -1, i: 0, flip: null, make: false }; }
   componentWillUnmount() { clearTimeout(this.ft); }
   renderVals() { const a = this.state.a, v = { off: () => this.setState({ a: -1 }) }; for (let i = 0; i < 9; i++) { v['on' + i] = () => this.setState({ a: i }); v['s' + i] = a === i; v['z' + i] = a === i ? 5 : 1; } const N = 3, i = this.state.i, f = this.state.flip, L = (k) => k === N - 1 ? 'spL' : 'blL', R = (k) => k === N - 1 ? 'spR' : 'blR';
-    const step = () => { this.setState({ flip: 'f', a: -1 }); if (window.ScrapbookMaker && this.state.i === 0) window.ScrapbookMaker.sfx('flip'); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
+    const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
     const run = () => { clearTimeout(this.ft); this.setState({ i: 0, flip: null, a: -1 }); this.ft = setTimeout(step, 600); };
     if (!this.started) { this.started = true; run(); }
     const mk = this.state.make;

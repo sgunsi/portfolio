@@ -62,7 +62,6 @@
     pat: function () { tone(880, 1320, 0.09, 0.06); },
     tape: function () { notes([1046, 1318], 0.06, 0.08, 0.045); },
     snip: function () { notes([1568, 2093], 0.07, 0.06, 0.04); },
-    flip: function () { burst('lowpass', 1100, 0.4, 0.3, 0.018, 0, 350); tone(392, 523, 0.18, 0.02, 0.12); },
     shutter: function () { notes([1046, 1318, 1568, 2093], 0.07, 0.16, 0.045); },
     rustle: function () { notes([784, 659], 0.07, 0.09, 0.04); },
     pop: function () { tone(440, 990, 0.07, 0.05); },
