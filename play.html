@@ -132,20 +132,34 @@ a{color:#3B3BF5}
 .mk-paper[aria-pressed="true"]{box-shadow:0 0 0 2px #F5F4F0,0 0 0 4px #7A70D8}
 .mk-ph{font:clamp(10px,1.6vw,17px) Caveat,cursive;color:rgba(43,41,55,.55);text-align:center;padding:0 6px}
 .mk-stage{display:block}
+.mk-back{display:none!important}
 .mk-rail{display:none}
 .mk-chip{position:relative}
 .mk-chip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);background:#1C1C1C;color:#FFFFFF;font:12px/1.2 Inter,sans-serif;padding:6px 9px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
 .mk-chip:hover::after,.mk-chip:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
 @media (min-width:1100px){
-  .pl-maker{max-width:1200px}
-  .mk-stage{display:grid;grid-template-columns:120px 1fr 120px;gap:22px;align-items:center}
-  .mk-rail{display:grid;grid-template-columns:repeat(2,52px);gap:10px;justify-content:center;align-content:center}
+  .pl-maker{max-width:none;margin-top:28px}
+  .mk-stage{display:grid;grid-template-columns:150px minmax(0,calc((100vh - 130px) * 1800 / 1315)) 150px;gap:28px;align-items:center;justify-content:center}
+  .mk-rail{display:flex;flex-direction:column;gap:16px;align-items:stretch}
+  .mk-rail-sk{display:grid;grid-template-columns:repeat(2,52px);gap:10px;justify-content:center}
+  .mk-rail .mk-wordbar{flex-direction:column;margin:0;gap:6px}
+  .mk-rail .mk-word-in{width:100%;box-sizing:border-box;padding:9px 12px;font-size:13px}
+  .mk-rail .mk-wordbar .mk-btn{width:100%}
+  .mk-rail .mk-papers{display:grid;grid-template-columns:repeat(3,30px);gap:8px;justify-content:center;margin:0}
+  .mk-rail .mk-papers span{grid-column:1/-1;text-align:center;margin:0}
+  .mk-rail .mk-actions{flex-direction:column;margin:0;gap:8px}
+  .mk-rail .mk-actions .mk-btn{width:100%}
+  .mk-rail .mk-hint{font-size:12px;margin:0;line-height:1.4}
+  .mk-back{display:block!important;width:100%}
   .mk-tray{display:none!important}
 }
 .why-note{position:relative;margin:0 auto;max-width:300px;background:#FFFDF6;padding:22px 20px 18px;box-shadow:0 10px 24px rgba(20,20,40,.12);transform:rotate(-2.5deg);font:20px/1.25 Caveat,cursive;color:#2B2937;text-align:left;order:-1}
 .why-note::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:repeating-linear-gradient(90deg,rgba(185,180,236,.85) 0 6px,rgba(185,180,236,.6) 6px 9px);transform:rotate(3deg)}
 .why-note b{display:block;font:600 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7A70B8;margin-bottom:6px}
-@media (min-width:1240px){.why-note{position:absolute;left:-166px;top:64px;width:184px;max-width:none;z-index:3;order:0;font-size:18px;padding:20px 16px 16px}}
+.note-cta{display:block;margin-top:12px;padding:8px 12px;white-space:nowrap;border:0;border-radius:999px;background:#1C1C1C;color:#FFFFFF;font:500 13px Inter,sans-serif;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.note-cta:hover{transform:translateY(-2px) rotate(1deg)}
+@media (min-width:1240px){.pl-book{max-width:780px!important}.why-note{position:absolute;left:-206px;top:90px;width:170px;max-width:none;z-index:3;order:0;font-size:18px;padding:20px 16px 16px}}
+@media (min-width:1440px){.pl-book{max-width:900px!important}.why-note{left:-262px;width:200px}}
 .mk-tray{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px}
 .mk-chip{width:52px;height:52px;border-radius:14px;border:1px solid #E4E1D9;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .mk-chip:hover{transform:translateY(-3px)}
@@ -181,13 +195,13 @@ body.making .sga-root{display:none}
       <sc-if value="{{ mine }}" hint-placeholder-val="{{ true }}">
         <button type="button" class="pl-btn" data-on-click="{{ replay }}" style="opacity: {{ replayO }}">Flip through again ↺</button>
       </sc-if>
-      <button type="button" class="pl-btn pl-dark" data-on-click="{{ toggleMake }}">{{ makeLabel }}</button>
+      <sc-if value="{{ making }}" hint-placeholder-val="{{ false }}"><button type="button" class="pl-btn pl-dark" data-on-click="{{ toggleMake }}">{{ makeLabel }}</button></sc-if>
     </div>
     
   </section>
 
-  <section style="position: relative; max-width: 900px; margin: 48px auto 0; padding: 0 24px; flex-direction: column; align-items: center; gap: 20px; display: {{ bookD }}">
-    <aside class="why-note"><b>Why a scrapbook?</b>Scrapbooking is my analog design practice: collecting little things, then figuring out how they fit together into a story. Make a page and see what I mean ✦</aside>
+  <section class="pl-book" style="position: relative; max-width: 900px; margin: 48px auto 0; padding: 0 24px; flex-direction: column; align-items: center; gap: 20px; display: {{ bookD }}">
+    <aside class="why-note"><b>Why a scrapbook?</b>Scrapbooking is my analog design practice: collecting little things, then figuring out how they fit together into a story.<button type="button" class="note-cta" data-on-click="{{ toggleMake }}">Make your own page ✦</button></aside>
     <div style="position: relative; width: 100%; aspect-ratio: 1800 / 1315; perspective: 2400px; border-radius: 18px; box-shadow: 0 18px 44px rgba(20,20,40,0.14)">
       <div style="position: absolute; left: 0; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseL }}" style="position: absolute; inset: 0; border-radius: 18px 0 0 18px"></div></div>
       <div style="position: absolute; left: 50%; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseR }}" style="position: absolute; inset: 0; border-radius: 0 18px 18px 0"></div></div>
@@ -275,7 +289,7 @@ class Component extends DCLogic {
     const run = () => { clearTimeout(this.ft); this.setState({ i: 0, flip: null, a: -1 }); this.ft = setTimeout(step, 600); };
     if (!this.started) { this.started = true; run(); }
     const mk = this.state.make;
-    Object.assign(v, { mine: !mk, bookD: mk ? 'none' : 'flex', makerD: mk ? 'block' : 'none', sub: mk ? 'Your turn! Make a page, then save it ✦' : 'A page from my scrapbook. Hover around to explore ✦', makeLabel: mk ? '← Back to my scrapbook' : 'Make your own page ✦', toggleMake: () => { const on = !this.state.make; this.setState({ make: on, a: -1 }); document.body.classList.toggle('making', on); if (on) setTimeout(() => { if (window.ScrapbookMaker) { if (!this.madeOnce) { this.madeOnce = true; document.querySelector('#maker [data-act=shuffle]').click(); } else window.ScrapbookMaker.refresh(); } }, 30); },
+    Object.assign(v, { making: mk, mine: !mk, bookD: mk ? 'none' : 'flex', makerD: mk ? 'block' : 'none', sub: mk ? 'Your turn! Make a page, then save it ✦' : 'A page from my scrapbook. Hover around to explore ✦', makeLabel: mk ? '← Back to my scrapbook' : 'Make your own page ✦', toggleMake: () => { const on = !this.state.make; this.setState({ make: on, a: -1 }); document.body.classList.toggle('making', on); if (on) setTimeout(() => { if (window.ScrapbookMaker) { if (!this.madeOnce) { this.madeOnce = true; document.querySelector('#maker [data-act=shuffle]').click(); } else window.ScrapbookMaker.refresh(); const m = document.querySelector('.pl-maker'); if (m && window.innerWidth >= 1100) window.scrollTo({ top: m.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }, 30); },
       replay: () => { if (!this.state.flip && this.state.i === N - 1) run(); }, replayO: i === N - 1 && !f ? 1 : 0.45, baseL: L(i), baseR: R(f === 'f' ? i + 1 : i), flipping: !!f, leafAnim: 'leafF .7s cubic-bezier(.45,.05,.3,1) both', leafFront: R(i), leafBack: L(i + 1), hotPE: i === N - 1 && !f ? 'auto' : 'none', hotO: i === N - 1 && !f ? 1 : 0, spineO: i === N - 1 && !f ? 0 : 1 }); return v; }
 }
 

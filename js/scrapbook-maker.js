@@ -62,8 +62,11 @@
       file = root.querySelector('.mk-file');
 
   var railL = root.querySelector('.mk-rail-l'), railR = root.querySelector('.mk-rail-r');
+  railL.innerHTML = '<div class="mk-rail-sk"></div>'; railR.innerHTML = '<button type="button" class="mk-btn mk-back">← My scrapbook</button><div class="mk-rail-sk"></div>';
+  railR.querySelector('.mk-back').addEventListener('click', function () { var b = document.querySelector('.pl-actions .pl-dark'); if (b) b.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  var skL = railL.querySelector('.mk-rail-sk'), skR = railR.querySelector('.mk-rail-sk');
   ORDER.forEach(function (k, n) {
-    [n < Math.ceil(ORDER.length / 2) ? railL : railR, tray].forEach(function (dest) {
+    [n < Math.ceil(ORDER.length / 2) ? skL : skR, tray].forEach(function (dest) {
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'mk-chip'; b.dataset.tip = STICKERS[k].label;
     b.setAttribute('aria-label', 'Add ' + STICKERS[k].label);
@@ -327,6 +330,21 @@
     if (cur) lines.push(cur);
     var y0 = -(lines.length - 1) * lh / 2; lines.forEach(function (l, i) { c.fillText(l, 0, y0 + i * lh); });
   }
+
+  var mq = window.matchMedia('(min-width: 1100px)'), home = {};
+  ['.mk-wordbar', '.mk-papers', '.mk-actions', '.mk-hint'].forEach(function (q) { var e = root.querySelector(q); home[q] = { el: e, parent: e.parentNode, next: e.nextSibling }; });
+  function layout() {
+    var wide = mq.matches;
+    if (wide) {
+      railL.insertBefore(home['.mk-papers'].el, skL); railL.insertBefore(home['.mk-wordbar'].el, home['.mk-papers'].el);
+      railR.appendChild(home['.mk-actions'].el); railR.appendChild(home['.mk-hint'].el);
+    } else {
+      ['.mk-wordbar', '.mk-papers', '.mk-actions', '.mk-hint'].forEach(function (q) { var h = home[q]; h.parent.insertBefore(h.el, h.next && h.next.parentNode === h.parent ? h.next : null); });
+      var tr = root.querySelector('.mk-tray'); tr.parentNode.insertBefore(home['.mk-wordbar'].el, tr); tr.parentNode.insertBefore(home['.mk-papers'].el, tr);
+    }
+    items.forEach(place);
+  }
+  (mq.addEventListener ? mq.addEventListener('change', layout) : mq.addListener(layout)); layout();
 
   window.ScrapbookMaker = { refresh: function () { items.forEach(place); } };
   syncEmpty();
