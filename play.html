@@ -90,7 +90,7 @@ a{color:#3B3BF5}
 .pl-btn:hover,.mk-btn:hover{transform:translateY(-2px)}
 .pl-dark,.mk-dark{background:#1C1C1C;border-color:#1C1C1C;color:#FFFFFF}
 .pl-maker{position:relative;max-width:900px;margin:40px auto 0;padding:0 24px}
-.mk-page{position:relative;width:100%;aspect-ratio:1800/1315;border-radius:18px;box-shadow:0 18px 44px rgba(20,20,40,.14);overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+.mk-page{position:relative;width:100%;aspect-ratio:1800/1265;border-radius:18px;box-shadow:0 18px 44px rgba(20,20,40,.14);overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
 .mk-half{position:absolute;top:0;bottom:0;width:50%}.mk-l{left:0}.mk-r{right:0}
 .mk-spine{position:absolute;left:50%;top:0;bottom:0;width:28px;margin-left:-14px;background:linear-gradient(90deg,transparent,rgba(60,50,30,.10) 45%,rgba(60,50,30,.16) 50%,rgba(60,50,30,.10) 55%,transparent);pointer-events:none}
 .mk-items{position:absolute;inset:0}
@@ -132,25 +132,31 @@ a{color:#3B3BF5}
 .mk-paper[aria-pressed="true"]{box-shadow:0 0 0 2px #F5F4F0,0 0 0 4px #7A70D8}
 .mk-ph{font:clamp(10px,1.6vw,17px) Caveat,cursive;color:rgba(43,41,55,.55);text-align:center;padding:0 6px}
 .mk-stage{display:block}
-.mk-back{display:none!important}
+.mk-box{border:1px solid #E4E1D9;border-radius:18px;background:rgba(255,255,255,.6);padding:14px;margin:18px auto 0;max-width:520px}
+.mk-box-title{margin:0 0 10px;font:600 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7A70B8;text-align:center}
+.mk-box .mk-wordbar,.mk-box .mk-papers,.mk-box .mk-actions{margin-top:0}
+.mk-box .mk-papers{margin-top:12px}
+.mk-box .mk-hint{margin-top:10px}
 .mk-rail{display:none}
 .mk-chip{position:relative}
 .mk-chip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);background:#1C1C1C;color:#FFFFFF;font:12px/1.2 Inter,sans-serif;padding:6px 9px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:5}
 .mk-chip:hover::after,.mk-chip:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
 @media (min-width:1100px){
   .pl-maker{max-width:none;margin-top:28px}
-  .mk-stage{display:grid;grid-template-columns:150px minmax(0,calc((100vh - 130px) * 1800 / 1315)) 150px;gap:28px;align-items:center;justify-content:center}
+  .mk-stage{display:grid;grid-template-columns:150px var(--bw) 150px;gap:28px;align-items:center;justify-content:center}
   .mk-rail{display:flex;flex-direction:column;gap:16px;align-items:stretch}
-  .mk-rail-sk{display:grid;grid-template-columns:repeat(2,52px);gap:10px;justify-content:center}
+  .mk-rail-sk{display:grid;grid-template-columns:repeat(3,44px);gap:8px;justify-content:center}
+  .mk-rail-sk .mk-chip{width:44px;height:44px;padding:5px;border-radius:12px}
   .mk-rail .mk-wordbar{flex-direction:column;margin:0;gap:6px}
   .mk-rail .mk-word-in{width:100%;box-sizing:border-box;padding:9px 12px;font-size:13px}
   .mk-rail .mk-wordbar .mk-btn{width:100%}
   .mk-rail .mk-papers{display:grid;grid-template-columns:repeat(3,30px);gap:8px;justify-content:center;margin:0}
   .mk-rail .mk-papers span{grid-column:1/-1;text-align:center;margin:0}
   .mk-rail .mk-actions{flex-direction:column;margin:0;gap:8px}
-  .mk-rail .mk-actions .mk-btn{width:100%}
-  .mk-rail .mk-hint{font-size:12px;margin:0;line-height:1.4}
-  .mk-back{display:block!important;width:100%}
+  .mk-rail .mk-actions .mk-btn{width:100%;white-space:nowrap;padding:9px 8px;font-size:13px}
+  .mk-rail .mk-hint{font-size:12px;margin:10px 0 0;line-height:1.4}
+  .mk-rail .mk-box{margin:0;padding:12px;max-width:none}
+  .mk-rail .mk-papers{margin-top:12px}
   .mk-tray{display:none!important}
 }
 .why-note{position:relative;margin:0 auto;max-width:300px;background:#FFFDF6;padding:22px 20px 18px;box-shadow:0 10px 24px rgba(20,20,40,.12);transform:rotate(-2.5deg);font:20px/1.25 Caveat,cursive;color:#2B2937;text-align:left;order:-1}
@@ -158,8 +164,9 @@ a{color:#3B3BF5}
 .why-note b{display:block;font:600 11px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7A70B8;margin-bottom:6px}
 .note-cta{display:block;margin-top:12px;padding:8px 12px;white-space:nowrap;border:0;border-radius:999px;background:#1C1C1C;color:#FFFFFF;font:500 13px Inter,sans-serif;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .note-cta:hover{transform:translateY(-2px) rotate(1deg)}
-@media (min-width:1240px){.pl-book{max-width:780px!important}.why-note{position:absolute;left:-206px;top:90px;width:170px;max-width:none;z-index:3;order:0;font-size:18px;padding:20px 16px 16px}}
-@media (min-width:1440px){.pl-book{max-width:900px!important}.why-note{left:-262px;width:200px}}
+@media (min-width:1100px){:root{--bw:calc(100vw - 420px)}.pl-book{max-width:var(--bw)!important}}
+@media (min-width:1240px){:root{--bw:732px}.why-note{position:absolute;right:-150px;top:-34px;width:184px;max-width:none;z-index:3;order:0;font-size:18px;padding:20px 16px 16px;transform:rotate(4deg)}}
+@media (min-width:1440px){:root{--bw:852px}.why-note{right:-176px;width:200px}}
 .mk-tray{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px}
 .mk-chip{width:52px;height:52px;border-radius:14px;border:1px solid #E4E1D9;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 .mk-chip:hover{transform:translateY(-3px)}
@@ -202,52 +209,52 @@ body.making .sga-root{display:none}
 
   <section class="pl-book" style="position: relative; max-width: 900px; margin: 48px auto 0; padding: 0 24px; flex-direction: column; align-items: center; gap: 20px; display: {{ bookD }}">
     <aside class="why-note"><b>Why a scrapbook?</b>Scrapbooking is my analog design practice: collecting little things, then figuring out how they fit together into a story.<button type="button" class="note-cta" data-on-click="{{ toggleMake }}">Make your own page ✦</button></aside>
-    <div style="position: relative; width: 100%; aspect-ratio: 1800 / 1315; perspective: 2400px; border-radius: 18px; box-shadow: 0 18px 44px rgba(20,20,40,0.14)">
+    <div style="position: relative; width: 100%; aspect-ratio: 1800 / 1265; perspective: 2400px; border-radius: 18px; box-shadow: 0 18px 44px rgba(20,20,40,0.14)">
       <div style="position: absolute; left: 0; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseL }}" style="position: absolute; inset: 0; border-radius: 18px 0 0 18px"></div></div>
       <div style="position: absolute; left: 50%; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseR }}" style="position: absolute; inset: 0; border-radius: 0 18px 18px 0"></div></div>
       <div aria-hidden="true" style="position: absolute; left: 50%; top: 0; bottom: 0; width: 28px; margin-left: -14px; background: linear-gradient(90deg, transparent, rgba(60,50,30,0.10) 45%, rgba(60,50,30,0.16) 50%, rgba(60,50,30,0.10) 55%, transparent); opacity: {{ spineO }}"></div>
       <div style="position: absolute; inset: 0; pointer-events: {{ hotPE }}; opacity: {{ hotO }}">
-        <div data-on-mouseenter="{{ on0 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 2.94%; top: 7.63%; width: 28.63%; height: 22.09%; cursor: pointer; z-index: {{ z0 }}">
+        <div data-on-mouseenter="{{ on0 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 2.94%; top: 5.01%; width: 28.63%; height: 22.96%; cursor: pointer; z-index: {{ z0 }}">
           <sc-if value="{{ s0 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">always down for a side quest 🏃‍♀️ ex. go karting through shibuya crossing in a minion costume</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on1 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 31.42%; top: 10.04%; width: 12.63%; height: 17.67%; cursor: pointer; z-index: {{ z1 }}">
+        <div data-on-mouseenter="{{ on1 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 31.42%; top: 7.51%; width: 12.63%; height: 18.37%; cursor: pointer; z-index: {{ z1 }}">
           <sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">rollerblading 🛼 a little rusty but still love it</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on2 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 21.44%; top: 29.72%; width: 24.82%; height: 30.52%; cursor: pointer; z-index: {{ z2 }}">
+        <div data-on-mouseenter="{{ on2 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 21.44%; top: 27.97%; width: 24.82%; height: 31.73%; cursor: pointer; z-index: {{ z2 }}">
           <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">making fun memories with friends and family 🎈</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on3 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 1.17%; top: 36.55%; width: 19.38%; height: 16.06%; cursor: pointer; z-index: {{ z3 }}">
+        <div data-on-mouseenter="{{ on3 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 1.17%; top: 35.07%; width: 19.38%; height: 16.69%; cursor: pointer; z-index: {{ z3 }}">
           <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">exploring new places ✈️ finding hidden spots as I go</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on4 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 54.04%; top: 6.02%; width: 21.73%; height: 33.33%; cursor: pointer; z-index: {{ z4 }}">
+        <div data-on-mouseenter="{{ on4 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 54.04%; top: 3.33%; width: 21.73%; height: 34.65%; cursor: pointer; z-index: {{ z4 }}">
           <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">exploring SF 🌁 finding new coffee shops to scrapbook at ☕</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on5 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 21.44%; top: 71.49%; width: 24.08%; height: 26.91%; cursor: pointer; z-index: {{ z5 }}">
+        <div data-on-mouseenter="{{ on5 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 21.44%; top: 71.39%; width: 24.08%; height: 27.97%; cursor: pointer; z-index: {{ z5 }}">
           <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">always down for a new craft 🎨 painting, ceramics, you name it</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on6 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 64.61%; top: 38.96%; width: 15.86%; height: 17.67%; cursor: pointer; z-index: {{ z6 }}">
+        <div data-on-mouseenter="{{ on6 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 64.61%; top: 37.58%; width: 15.86%; height: 18.37%; cursor: pointer; z-index: {{ z6 }}">
           <sc-if value="{{ s6 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">reading 📚 my goal is to read 30 books a year</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on7 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 78.71%; top: 52.61%; width: 21.29%; height: 44.18%; cursor: pointer; z-index: {{ z7 }}">
+        <div data-on-mouseenter="{{ on7 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 78.71%; top: 51.76%; width: 21.29%; height: 45.93%; cursor: pointer; z-index: {{ z7 }}">
           <sc-if value="{{ s7 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">lego sets &amp; room decor 🧱 always making my space feel like me</span>
           </sc-if>
         </div>
-        <div data-on-mouseenter="{{ on8 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 76.36%; top: 12.45%; width: 22.32%; height: 30.92%; cursor: pointer; z-index: {{ z8 }}">
+        <div data-on-mouseenter="{{ on8 }}" data-on-mouseleave="{{ off }}" style="position: absolute; left: 76.36%; top: 10.02%; width: 22.32%; height: 32.14%; cursor: pointer; z-index: {{ z8 }}">
           <sc-if value="{{ s8 }}" hint-placeholder-val="{{ false }}">
             <span style="position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; padding: 9px 13px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 10px 26px rgba(20,20,40,0.16); font-size: 13px; line-height: 1.4; color: #1C1C1C; text-align: center; pointer-events: none">costumes &amp; team spirit 🎃 work halloween is serious business</span>
           </sc-if>
@@ -289,7 +296,7 @@ class Component extends DCLogic {
     const run = () => { clearTimeout(this.ft); this.setState({ i: 0, flip: null, a: -1 }); this.ft = setTimeout(step, 600); };
     if (!this.started) { this.started = true; run(); }
     const mk = this.state.make;
-    Object.assign(v, { making: mk, mine: !mk, bookD: mk ? 'none' : 'flex', makerD: mk ? 'block' : 'none', sub: mk ? 'Your turn! Make a page, then save it ✦' : 'A page from my scrapbook. Hover around to explore ✦', makeLabel: mk ? '← Back to my scrapbook' : 'Make your own page ✦', toggleMake: () => { const on = !this.state.make; this.setState({ make: on, a: -1 }); document.body.classList.toggle('making', on); if (on) setTimeout(() => { if (window.ScrapbookMaker) { if (!this.madeOnce) { this.madeOnce = true; document.querySelector('#maker [data-act=shuffle]').click(); } else window.ScrapbookMaker.refresh(); const m = document.querySelector('.pl-maker'); if (m && window.innerWidth >= 1100) window.scrollTo({ top: m.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' }); } }, 30); },
+    Object.assign(v, { making: mk, mine: !mk, bookD: mk ? 'none' : 'flex', makerD: mk ? 'block' : 'none', sub: mk ? 'Your turn! Make a page, then save it ✦' : 'A page from my scrapbook. Hover around to explore ✦', makeLabel: mk ? '← Back to my scrapbook' : 'Make your own page ✦', toggleMake: () => { const on = !this.state.make; this.setState({ make: on, a: -1 }); document.body.classList.toggle('making', on); if (on) setTimeout(() => { if (window.ScrapbookMaker) { if (!this.madeOnce) { this.madeOnce = true; document.querySelector('#maker [data-act=shuffle]').click(); } else window.ScrapbookMaker.refresh(); } }, 30); },
       replay: () => { if (!this.state.flip && this.state.i === N - 1) run(); }, replayO: i === N - 1 && !f ? 1 : 0.45, baseL: L(i), baseR: R(f === 'f' ? i + 1 : i), flipping: !!f, leafAnim: 'leafF .7s cubic-bezier(.45,.05,.3,1) both', leafFront: R(i), leafBack: L(i + 1), hotPE: i === N - 1 && !f ? 'auto' : 'none', hotO: i === N - 1 && !f ? 1 : 0, spineO: i === N - 1 && !f ? 0 : 1 }); return v; }
 }
 

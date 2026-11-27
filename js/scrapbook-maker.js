@@ -46,15 +46,16 @@
       '<div class="mk-items"></div>' +
       '<p class="mk-empty">Tap a sticker to start your page ✦</p>' +
     '</div><div class="mk-rail mk-rail-r" role="toolbar" aria-label="More stickers"></div></div>' +
+    '<div class="mk-box mk-box-l"><p class="mk-box-title">Make it yours</p>' +
     '<form class="mk-wordbar" autocomplete="off"><input class="mk-word-in" maxlength="16" placeholder="Type a word in cut-out letters" aria-label="Type a word"><button type="submit" class="mk-btn">Add ✂︎</button></form>' +
-    '<div class="mk-papers" role="group" aria-label="Paper"><span>Paper</span></div>' +
+    '<div class="mk-papers" role="group" aria-label="Paper"><span>Paper</span></div></div>' +
     '<div class="mk-tray" role="toolbar" aria-label="Stickers"></div>' +
-    '<div class="mk-actions">' +
+    '<div class="mk-box mk-box-r"><p class="mk-box-title">Your page</p><div class="mk-actions">' +
       '<button type="button" class="mk-btn" data-act="shuffle">Shuffle ⟳</button>' +
       '<button type="button" class="mk-btn" data-act="clear">Clear</button>' +
       '<button type="button" class="mk-btn mk-dark" data-act="save">Save my page ↓</button>' +
     '</div>' +
-    '<p class="mk-hint">Drag to move. Use the corner handle to resize and rotate. Your page stays on your device.</p>' +
+    '<p class="mk-hint">Drag to move. Use the corner handle to resize and rotate. Your page stays on your device.</p></div>' +
     '<input type="file" accept="image/*" class="mk-file" hidden>';
 
   var page = root.querySelector('.mk-page'), layer = root.querySelector('.mk-items'),
@@ -62,8 +63,7 @@
       file = root.querySelector('.mk-file');
 
   var railL = root.querySelector('.mk-rail-l'), railR = root.querySelector('.mk-rail-r');
-  railL.innerHTML = '<div class="mk-rail-sk"></div>'; railR.innerHTML = '<button type="button" class="mk-btn mk-back">← My scrapbook</button><div class="mk-rail-sk"></div>';
-  railR.querySelector('.mk-back').addEventListener('click', function () { var b = document.querySelector('.pl-actions .pl-dark'); if (b) b.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  railL.innerHTML = '<div class="mk-rail-sk"></div>'; railR.innerHTML = '<div class="mk-rail-sk"></div>';
   var skL = railL.querySelector('.mk-rail-sk'), skR = railR.querySelector('.mk-rail-sk');
   ORDER.forEach(function (k, n) {
     [n < Math.ceil(ORDER.length / 2) ? skL : skR, tray].forEach(function (dest) {
@@ -248,7 +248,7 @@
   }
   function save() {
     select(null);
-    var W = 1800, H = Math.round(W * 1315 / 1800), cv = document.createElement('canvas');
+    var W = 1800, H = Math.round(W * 1265 / 1800), cv = document.createElement('canvas');
     cv.width = W; cv.height = H; var c = cv.getContext('2d');
     drawPaper(c, W, H);
     var srcs = items.filter(function (i) { return STICKERS[i.k].type === 'img'; }).map(function (i) { return STICKERS[i.k].src; });
@@ -331,17 +331,11 @@
     var y0 = -(lines.length - 1) * lh / 2; lines.forEach(function (l, i) { c.fillText(l, 0, y0 + i * lh); });
   }
 
-  var mq = window.matchMedia('(min-width: 1100px)'), home = {};
-  ['.mk-wordbar', '.mk-papers', '.mk-actions', '.mk-hint'].forEach(function (q) { var e = root.querySelector(q); home[q] = { el: e, parent: e.parentNode, next: e.nextSibling }; });
+  var mq = window.matchMedia('(min-width: 1100px)'), boxL = root.querySelector('.mk-box-l'), boxR = root.querySelector('.mk-box-r');
   function layout() {
-    var wide = mq.matches;
-    if (wide) {
-      railL.insertBefore(home['.mk-papers'].el, skL); railL.insertBefore(home['.mk-wordbar'].el, home['.mk-papers'].el);
-      railR.appendChild(home['.mk-actions'].el); railR.appendChild(home['.mk-hint'].el);
-    } else {
-      ['.mk-wordbar', '.mk-papers', '.mk-actions', '.mk-hint'].forEach(function (q) { var h = home[q]; h.parent.insertBefore(h.el, h.next && h.next.parentNode === h.parent ? h.next : null); });
-      var tr = root.querySelector('.mk-tray'); tr.parentNode.insertBefore(home['.mk-wordbar'].el, tr); tr.parentNode.insertBefore(home['.mk-papers'].el, tr);
-    }
+    var tr = root.querySelector('.mk-tray');
+    if (mq.matches) { railL.insertBefore(boxL, skL); railR.appendChild(boxR); }
+    else { tr.parentNode.insertBefore(boxL, tr); tr.parentNode.insertBefore(boxR, tr.nextSibling); }
     items.forEach(place);
   }
   (mq.addEventListener ? mq.addEventListener('change', layout) : mq.addListener(layout)); layout();
