@@ -101,6 +101,23 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 .sf-links a:hover{color:#1C1C1C;text-decoration:underline}
 @media (max-width:760px){.site-foot{margin-top:64px;margin-bottom:-24px}.sf-inner{flex-direction:column;align-items:flex-start;gap:16px}.sf-links{padding-right:0}}
 </style>
+<style>
+.pantry-tile{position:relative;display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:24px;min-height:270px;border-radius:24px;background:#FFFFFF;padding:22px 22px 22px 36px;text-decoration:none;color:#1C1C1C;box-shadow:0 6px 18px rgba(20,20,40,0.05)}
+.pt-text{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.pt-pill{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:5px 11px;border-radius:999px;background:#EAF4E6;color:#3E6B37;font-size:12px;font-weight:500}
+.pt-art{position:relative;align-self:stretch;border-radius:16px;background:linear-gradient(135deg,#F1F7EC,#FBF6EA);overflow:hidden;min-height:226px}
+.pt-phone{position:absolute;left:50%;top:22px;width:250px;transform:translateX(-50%);background:#FFFFFF;border-radius:22px;padding:16px;box-shadow:0 16px 34px rgba(40,60,30,.14);font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:10px;transition:transform .5s cubic-bezier(.3,1,.4,1)}
+.pt-h{margin:0;font-weight:600;font-size:13px;color:#2B2937}
+.pt-chips{display:flex;flex-wrap:wrap;gap:5px}
+.pt-chips span{font-size:10.5px;padding:4px 8px;border-radius:999px;background:#F2F5EE;color:#3D4A37}
+.pt-ask{align-self:flex-end;max-width:80%;font-size:11px;padding:7px 10px;border-radius:12px 12px 3px 12px;background:#2F5D2A;color:#FFFFFF}
+.pt-ans{display:flex;flex-direction:column;gap:3px;font-size:11px;padding:9px 11px;border-radius:12px 12px 12px 3px;background:#F7F3E8;color:#4A4A52;opacity:0;transform:translateY(8px);transition:opacity .35s ease .15s,transform .45s cubic-bezier(.3,1,.4,1) .15s}
+.pt-ans b{font-weight:600;color:#2B2937;font-size:11.5px}
+.pantry-tile:hover .pt-phone,.pantry-tile:focus-visible .pt-phone{transform:translateX(-50%) translateY(-14px)}
+.pantry-tile:hover .pt-ans,.pantry-tile:focus-visible .pt-ans{opacity:1;transform:none}
+@media (hover:none){.pt-ans{opacity:1;transform:none}}
+@media (max-width:760px){.pantry-tile{grid-template-columns:1fr;padding:20px}.pt-art{min-height:250px}}
+</style>
 </head>
 <body>
 <div id="app" hidden>
@@ -346,6 +363,23 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
         </a>
       </div>
     </div>
+    <a href="pantry.html" class="tile pantry-tile" aria-label="Pantry, an AI nutrition app, password protected case study">
+      <div aria-hidden="true" style="position: absolute; top: -9px; left: 48px; width: 88px; height: 22px; background: rgba(150,200,140,0.6); transform: rotate(-4deg); z-index: 1"></div>
+      <div class="pt-text">
+        <p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Pantry · Side project</p>
+        <h2 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 30px; line-height: 1.15">Designing an AI nutrition app<span class="arr" aria-hidden="true">→</span></h2>
+        <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4A52; max-width: 380px">Designed and shipped with one engineer, building with Claude Code and Cursor.</p>
+        <span class="pt-pill"><svg width="11" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Password protected</span>
+      </div>
+      <div class="pt-art" aria-hidden="true">
+        <div class="pt-phone">
+          <p class="pt-h">My pantry</p>
+          <div class="pt-chips"><span>🥬 spinach</span><span>🫘 chickpeas</span><span>🍋 lemon</span><span>🧄 garlic</span><span>🍚 rice</span></div>
+          <div class="pt-ask">What can I make tonight?</div>
+          <div class="pt-ans"><b>Lemony chickpea &amp; spinach bowl</b><span>25 min · 22g protein · uses 5 of your items</span></div>
+        </div>
+      </div>
+    </a>
     <div style="height: 24px"></div>
     <div style="display: flex; align-items: center; gap: 20px">
       <p style="margin: 0; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #5E5E5E">More work</p>
