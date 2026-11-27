@@ -18,7 +18,7 @@ a{color:#3B3BF5}
 .caret{display:inline-block;width:2px;height:.9em;margin-left:4px;background:#2B2937;vertical-align:-0.05em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 </style>
-<style>[hidden]{display:none!important}
+<style>[hidden]{display:none!important}.stk{z-index:2;transition:transform .25s ease;outline:none}.stk:hover,.stk:focus-visible{z-index:6}.stk>img{transition:transform .25s ease}.stk:hover>img,.stk:focus-visible>img{transform:scale(1.1)}.tip{opacity:0;visibility:hidden;transition:opacity .2s}.stk:hover .tip,.stk:focus-visible .tip{opacity:1;visibility:visible}@media (max-width:760px){.photo-col{max-width:340px;margin:0 auto}}
 @media (max-width: 760px){
   .nav-wrap nav{gap:2px!important;padding:6px 8px!important;flex-wrap:nowrap!important}
   .nav-wrap nav a{padding:9px 10px!important;font-size:14px!important}
@@ -50,7 +50,24 @@ a{color:#3B3BF5}
   </div>
 
   <section class="stack" style="position: relative; max-width: 1080px; margin: 72px auto 0; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 64px; align-items: start">
-    <img src="images/redesign/simran-balcony.jpg" alt="Simran on a balcony in San Francisco with the Bay Bridge behind her" style="display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 24px; box-shadow: 0 10px 28px rgba(20,20,40,0.08)">
+    <div class="photo-col" style="position: relative; padding: 18px 10px 30px">
+      <div style="background: #FFFFFF; padding: 14px 14px 56px; box-shadow: 0 16px 36px rgba(40,30,30,0.14); transform: rotate(-2deg)">
+        <img src="images/redesign/simran-balcony.jpg" alt="Simran on a balcony in San Francisco with the Bay Bridge behind her" style="display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover">
+      </div>
+      <img src="images/redesign/sticker-star.png" alt="" aria-hidden="true" style="position: absolute; left: -14px; top: 40%; width: 30px; transform: rotate(-14deg)">
+      <div class="stk" tabindex="0" aria-label="Stamp sticker, where I'm from" style="position: absolute; right: -34px; top: -10px; transform: rotate(14deg)">
+        <img src="images/redesign/stamp.png" alt="" style="display: block; width: 112px; filter: drop-shadow(0 4px 8px rgba(40,30,30,0.15))">
+        <div class="tip" style="position: absolute; width: 236px; pointer-events: none; background: #FFFFFF; border-radius: 16px; padding: 14px 16px; box-shadow: 0 14px 34px rgba(20,20,40,0.14); display: flex; flex-direction: column; gap: 6px; text-align: left; z-index: 5; right: 0; top: calc(100% + 12px); transform: rotate(-14deg)"><p style="margin: 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Postmarked from</p><p style="margin: 0; font-size: 15px; font-weight: 500; color: #1C1C1C">Canadian at heart, Californian by zip code.</p></div>
+      </div>
+      <div class="stk" tabindex="0" aria-label="Lego sticker, current build progress" style="position: absolute; left: -30px; bottom: -6px; transform: rotate(-12deg)">
+        <img src="images/redesign/sticker-lego.png" alt="" style="display: block; width: 104px">
+        <div class="tip" style="position: absolute; width: 236px; pointer-events: none; background: #FFFFFF; border-radius: 16px; padding: 14px 16px; box-shadow: 0 14px 34px rgba(20,20,40,0.14); display: flex; flex-direction: column; gap: 6px; text-align: left; z-index: 5; left: 0; bottom: calc(100% + 12px); transform: rotate(12deg)"><p style="margin: 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Currently building</p><p style="margin: 0; font-size: 15px; font-weight: 500; color: #1C1C1C">LEGO Art Mona Lisa</p><div role="img" aria-label="67 percent built"><div style="display: flex; justify-content: space-between; padding: 0 6px"><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #2F5FD0"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #D8D4CB"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #D8D4CB"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #D8D4CB"></span><span style="width: 10px; height: 4px; border-radius: 2px 2px 0 0; background: #D8D4CB"></span></div><div style="height: 12px; border-radius: 3px; background: #EDEAE3; overflow: hidden"><div style="width: 67%; height: 100%; background: #2F5FD0"></div></div></div><div style="display: flex; justify-content: space-between; align-items: baseline"><p style="margin: 0; font-size: 22px; font-weight: 500; color: #1C1C1C">67%</p><p style="margin: 0; font-size: 13px; color: #5E5E5E">1,007 of 1,503 pieces</p></div></div>
+      </div>
+      <div class="stk" tabindex="0" aria-label="Reading sticker, currently reading" style="position: absolute; right: 18px; bottom: -14px; transform: rotate(8deg)">
+        <img src="images/redesign/sticker-miffy.png" alt="" style="display: block; width: 62px; filter: saturate(1.6) brightness(1.08) contrast(1.05)">
+        <div class="tip" style="position: absolute; width: 236px; pointer-events: none; background: #FFFFFF; border-radius: 16px; padding: 14px 16px; box-shadow: 0 14px 34px rgba(20,20,40,0.14); display: flex; flex-direction: column; gap: 6px; text-align: left; z-index: 5; right: 0; bottom: calc(100% + 12px); transform: rotate(-8deg)"><p style="margin: 0; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Currently reading</p><p style="margin: 0; font-size: 15px; font-weight: 500; color: #1C1C1C">[book title]</p><p style="margin: 0; font-size: 13px; color: #5E5E5E">[author]</p></div>
+      </div>
+    </div>
     <div style="display: flex; flex-direction: column; gap: 36px">
       <div style="display: flex; flex-direction: column; gap: 10px">
         <p style="margin: 0; font-size: 16px; color: #6A6A72">I am a:</p>
