@@ -84,6 +84,48 @@ a{color:#3B3BF5}
 .sf-links a:hover{color:#1C1C1C;text-decoration:underline}
 @media (max-width:760px){.site-foot{margin-top:64px;margin-bottom:-24px}.sf-inner{flex-direction:column;align-items:flex-start;gap:16px}.sf-links{padding-right:0}}
 </style>
+<style>
+.pl-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.pl-btn,.mk-btn{padding:10px 18px;border:1px solid #DDDAD2;border-radius:999px;background:#FFFFFF;font:14px Inter,sans-serif;color:#4A4A52;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1),opacity .3s}
+.pl-btn:hover,.mk-btn:hover{transform:translateY(-2px)}
+.pl-dark,.mk-dark{background:#1C1C1C;border-color:#1C1C1C;color:#FFFFFF}
+.pl-maker{position:relative;max-width:900px;margin:40px auto 0;padding:0 24px}
+.mk-page{position:relative;width:100%;aspect-ratio:1800/1315;border-radius:18px;box-shadow:0 18px 44px rgba(20,20,40,.14);overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+.mk-half{position:absolute;top:0;bottom:0;width:50%}.mk-l{left:0}.mk-r{right:0}
+.mk-spine{position:absolute;left:50%;top:0;bottom:0;width:28px;margin-left:-14px;background:linear-gradient(90deg,transparent,rgba(60,50,30,.10) 45%,rgba(60,50,30,.16) 50%,rgba(60,50,30,.10) 55%,transparent);pointer-events:none}
+.mk-items{position:absolute;inset:0}
+.mk-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;margin:0;font:22px Caveat,cursive;color:#8A8478;pointer-events:none}
+.mk-item{position:absolute;cursor:grab;outline:none;transform-origin:50% 50%}
+.mk-item:active{cursor:grabbing}
+.mk-item img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(20,20,40,.14))}
+.mk-tape{opacity:.85;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.mk-item.mk-tape{opacity:.85}
+.mk-glyph{display:flex;align-items:center;justify-content:center;line-height:1}
+.mk-glyph span{font-family:Fraunces,serif;line-height:1}
+.mk-photo{background:#FFFFFF;box-shadow:0 8px 18px rgba(20,20,40,.16)}
+.mk-photo-in{position:absolute;left:7%;right:7%;top:5.9%;height:72.9%;background:#EDE9F8;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mk-photo-in span{font:12px Inter,sans-serif;color:#7A70B8;opacity:0;transition:opacity .2s}
+.mk-sel .mk-photo-in span{opacity:1;cursor:pointer}
+.mk-photo-in img{width:100%;height:100%;object-fit:cover;filter:none}
+.mk-note{background:#FFFDF6;box-shadow:0 6px 14px rgba(20,20,40,.12);display:flex;align-items:center;justify-content:center}
+.mk-note-text{font-family:Caveat,cursive;color:#2B2937;text-align:center;padding:4px 8px;outline:none;line-height:1.15;cursor:text;max-width:100%;word-break:break-word}
+.mk-handle,.mk-del{position:absolute;display:none;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;box-sizing:border-box}
+.mk-handle{right:-11px;bottom:-11px;background:#FFFFFF;border:2px solid #7A70D8;cursor:nwse-resize;touch-action:none}
+.mk-del{left:-11px;top:-11px;background:#1C1C1C;color:#FFFFFF;border:0;font:14px/1 Inter,sans-serif;cursor:pointer;padding:0}
+.mk-sel{box-shadow:0 0 0 1.5px #7A70D8}
+.mk-sel.mk-photo{box-shadow:0 0 0 1.5px #7A70D8,0 8px 18px rgba(20,20,40,.16)}
+.mk-sel .mk-handle,.mk-sel .mk-del{display:flex}
+.mk-tray{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+.mk-chip{width:52px;height:52px;border-radius:14px;border:1px solid #E4E1D9;background:#FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.mk-chip:hover{transform:translateY(-3px) rotate(-3deg)}
+.mk-chip img{max-width:100%;max-height:100%;object-fit:contain}
+.mk-mini-photo{width:30px;height:34px;background:#FFFFFF;box-shadow:0 1px 4px rgba(0,0,0,.18);border-top:4px solid #fff;display:block;background-image:linear-gradient(#EDE9F8,#EDE9F8);background-size:24px 24px;background-position:3px 0;background-repeat:no-repeat}
+.mk-mini-note{font:16px Caveat,cursive;color:#2B2937;background:#FFFDF6;padding:2px 6px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.mk-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+body.making .sga-root{display:none}
+.mk-hint{margin:12px 0 0;text-align:center;font-size:13px;color:#7A7A82}
+@media (max-width:760px){.pl-maker{padding:0 4px}.mk-handle,.mk-del{width:28px;height:28px;right:-14px;bottom:-14px}.mk-del{left:-14px;top:-14px;right:auto;bottom:auto}.mk-chip{width:46px;height:46px}}
+</style>
 </head>
 <body>
 <div id="app" hidden>
@@ -103,11 +145,17 @@ a{color:#3B3BF5}
   <section style="position: relative; max-width: 1080px; margin: 72px auto 0; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
     
     <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 56px; line-height: 1.05">Outside of design, I love...</h1>
-    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4A52">A page from my scrapbook. Hover around to explore ✦</p>
+    <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A4A52">{{ sub }}</p>
+    <div class="pl-actions">
+      <sc-if value="{{ mine }}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="pl-btn" data-on-click="{{ replay }}" style="opacity: {{ replayO }}">Flip through again ↺</button>
+      </sc-if>
+      <button type="button" class="pl-btn pl-dark" data-on-click="{{ toggleMake }}">{{ makeLabel }}</button>
+    </div>
     
   </section>
 
-  <section style="position: relative; max-width: 900px; margin: 48px auto 0; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 20px">
+  <section style="position: relative; max-width: 900px; margin: 48px auto 0; padding: 0 24px; flex-direction: column; align-items: center; gap: 20px; display: {{ bookD }}">
     <div style="position: relative; width: 100%; aspect-ratio: 1800 / 1315; perspective: 2400px; border-radius: 18px; box-shadow: 0 18px 44px rgba(20,20,40,0.14)">
       <div style="position: absolute; left: 0; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseL }}" style="position: absolute; inset: 0; border-radius: 18px 0 0 18px"></div></div>
       <div style="position: absolute; left: 50%; top: 0; width: 50%; height: 100%"><div aria-hidden="true" class="{{ baseR }}" style="position: absolute; inset: 0; border-radius: 0 18px 18px 0"></div></div>
@@ -166,7 +214,9 @@ a{color:#3B3BF5}
         </div>
       </sc-if>
     </div>
-    <button type="button" data-on-click="{{ replay }}" style="padding: 10px 18px; border: 1px solid #DDDAD2; border-radius: 999px; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; color: #4A4A52; cursor: pointer; opacity: {{ replayO }}; transition: opacity .3s">Flip through again ↺</button>
+  </section>
+  <section class="pl-maker" style="display: {{ makerD }}">
+    <div id="maker"></div>
   </section>
   <footer class="site-foot">
     <div class="sf-inner">
@@ -186,17 +236,20 @@ a{color:#3B3BF5}
 <script src="js/dc-lite.js"></script>
 <script>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { a: -1, i: 0, flip: null }; }
+  constructor(props) { super(props); this.state = { a: -1, i: 0, flip: null, make: false }; }
   componentWillUnmount() { clearTimeout(this.ft); }
   renderVals() { const a = this.state.a, v = { off: () => this.setState({ a: -1 }) }; for (let i = 0; i < 9; i++) { v['on' + i] = () => this.setState({ a: i }); v['s' + i] = a === i; v['z' + i] = a === i ? 5 : 1; } const N = 3, i = this.state.i, f = this.state.flip, L = (k) => k === N - 1 ? 'spL' : 'blL', R = (k) => k === N - 1 ? 'spR' : 'blR';
     const step = () => { this.setState({ flip: 'f', a: -1 }); this.ft = setTimeout(() => { const n = this.state.i + 1; this.setState({ i: n, flip: null }); if (n < N - 1) this.ft = setTimeout(step, 120); }, 700); };
     const run = () => { clearTimeout(this.ft); this.setState({ i: 0, flip: null, a: -1 }); this.ft = setTimeout(step, 600); };
     if (!this.started) { this.started = true; run(); }
-    Object.assign(v, { replay: () => { if (!this.state.flip && this.state.i === N - 1) run(); }, replayO: i === N - 1 && !f ? 1 : 0, baseL: L(i), baseR: R(f === 'f' ? i + 1 : i), flipping: !!f, leafAnim: 'leafF .7s cubic-bezier(.45,.05,.3,1) both', leafFront: R(i), leafBack: L(i + 1), hotPE: i === N - 1 && !f ? 'auto' : 'none', hotO: i === N - 1 && !f ? 1 : 0, spineO: i === N - 1 && !f ? 0 : 1 }); return v; }
+    const mk = this.state.make;
+    Object.assign(v, { mine: !mk, bookD: mk ? 'none' : 'flex', makerD: mk ? 'block' : 'none', sub: mk ? 'Your turn! Make a page, then save it ✦' : 'A page from my scrapbook. Hover around to explore ✦', makeLabel: mk ? '← Back to my scrapbook' : 'Make your own page ✦', toggleMake: () => { const on = !this.state.make; this.setState({ make: on, a: -1 }); document.body.classList.toggle('making', on); if (on) setTimeout(() => { if (window.ScrapbookMaker) { if (!this.madeOnce) { this.madeOnce = true; document.querySelector('#maker [data-act=shuffle]').click(); } else window.ScrapbookMaker.refresh(); } }, 30); },
+      replay: () => { if (!this.state.flip && this.state.i === N - 1) run(); }, replayO: i === N - 1 && !f ? 1 : 0.45, baseL: L(i), baseR: R(f === 'f' ? i + 1 : i), flipping: !!f, leafAnim: 'leafF .7s cubic-bezier(.45,.05,.3,1) both', leafFront: R(i), leafBack: L(i + 1), hotPE: i === N - 1 && !f ? 'auto' : 'none', hotO: i === N - 1 && !f ? 1 : 0, spineO: i === N - 1 && !f ? 0 : 1 }); return v; }
 }
 
 DCLite.mount(document.getElementById('app'), Component);
 </script>
+<script src="js/scrapbook-maker.js"></script>
 <script src="simran-assistant.js" defer></script>
 </body>
 </html>
