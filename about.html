@@ -18,7 +18,28 @@ a{color:#3B3BF5}
 .caret{display:inline-block;width:2px;height:.9em;margin-left:4px;background:#2B2937;vertical-align:-0.05em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 </style>
-<style>[hidden]{display:none!important}@view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}::view-transition-group(nav-pill){animation-duration:.32s;animation-timing-function:cubic-bezier(.3,1,.4,1)}@media (prefers-reduced-motion: reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}.tw{color:#3B3BF5;position:relative}.tw.final{font-style:italic;font-variation-settings:'SOFT' 100,'WONK' 1}
+<style>[hidden]{display:none!important}
+@media (max-width: 900px){
+  .deco{display:none!important}
+  .sel-grid{grid-template-columns:1fr!important;grid-template-rows:none!important}
+  .sel-grid>*{grid-row:auto!important}
+  .sel-grid>a{min-height:460px}
+  .sel-grid>div{grid-template-rows:none!important}
+  .sel-grid>div>a{min-height:330px}
+  .stack{grid-template-columns:1fr!important;gap:36px!important}
+  .photo-col{max-width:380px;margin:0 auto}
+}
+@media (max-width: 760px){
+  .gcard{flex-basis:min(300px,80vw)!important}
+  .gal-arrows{display:none!important}
+  .free-row{flex-direction:column;align-items:flex-start!important;gap:8px!important}
+  .fcard{width:92%!important;height:86%!important}
+  .fcard>div:last-child{flex-basis:104px!important;padding:10px 8px!important}
+  .exp{flex-direction:column;align-items:flex-start!important;gap:4px!important}
+  .exp>p:last-child{padding-left:19px;text-align:left!important}
+  .bdj{font-size:26px!important;white-space:normal!important}
+}
+@view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}::view-transition-group(nav-pill){animation-duration:.32s;animation-timing-function:cubic-bezier(.3,1,.4,1)}@media (prefers-reduced-motion: reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}.tw{color:#3B3BF5;position:relative}.tw.final{font-style:italic;font-variation-settings:'SOFT' 100,'WONK' 1}
 .tw.striking::after{content:'';position:absolute;left:0;right:0;top:54%;height:3px;background:#2B2937;transform:scaleX(0);transform-origin:left;animation:strike .32s ease forwards}
 @keyframes strike{to{transform:scaleX(1)}}
 .caret{background:#3B3BF5!important}.caret.hide{display:none}
@@ -118,40 +139,40 @@ a{color:#3B3BF5}
   <section style="position: relative; max-width: 1240px; margin: 96px auto 0; padding: 0 24px; display: flex; flex-direction: column; gap: 24px">
     <img src="images/redesign/sticker-star.png" alt="" aria-hidden="true" class="deco" style="position: absolute; left: 12px; top: -40px; width: 22px; transform: rotate(-10deg)">
     <div style="display: flex; align-items: center; gap: 16px">
-      <h2 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.01em; font-size: 32px; line-height: 1.1; color: #2B2937; white-space: nowrap">Beyond the day job</h2>
+      <h2 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.01em; font-size: 32px; line-height: 1.1; color: #2B2937; white-space: nowrap" class="bdj">Beyond the day job</h2>
       <div style="flex-grow: 1; height: 1px; background: #DDDAD2"></div>
-      <div style="display: flex; gap: 8px">
+      <div class="gal-arrows" style="display: flex; gap: 8px">
         <button aria-label="Scroll gallery left" id="galPrev" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #DDDAD2; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></button>
         <button aria-label="Scroll gallery right" id="galNext" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #DDDAD2; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></button>
       </div>
     </div>
     <p style="margin: -8px 0 0; max-width: 620px; font-size: 16px; line-height: 1.6; color: #4A4A52">Where I spend the rest of my design energy: consulting, mentoring, and bringing designers together.</p>
     <div id="galRow" class="gal-row" style="display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px 24px 24px 4px; margin: 0 -4px">
-        <a href="mailto:skgunsi@gmail.com" class="tile" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+        <a href="mailto:skgunsi@gmail.com" class="tile gcard" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div style="height: 190px; border-radius: 14px; overflow: hidden; background: #F0EEEA"><img src="images/redesign/play-chaos-consulting.png" alt="Chaos Consulting" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Chaos Consulting</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 20px; line-height: 1.25">UX audits &amp; volunteer design work<span class="arr" aria-hidden="true">→</span></h3>
           <p style="margin: 2px 6px 0; font-size: 14px; line-height: 1.55; color: #4A4A52">I take on the occasional UX audit, scrappy redesign, or pro bono project for early-stage teams and nonprofits who need a design eye but not a full hire.</p>
         </a>
-        <a href="mailto:skgunsi@gmail.com" class="tile" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+        <a href="mailto:skgunsi@gmail.com" class="tile gcard" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div style="height: 190px; border-radius: 14px; overflow: hidden; background: #F0EEEA"><img src="images/redesign/play-design-advice.jpg" alt="Design Advice" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Design Advice</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 20px; line-height: 1.25">Mentoring, speaking &amp; portfolio reviews<span class="arr" aria-hidden="true">→</span></h3>
           <p style="margin: 2px 6px 0; font-size: 14px; line-height: 1.55; color: #4A4A52">Love talking through the messy parts of breaking into design. Open to portfolio reviews, speaking events, and general career chats.</p>
         </a>
-        <a href="https://www.linkedin.com/company/ucsc-ctd/" class="tile" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+        <a href="https://www.linkedin.com/company/ucsc-ctd/" class="tile gcard" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div style="height: 190px; border-radius: 14px; overflow: hidden; background: #F0EEEA"><img src="images/play-creative-tech.jpg" alt="Creative Tech Design" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Creative Tech Design</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 20px; line-height: 1.25">Founding UCSC's first UI/UX organization<span class="arr" aria-hidden="true">→</span></h3>
           <p style="margin: 2px 6px 0; font-size: 14px; line-height: 1.55; color: #4A4A52">Built the first UI/UX community at UC Santa Cruz, bringing together students and aspiring designers around design education.</p>
         </a>
-        <a href="https://medium.com/ucsc-creative-tech-design/just-design-ing-a-community-5a27de639d49" class="tile" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+        <a href="https://medium.com/ucsc-creative-tech-design/just-design-ing-a-community-5a27de639d49" class="tile gcard" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div style="height: 190px; border-radius: 14px; overflow: hidden; background: #F0EEEA"><img src="images/play-just-design.png" alt="Just Design" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Just Design</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 20px; line-height: 1.25">A design-a-thon for justice<span class="arr" aria-hidden="true">→</span></h3>
           <p style="margin: 2px 6px 0; font-size: 14px; line-height: 1.55; color: #4A4A52">Led a design-a-thon bringing together students, designers, and aspiring leaders to design for social justice.</p>
         </a>
-        <a href="https://www.instagram.com/gracehacks/" class="tile" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+        <a href="https://www.instagram.com/gracehacks/" class="tile gcard" style="flex: 0 0 320px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div style="height: 190px; border-radius: 14px; overflow: hidden; background: #F0EEEA"><img src="images/play-grace-hacks.png" alt="Grace-Hacks" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Grace-Hacks</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 20px; line-height: 1.25">Hackathon for underrepresented genders<span class="arr" aria-hidden="true">→</span></h3>

@@ -24,7 +24,28 @@ a{color:#3B3BF5}
 @keyframes leafF{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
 @keyframes leafB{from{transform:rotateY(-180deg)}to{transform:rotateY(0)}}
 </style>
-<style>[hidden]{display:none!important}@view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}::view-transition-group(nav-pill){animation-duration:.32s;animation-timing-function:cubic-bezier(.3,1,.4,1)}@media (prefers-reduced-motion: reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+<style>[hidden]{display:none!important}
+@media (max-width: 900px){
+  .deco{display:none!important}
+  .sel-grid{grid-template-columns:1fr!important;grid-template-rows:none!important}
+  .sel-grid>*{grid-row:auto!important}
+  .sel-grid>a{min-height:460px}
+  .sel-grid>div{grid-template-rows:none!important}
+  .sel-grid>div>a{min-height:330px}
+  .stack{grid-template-columns:1fr!important;gap:36px!important}
+  .photo-col{max-width:380px;margin:0 auto}
+}
+@media (max-width: 760px){
+  .gcard{flex-basis:min(300px,80vw)!important}
+  .gal-arrows{display:none!important}
+  .free-row{flex-direction:column;align-items:flex-start!important;gap:8px!important}
+  .fcard{width:92%!important;height:86%!important}
+  .fcard>div:last-child{flex-basis:104px!important;padding:10px 8px!important}
+  .exp{flex-direction:column;align-items:flex-start!important;gap:4px!important}
+  .exp>p:last-child{padding-left:19px;text-align:left!important}
+  .bdj{font-size:26px!important;white-space:normal!important}
+}
+@view-transition{navigation:auto}.nav-wrap nav{view-transition-name:site-nav}.nav-active{view-transition-name:nav-pill}::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}::view-transition-group(nav-pill){animation-duration:.32s;animation-timing-function:cubic-bezier(.3,1,.4,1)}@media (prefers-reduced-motion: reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 @media (max-width: 760px){
   .nav-wrap nav{gap:2px!important;padding:6px 8px!important;flex-wrap:nowrap!important}
   .nav-wrap nav a{padding:9px 10px!important;font-size:14px!important}
