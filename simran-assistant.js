@@ -21,8 +21,8 @@
   // CONFIG — safe to edit
   // ---------------------------------------------------------------------
   var SGA_CONFIG = {
-    accent: "#2B2BFF",
-    accentSoft: "#E8E8FF",
+    accent: "#1C1C1C",
+    accentSoft: "#EFEDE8",
     ink: "#0A0A0A",
     inkSoft: "#888888",
     bg: "#F5F5F2",
@@ -352,7 +352,7 @@
       "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&display=swap');" +
       ".sga-root, .sga-root *{box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}" +
       ".sga-root{position:fixed;bottom:24px;" + side + ":24px;z-index:999999;color-scheme:light;}" +
-      ".sga-launcher{width:56px;height:56px;border-radius:50%;background:" + SGA_CONFIG.accent + ";box-shadow:0 6px 20px rgba(43,43,255,0.28);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease;animation:sga-pop .5s cubic-bezier(.34,1.56,.64,1);}" +
+      ".sga-launcher{width:56px;height:56px;border-radius:50%;background:" + SGA_CONFIG.accent + ";box-shadow:0 6px 18px rgba(0,0,0,0.18);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .22s cubic-bezier(.34,1.56,.64,1),box-shadow .22s ease;animation:sga-pop .5s cubic-bezier(.34,1.56,.64,1);}" +
       ".sga-launcher:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(43,43,255,0.36);}" +
       ".sga-launcher svg{width:26px;height:26px;}" +
       ".sga-launcher .sga-close-icon{display:none;}" +
