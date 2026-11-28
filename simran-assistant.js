@@ -57,8 +57,168 @@
 
   var INTENTS = [
     {
+      id: "project-filters",
+      triggers: ["report filters","filters","filter","filtering","mode analytics","mode","dashboards","dashboard","churn","satisfaction","date filters","cascading"],
+      response: "At Mode (now ThoughtSpot) she drove the design for report filters, alongside a PM and an engineering manager. Analysts were stuck with basic filtering while sifting through huge datasets, so she designed new capabilities like relative date filters, cascading filters, and filters that only show values relevant to your other selections. When a design review came back with mixed feedback, she took both directions to six real users instead of guessing. The result: it prevented churn for a top customer, user satisfaction rose from 3.9 to 4.3 out of 5 after launch, and the pattern carried across future reports.",
+      followups: [
+        { label: "How does she handle mixed feedback?", intent: "collaboration" },
+        { label: "Tell me about the freemium work", intent: "project-freemium" },
+        { label: "What's her design process like?", intent: "process" }
+      ]
+    },
+    {
+      id: "project-freemium",
+      triggers: ["freemium","upsell","paywall","monetization","paid feature","upgrade","conversion","pricing","free to paid","growth"],
+      response: "Also at ThoughtSpot, she built an upsell framework for the freemium product: a system for where and how free-to-paid touchpoints live, so upgrade moments feel helpful instead of pushy. The case study for this one is coming soon on the site.",
+      followups: [
+        { label: "Tell me about report filters", intent: "project-filters" },
+        { label: "What did she do at ThoughtSpot?", intent: "project-thoughtspot" },
+        { label: "How can I get in touch?", intent: "contact" }
+      ]
+    },
+    {
+      id: "project-playground",
+      triggers: ["playground","playground global","robot","robots","robotics","fleet","warehouse","autonomous","navigation","internship","intern"],
+      response: "At Playground Global, a deep tech venture firm, she was a UX design intern on the internal software team, working with a portfolio company in warehouse automation. The core problem: robots don't follow fixed paths, so their behavior can feel unpredictable to warehouse managers. She designed how the fleet UI shows robot states and routes on a live map, and learned there's a sweet spot, enough signal that you notice a change, but not so much that a busy map becomes noise.",
+      followups: [
+        { label: "What about the human-robot interaction work?", intent: "project-hri" },
+        { label: "What's her design process like?", intent: "process" },
+        { label: "What has she worked on?", intent: "impact" }
+      ]
+    },
+    {
+      id: "project-hri",
+      triggers: ["hri","human robot","human-robot","human robot interaction","cart","semantic mapping"],
+      response: "Her other Playground project explored warehouse robots through a human-robot interaction lens. The industry bar for collaborative robots is basically 'don't hit people,' and she looked at how robots could actually work with people instead. She researched it three ways, literature (including semantic mapping, where robots model space more like humans do), informal conversations with potential users, and industry research, then sketched concepts like a robot cart built around how workers actually move.",
+      followups: [
+        { label: "Tell me about the fleet UI", intent: "project-playground" },
+        { label: "How does she do research?", intent: "research" },
+        { label: "What has she worked on?", intent: "impact" }
+      ]
+    },
+    {
+      id: "project-gratitude",
+      triggers: ["gratitude","tech4good","tech 4 good","thank you","thank you cards","cards","social connection"],
+      response: "Gratitude came out of UC Santa Cruz's Tech4Good Research Lab during the pandemic: a platform for collective thank-you cards, so a community could show appreciation while staying apart. She worked on UX, research, and animation with a team of designers and researchers. The two priorities were zero friction for the people receiving cards, and making opening them feel like unwrapping a gift rather than reading a message.",
+      followups: [
+        { label: "What does she care about?", intent: "community" },
+        { label: "What's her design process like?", intent: "process" },
+        { label: "What has she worked on?", intent: "impact" }
+      ]
+    },
+    {
+      id: "research",
+      triggers: ["user research","research","interviews","usability","usability testing","testing","users","talk to users","synthesis"],
+      response: "She treats research as something woven through the work, not a phase you finish first. A good example is Mode's report filters: when two design directions split a design review, she walked six existing users through both, asked where they'd expect to add a new filter, and let that settle it. At Playground she combined academic papers, informal user conversations, and industry research to make sense of a space nobody fully understood yet.",
+      followups: [
+        { label: "Tell me about report filters", intent: "project-filters" },
+        { label: "What's her design process like?", intent: "process" },
+        { label: "How does she work with PMs and engineers?", intent: "collaboration" }
+      ]
+    },
+    {
+      id: "collaboration",
+      triggers: ["work with pms","work with pm","work with product","work with engineers","work with engineering","working with engineers","working with pms","work with developers","collaborate","collaboration","pm","pms","product manager","engineers","engineering","cross functional","cross-functional","stakeholders","feedback","disagree","disagreement","conflict","teamwork","team"],
+      response: "She works closely with PMs and engineering, and she's comfortable in code herself, which makes those conversations easier. When there's disagreement she tries to take opinions out of it and get evidence: at Mode, when a design review gave mixed feedback on two directions, she ran quick sessions with real users and brought the answer back to the team. She also cares about leaving work others can build on, so documentation and rationale ship with the designs.",
+      followups: [
+        { label: "How does she do research?", intent: "research" },
+        { label: "Is she technical?", intent: "technical" },
+        { label: "What's her design process like?", intent: "process" }
+      ]
+    },
+    {
+      id: "technical",
+      triggers: ["code","coding","technical","engineer","developer","front end","frontend","html","css","javascript","cursor","claude code","built this site","build this site","this website","this site","prototype","prototyping","vibe coding"],
+      response: "Yes, she's comfortable in code: HTML, CSS, and JavaScript, and she builds with AI coding tools like Cursor and Claude Code regularly. She designed and built this site with them, including the scrapbook maker on the Play page and this assistant. Pantry was built the same way, which is why she understands how AI products actually get made, not just how they're mocked up.",
+      followups: [
+        { label: "Tell me about Pantry", intent: "project-pantry" },
+        { label: "What tools does she use?", intent: "skills" },
+        { label: "How does she design for AI?", intent: "ai-design" }
+      ]
+    },
+    {
+      id: "ai-design",
+      triggers: ["designing for ai","design for ai","ai design","ai experiences","ai ux","llm","llms","generative","gen ai","genai","trust","uncertainty","consumer ai","ai products","machine learning"],
+      response: "Her clearest AI work is Pantry, an AI nutrition app she took from 0 to 1. The interesting design problems there are less about chat and more about turning messy human input, like 'a handful of trail mix' or a photo of a plate, into structured information people can trust, and being honest when the AI is estimating. She also brings that thinking to how her team at Samsung uses AI in its own design workflow.",
+      followups: [
+        { label: "Tell me about Pantry", intent: "project-pantry" },
+        { label: "Is she technical?", intent: "technical" },
+        { label: "Why would she be a good fit?", intent: "fit-general" }
+      ]
+    },
+    {
+      id: "data-viz",
+      triggers: ["data visualization","data viz","dataviz","visualization","charts","chart","graphs","data heavy","complex data","enterprise"],
+      response: "Data-heavy products are her favorite kind of problem. At Samsung she designs how researchers monitor studies and see clinical health metrics across phone, watch, and desktop. At Mode she worked on tools for data analysts who write SQL, Python, and R, where good filtering decides whether an insight is findable at all. The thread is the same: make complex data feel clear without dumbing it down.",
+      followups: [
+        { label: "Tell me about report filters", intent: "project-filters" },
+        { label: "What's she up to right now?", intent: "project-samsung" },
+        { label: "What kind of designer is she?", intent: "about" }
+      ]
+    },
+    {
+      id: "community",
+      triggers: ["review my portfolio","portfolio review","look at my portfolio","career advice","career chat","mentor","mentoring","mentorship","community","speaking","speaker","talk","portfolio review","portfolio reviews","chaos consulting","consulting","volunteer","pro bono","creative tech design","just design","grace hacks","grace-hacks","hackathon","leadership","leader","social impact","nonprofit","nonprofits","give back"],
+      response: "Outside her day job she puts a lot of design energy into other people. She takes on occasional UX audits and pro bono projects for early-stage teams and nonprofits, and she's open to portfolio reviews, mentoring, and speaking. In college she founded Creative Tech Design, UC Santa Cruz's first UI/UX organization, led Just Design, a design-a-thon for social justice, and was lead designer for Grace-Hacks, the campus hackathon for underrepresented genders.",
+      followups: [
+        { label: "Can she review my portfolio?", intent: "contact" },
+        { label: "What's her education?", intent: "education" },
+        { label: "What does she do for fun?", intent: "personality" }
+      ]
+    },
+    {
+      id: "scrapbook",
+      triggers: ["scrapbook","scrapbooking","junk journal","junk journaling","play page","make your own","maker","stickers","crafts","craft"],
+      response: "Scrapbooking was her first design practice, figuring out how to tell a story with just visuals and a few constraints. That's still the question she asks every day as a product designer. You can flip through a page of hers on the Play page, and even make and download your own.",
+      followups: [
+        { label: "What does she do for fun?", intent: "personality" },
+        { label: "What inspires her work?", intent: "inspiration" },
+        { label: "Is she technical?", intent: "technical" }
+      ]
+    },
+    {
+      id: "reading",
+      triggers: ["books","book","reading","read","goodreads","favorite book","reader","novel","novels"],
+      response: "She's a big reader, with a goal of 30 books a year, and she keeps her shelf on Goodreads (linked from the About page). Her favorite genres lean contemporary fiction, historical fiction, memoir, and a good thriller.",
+      followups: [
+        { label: "What does she do for fun?", intent: "personality" },
+        { label: "What's she building with Lego?", intent: "lego" },
+        { label: "How can I get in touch?", intent: "contact" }
+      ]
+    },
+    {
+      id: "lego",
+      triggers: ["lego","legos","mona lisa","building lego","miffy"],
+      response: "Right now it's the LEGO Art Mona Lisa, a little over a thousand pieces in out of about 1,500. Hover the Lego sticker on the About page for her progress.",
+      followups: [
+        { label: "What does she do for fun?", intent: "personality" },
+        { label: "What is she reading?", intent: "reading" },
+        { label: "Tell me about the scrapbook", intent: "scrapbook" }
+      ]
+    },
+    {
+      id: "location",
+      triggers: ["where is she based","where does she live","based","location","located","san francisco","sf","bay area","california","canada","canadian","toronto","remote","relocate","relocation","hybrid","onsite","in office","time zone","timezone"],
+      response: "She's based in San Francisco, Canadian at heart and Californian by zip code. For questions about remote, hybrid, or relocating for a specific role, it's best to ask her directly at skgunsi@gmail.com.",
+      followups: [
+        { label: "What roles is she looking for?", intent: "target-roles" },
+        { label: "How can I get in touch?", intent: "contact" },
+        { label: "What does she do for fun?", intent: "personality" }
+      ]
+    },
+    {
+      id: "logistics",
+      triggers: ["salary","compensation","pay","rate","availability","available","start date","notice","notice period","open to work","visa","sponsorship","work authorization","interview","schedule a call","freelance","contract","contracting","hourly"],
+      response: "That's one for a direct conversation rather than a chatbot. The best way is to email her at skgunsi@gmail.com, and she's happy to talk details there.",
+      followups: [
+        { label: "What roles is she looking for?", intent: "target-roles" },
+        { label: "What has she worked on?", intent: "impact" },
+        { label: "Why would she be a good fit?", intent: "fit-general" }
+      ]
+    },
+    {
       id: "about",
-      triggers: ["kind of designer","what kind of designer","who is simran","describe simran","type of designer","tell me about simran","about simran","who is she"],
+      triggers: ["introduce","summary","tldr","tl dr","elevator pitch","in a sentence","overview","kind of designer","what kind of designer","who is simran","describe simran","type of designer","tell me about simran","about simran","who is she"],
       response: "She'd call herself a product designer who makes complex data feel clear and human, with a focus in digital health, design systems, and data visualization. She likes problems where the underlying system is genuinely complicated (clinical data, enterprise BI, internal platforms) and the job is translating that complexity into something a person can actually use without a manual. She cares as much about the craft side, documentation, systems thinking, as she does about the pixels.",
       followups: [
         { label: "What's her design process like?", intent: "process" },
@@ -98,7 +258,7 @@
     },
     {
       id: "project-samsung",
-      triggers: ["samsung","digital health platform","health platform","current role","current job","healthstack","clinical health","up to right now","what is she up to","what's she up to","currently working on","up to these days"],
+      triggers: ["research stack","samsung health","open source","open-source","wearable","wearables","watch","smartwatch","healthcare research","samsung","digital health platform","health platform","current role","current job","healthstack","clinical health","up to right now","what is she up to","what's she up to","currently working on","up to these days"],
       response: "At Samsung Research America she's the Platform Product Designer for a healthcare research platform, the tool researchers use to run clinical studies. She owns end-to-end design across mobile, watch, and desktop: study configuration, participant management, progress monitoring, and data visualization for clinical health metrics. She also co-owns the platform's design system, building on earlier versions rather than starting from scratch, spanning watch, phone, and laptop, with real rigor around components, tokens, accessibility patterns, and documentation.",
       followups: [
         { label: "What's her design system work like?", intent: "design-systems" },
@@ -128,7 +288,7 @@
     },
     {
       id: "design-systems",
-      triggers: ["design system","design systems","components","tokens","design ops","component library","component api"],
+      triggers: ["theming","themes","component kit","figma library","storybook","design system","design systems","components","tokens","design ops","component library","component api"],
       response: "Design systems are honestly some of her favorite work. At Samsung she co-owns the platform's design system with two or three other designers, building on earlier versions rather than starting from a blank slate, and it spans watch, phone, and laptop. It's specific to her own project rather than a shared org-wide library, but she still treats it like a real system: components, tokens, accessibility patterns, and documentation, not just a Figma file.",
       followups: [
         { label: "Tell me about her work at Samsung", intent: "project-samsung" },
@@ -168,7 +328,7 @@
     },
     {
       id: "skills",
-      triggers: ["skills","experience","what can you do","background","expertise","strengths","years of experience","how long"],
+      triggers: ["tools","tool","figma","software","what tools","tech stack","stack","skills","experience","what can you do","background","expertise","strengths","years of experience","how long"],
       response: "Broad strokes: end-to-end product design, design systems, interaction design, prototyping, data visualization, illustration, motion design, mobile and responsive web, and UX writing. On the research side, interviews, usability testing, synthesis, and heuristic evaluation. She's also comfortable in code: HTML, CSS, JavaScript, and builds with Cursor and Claude Code regularly, including this chat assistant. Tools-wise it's mostly Figma, FigJam, Storybook, Adobe, Miro, and Jira.",
       followups: [
         { label: "What's her process?", intent: "process" },
@@ -188,7 +348,7 @@
     },
     {
       id: "personality",
-      triggers: ["outside of work","hobbies","fun fact","personality","who are you","free time","for fun","hobby","yourself","what do you do for fun"],
+      triggers: ["rollerblading","ceramics","pottery","soulcycle","travel","traveling","weekends","outside of work","hobbies","fun fact","personality","who are you","free time","for fun","hobby","yourself","what do you do for fun"],
       response: "Outside of design, she's usually rollerblading, doing ceramics, deep in a scrapbooking project, traveling, or at a SoulCycle class. She likes making things with her hands as a counterweight to staring at Figma all day.",
       followups: [
         { label: "What kind of designer is she?", intent: "about" },
@@ -218,8 +378,8 @@
     },
     {
       id: "impact",
-      triggers: ["impact","results","outcomes","metrics","projects","what have you built","what have you shipped","what has she worked on","worked on","what has she built","what has she shipped"],
-      response: "She's led design for a healthcare research platform at Samsung, worked on product-led growth and visualization features at ThoughtSpot, and shipped her own AI product, Pantry, as a side project. Feel free to check out her full case studies and resume right here on the site, or I can tell you more about what she's up to these days.",
+      triggers: ["portfolio","case studies","case study","best work","accomplishments","achievements","numbers","impact","results","outcomes","metrics","projects","what have you built","what have you shipped","what has she worked on","worked on","what has she built","what has she shipped"],
+      response: "She's led design for a healthcare research platform at Samsung, worked on product-led growth and visualization features at ThoughtSpot, and shipped her own AI product, Pantry. At Mode, her report filters work prevented churn for a top customer and lifted satisfaction from 3.9 to 4.3. Feel free to check out her full case studies and resume right here on the site, or I can tell you more about what she's up to these days.",
       followups: [
         { label: "What's she up to right now?", intent: "project-samsung" },
         { label: "What's her favorite project?", intent: "favorite-project" },
@@ -281,8 +441,8 @@
   ];
 
   var FALLBACK_RESPONSE =
-    "That one's outside what I'm trained on, I'm built around Simran's real work rather than general " +
-    "conversation. Here's what I can help with:";
+    "Hmm, I don't have a good answer for that one. I know her projects, process, background, and life outside work, " +
+    "or you can ask her directly at skgunsi@gmail.com. Here's where I'd start:";
 
   var NO_MORE_DEPTH_RESPONSE = "That's really the whole picture on that one, here's where else you can look:";
 
