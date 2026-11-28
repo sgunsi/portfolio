@@ -54,6 +54,3 @@ footer:not(.site-foot){display:none!important}
   .sf-inner{flex-direction:column;align-items:flex-start;gap:16px}
   .sf-links{padding-right:0;margin-left:0}
 }
-
-/* dark half-width footer */
-.site-foot{width:min(640px,calc(100% - 48px))!important;max-width:none!important;box-sizing:border-box!important;margin:96px auto 40px!important;padding:26px 30px!important;background:#1C1C1C!important;border:0!important;border-radius:6px!important;display:block!important}.sf-inner{gap:18px!important}.sf-name{color:#FFFFFF!important}.sf-note{color:#A9A7B0!important}.sf-links{padding-right:0!important;margin-left:auto}.sf-links a{color:#E6E4EA!important}.sf-links a:hover{color:#FFFFFF!important}@media (max-width:760px){.site-foot{margin:64px auto 96px!important;padding:22px!important}.sf-links{margin-left:0}}
