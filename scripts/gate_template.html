@@ -85,9 +85,9 @@
 
 (function(){var b=document.querySelector('#gate .g-copy'),st=document.querySelector('#gate .g-copied');if(!b)return;
 b.addEventListener('click',function(){var e=b.dataset.email;
-function done(){b.textContent=e;st.textContent='copied ✓';clearTimeout(b._t);b._t=setTimeout(function(){st.textContent='';},2500);}
-if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(e).then(done,function(){b.textContent=e;});}
-else{var t=document.createElement('textarea');t.value=e;document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(x){b.textContent=e;}t.remove();}});})();
+function done(){st.textContent='email copied ✓';clearTimeout(b._t);b._t=setTimeout(function(){st.textContent='';},2500);}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(e).then(done,function(){st.textContent=e;});}
+else{var t=document.createElement('textarea');t.value=e;document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(x){st.textContent=e;}t.remove();}});})();
 </script>
 </body>
 </html>
