@@ -103,7 +103,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 </style>
 <style>
 .pt-pill{flex-shrink:0;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:#EAF4E6;color:#3E6B37;font-size:12px;font-weight:500}
-.pt-art{position:relative;flex-grow:1;border-radius:14px;background:linear-gradient(135deg,#F7F2EA,#F3F0FA);overflow:hidden;min-height:170px}
+.pt-art{position:relative;flex-grow:1;border-radius:3px;background:linear-gradient(135deg,#F7F2EA,#F3F0FA);overflow:hidden;min-height:170px}
 .pt-art{container-type:size}
 .pt-scan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:5cqw;padding:12px;font-family:Inter,sans-serif}
 .pt-vf{position:relative;height:min(90cqh,46cqw);aspect-ratio:1;flex:none}
@@ -236,9 +236,8 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
       <div style="flex-grow: 1; height: 1px; background: #DDDAD2"></div>
     </div>
     <div class="sel-grid" style="display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-rows: 292px 292px; gap: 24px">
-      <a href="samsung.html" class="tile hov-tile" data-on-mouseenter="{{ samOn }}" data-on-mouseleave="{{ samOff }}" data-on-mousemove="{{ track }}" style="grid-row: span 2; position: relative; border-radius: 24px; background: #FFFFFF; padding: 20px 20px 36px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-        <div aria-hidden="true" style="position: absolute; top: -10px; left: 36px; width: 90px; height: 24px; background: rgba(183,178,238,0.7); transform: rotate(-4deg)"></div>
-        <div style="position: relative; flex-grow: 1; border-radius: 16px; background: #EEF3FD; overflow: hidden">
+      <a href="samsung.html" class="tile hov-tile" data-on-mouseenter="{{ samOn }}" data-on-mouseleave="{{ samOff }}" data-on-mousemove="{{ track }}" style="grid-row: span 2; position: relative; border-radius: 6px; background: #FFFFFF; padding: 20px 20px 36px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+        <div style="position: relative; flex-grow: 1; border-radius: 3px; background: #EEF3FD; overflow: hidden">
         <div style="position: absolute; top: 0; left: 0; height: 100%; aspect-ratio: 1100 / 948; container-type: size; font-family: Inter, sans-serif">
           <div style="position: absolute; left: 28.45%; top: 2.11%; width: 115.909cqw; height: 69.636cqw; box-sizing: border-box; border: 0.545cqw solid #121318; border-radius: 2.182cqw; background: #F6F8FB; overflow: hidden; box-shadow: 0 1.818cqw 3.636cqw rgba(30,40,80,0.10); display: flex">
             <div style="width: 15.455cqw; flex-shrink: 0; background: #FFFFFF; padding: 2.182cqw 1.636cqw; box-sizing: border-box; display: flex; flex-direction: column; gap: 2.000cqw">
@@ -315,8 +314,8 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
         </div>
       </a>
       <div style="grid-row: span 2; display: grid; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 24px">
-        <a href="mode.html" class="tile hov-tile" data-on-mouseenter="{{ modeOn }}" data-on-mouseleave="{{ hovOff }}" data-on-mousemove="{{ track }}" style="position: relative; border-radius: 24px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div style="position: relative; flex-grow: 1; border-radius: 14px; background: linear-gradient(135deg, #F2F8E3, #E6F1D2); overflow: hidden; display: flex; align-items: center; justify-content: center">
+        <a href="mode.html" class="tile hov-tile" data-on-mouseenter="{{ modeOn }}" data-on-mouseleave="{{ hovOff }}" data-on-mousemove="{{ track }}" style="position: relative; border-radius: 6px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+          <div style="position: relative; flex-grow: 1; border-radius: 3px; background: linear-gradient(135deg, #F2F8E3, #E6F1D2); overflow: hidden; display: flex; align-items: center; justify-content: center">
             <div class="fcard" style="width: 88%; height: 80%; box-sizing: border-box; background: #FFFFFF; border-radius: 10px; box-shadow: 0 14px 30px rgba(40,30,80,0.12); display: flex; overflow: hidden; font-family: Inter, sans-serif">
               <div style="flex: 1 1 0; min-width: 0; padding: 12px 14px 10px; display: flex; flex-direction: column; gap: 6px">
                 <div style="display: flex; justify-content: space-between; align-items: baseline">
@@ -352,8 +351,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
             </div>
           </div>
         </a>
-        <a href="pantry.html" class="tile hov-tile pantry-tile" aria-label="Pantry, 0 to 1 consumer AI" style="position: relative; border-radius: 24px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div aria-hidden="true" style="position: absolute; top: -9px; right: 34px; width: 84px; height: 22px; background: rgba(229,138,164,0.55); transform: rotate(5deg); z-index: 1"></div>
+        <a href="pantry.html" class="tile hov-tile pantry-tile" aria-label="Pantry, 0 to 1 consumer AI" style="position: relative; border-radius: 6px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div class="pt-art" aria-hidden="true">
             <div class="pt-scan">
               <div class="pt-vf">
@@ -397,8 +395,8 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
       </div>
     </div>
     <div data-ref="{{ setRow }}" style="display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px 24px 20px 4px; margin: 0 -4px">
-        <div class="gcard" aria-label="Designing a freemium upsell system, case study coming soon" data-on-mouseenter="{{ upOn }}" data-on-mouseleave="{{ upOff }}" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-<div style="position: relative; height: 230px; flex: none; border-radius: 14px; background: linear-gradient(135deg, #F5F2FC, #ECEEF9); overflow: hidden">
+        <div class="gcard" aria-label="Designing a freemium upsell system, case study coming soon" data-on-mouseenter="{{ upOn }}" data-on-mouseleave="{{ upOff }}" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 6px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+<div style="position: relative; height: 230px; flex: none; border-radius: 3px; background: linear-gradient(135deg, #F5F2FC, #ECEEF9); overflow: hidden">
             <div style="position: absolute; top: 50%; left: 50%; height: 82%; aspect-ratio: 328 / 302; transform: translate(-50%, -50%) translate({{ zx }}) scale({{ zoom }}); transform-origin: 72.6% 77.2%; transition: transform .6s cubic-bezier(.3,1,.4,1)">
               <img src="images/redesign/mode-menu.png" alt="Mode dataset menu with Schedule marked as a paid feature" style="display: block; width: 100%; height: 100%; border-radius: 10px; box-shadow: 0 14px 30px rgba(40,30,80,0.14)">
               <sc-if value="{{ showVar }}" hint-placeholder-val="{{ false }}">
@@ -412,8 +410,8 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Designing a freemium upsell system</h3>
           <span style="align-self: flex-start; margin: 4px 6px 0; padding: 4px 10px; border-radius: 999px; background: #EFEAFB; color: #4E3FA6; font-size: 12px; font-weight: 500">Case study coming soon</span>
         </div>
-        <a href="playground-ux.html" class="tile gcard" data-on-mouseenter="{{ pgOn }}" data-on-mouseleave="{{ pgOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div style="position: relative; height: 230px; border-radius: 14px; background: #F2F3F5; overflow: hidden">
+        <a href="playground-ux.html" class="tile gcard" data-on-mouseenter="{{ pgOn }}" data-on-mouseleave="{{ pgOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 6px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+          <div style="position: relative; height: 230px; border-radius: 3px; background: #F2F3F5; overflow: hidden">
             <div style="position: absolute; left: -434px; top: -290px; width: 1284px; height: 764px; transform: scale(0.7); transform-origin: 0 0">
               <img src="images/redesign/playground-fleet-ui.webp" alt="Robot fleet UI: delivery list with statuses next to the warehouse map" style="display: block; width: 1284px; height: 764px">
               
@@ -437,8 +435,8 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Playground Global</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Designing autonomous navigation experiences<span class="arr" aria-hidden="true">→</span></h3>
         </a>
-        <a href="playground-hri.html" class="tile gcard" data-on-mouseenter="{{ hriOn }}" data-on-mouseleave="{{ hriOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div style="position: relative; height: 230px; border-radius: 14px; background: {{ hriBg }}; transition: background .5s ease; overflow: hidden">
+        <a href="playground-hri.html" class="tile gcard" data-on-mouseenter="{{ hriOn }}" data-on-mouseleave="{{ hriOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 6px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+          <div style="position: relative; height: 230px; border-radius: 3px; background: {{ hriBg }}; transition: background .5s ease; overflow: hidden">
             <div style="position: absolute; left: 50%; top: 50%; height: 88%; aspect-ratio: 820 / 964; transform: translate(-50%, -50%) translateX({{ hriX }}px) rotate({{ hriR }}deg); transition: transform .7s cubic-bezier(.3,1.5,.5,1)">
               <img src="images/redesign/hri-cart.webp" alt="Sketch of the cart prototype used in informal user testing, with adjustable handlebars and a tablet stand" style="display: block; width: 100%; height: 100%">
               <img src="images/redesign/hri-cart-on.webp" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: {{ hriGlow }}; transition: opacity .4s .25s">
@@ -457,8 +455,8 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Playground Global</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Human-Robot Interaction Design<span class="arr" aria-hidden="true">→</span></h3>
         </a>
-        <a href="gratitude.html" class="tile gcard" data-on-mouseenter="{{ gratOn }}" data-on-mouseleave="{{ gratOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div style="position: relative; height: 230px; border-radius: 14px; background: #FBF6E9; overflow: hidden">
+        <a href="gratitude.html" class="tile gcard" data-on-mouseenter="{{ gratOn }}" data-on-mouseleave="{{ gratOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 6px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+          <div style="position: relative; height: 230px; border-radius: 3px; background: #FBF6E9; overflow: hidden">
             <sc-for list="{{ gratBits }}" as="g" hint-placeholder-count="5">
               <div aria-hidden="true" style="position: absolute; left: {{ g.x }}%; top: {{ g.y }}%; opacity: {{ g.o }}; transform: translate(-50%, -50%) translateY({{ g.ty }}px) rotate({{ g.r }}deg) scale({{ g.s }}); transition: opacity .35s {{ g.d }}, transform .6s cubic-bezier(.3,1.6,.5,1) {{ g.d }}">
                 <div style="animation: {{ g.bob }}">
@@ -481,7 +479,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Gratitude · Tech4Good</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Social connection platform<span class="arr" aria-hidden="true">→</span></h3>
         </a>
-        <a href="https://www.linkedin.com/in/simrangunsi/" target="_blank" rel="noopener" class="tile gcard" data-on-mouseenter="{{ sayOn }}" data-on-mouseleave="{{ sayOff }}" data-on-mousemove="{{ sayMove }}" style="position: relative; overflow: hidden; isolation: isolate; flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05); box-sizing: border-box; min-height: 340px; background: radial-gradient(ellipse 70% 50% at 12% 110%, rgba(232,134,159,0.5) 0%, transparent 100%), radial-gradient(ellipse 60% 45% at 50% 114%, rgba(196,108,196,0.42) 0%, transparent 100%), radial-gradient(ellipse 70% 50% at 92% 106%, rgba(111,176,232,0.5) 0%, transparent 100%), radial-gradient(ellipse 90% 40% at 60% 102%, rgba(154,138,234,0.38) 0%, transparent 100%), #FFFFFF">
+        <a href="https://www.linkedin.com/in/simrangunsi/" target="_blank" rel="noopener" class="tile gcard" data-on-mouseenter="{{ sayOn }}" data-on-mouseleave="{{ sayOff }}" data-on-mousemove="{{ sayMove }}" style="position: relative; overflow: hidden; isolation: isolate; flex: 0 0 380px; scroll-snap-align: start; border-radius: 6px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05); box-sizing: border-box; min-height: 340px; background: radial-gradient(ellipse 70% 50% at 12% 110%, rgba(232,134,159,0.5) 0%, transparent 100%), radial-gradient(ellipse 60% 45% at 50% 114%, rgba(196,108,196,0.42) 0%, transparent 100%), radial-gradient(ellipse 70% 50% at 92% 106%, rgba(111,176,232,0.5) 0%, transparent 100%), radial-gradient(ellipse 90% 40% at 60% 102%, rgba(154,138,234,0.38) 0%, transparent 100%), #FFFFFF">
           <div aria-hidden="true" style="position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: {{ sayO }}; transition: opacity .5s; filter: blur(34px)"><span style="position: absolute; left: 0; top: 0; width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%; background: rgba(232,134,159,0.55); transform: translate(calc({{ sx }}px + -50px), calc({{ sy }}px + 10px)); transition: transform 0.35s cubic-bezier(.2,.8,.3,1)"></span><span style="position: absolute; left: 0; top: 0; width: 190px; height: 190px; margin: -95px 0 0 -95px; border-radius: 50%; background: rgba(176,112,214,0.45); transform: translate(calc({{ sx }}px + 30px), calc({{ sy }}px + -30px)); transition: transform 0.7s cubic-bezier(.2,.8,.3,1)"></span><span style="position: absolute; left: 0; top: 0; width: 160px; height: 160px; margin: -80px 0 0 -80px; border-radius: 50%; background: rgba(111,166,236,0.55); transform: translate(calc({{ sx }}px + 60px), calc({{ sy }}px + 40px)); transition: transform 1.1s cubic-bezier(.2,.8,.3,1)"></span><span style="position: absolute; left: 0; top: 0; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%; background: rgba(245,190,140,0.35); transform: translate(calc({{ sx }}px + -20px), calc({{ sy }}px + -60px)); transition: transform 1.5s cubic-bezier(.2,.8,.3,1)"></span></div>
           <p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Say hi</p>
           <p style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.01em; font-size: 32px; line-height: 1.15; color: #2B2937">Got something in the works? I'd love to hear about it.</p>

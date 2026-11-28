@@ -22,7 +22,7 @@ footer:not(.site-foot){display:none!important}
 
 /* hero images become rounded panels instead of full-bleed strips */
 .case-page .hero-image,#page-content .hero-image,
-.case-page > .hero:not(:has(.hero-image)){width:auto!important;margin:88px 24px 0!important;border-radius:24px;overflow:hidden}
+.case-page > .hero:not(:has(.hero-image)){width:auto!important;margin:88px 24px 0!important;border-radius:6px;overflow:hidden}
 .case-page .hero:has(.hero-image),#page-content .hero:has(.hero-image){padding-top:0!important}
 .case-page .hero img,.case-page .hero-image img{border-radius:0}
 
@@ -32,7 +32,7 @@ footer:not(.site-foot){display:none!important}
 
 /* cards sit on the warm background as white tiles */
 .ps-card,.feature-card,.approach-card,.framing-card,.card,.highlight,.next-card{background:#FFFFFF;border-color:var(--border)}
-.next-card{border-radius:22px}
+.next-card{border-radius:6px}
 
 /* footer, same as Work/About/Play */
 .site-foot{display:block!important;max-width:none!important;background:none!important;margin:96px 48px 0;padding:28px 0 48px;border-top:1px solid #E4E1D9;font-family:Inter,system-ui,sans-serif}
@@ -48,7 +48,7 @@ footer:not(.site-foot){display:none!important}
   .nav-wrap nav.pill{flex-wrap:nowrap!important}
   .nav-wrap nav.pill a:not([aria-label]){padding:10px 11px!important;font-size:14px!important;white-space:nowrap}
   .nav-wrap nav.pill a[aria-label]{width:28px!important;height:28px!important;margin-right:4px!important}
-  .case-page .hero-image,#page-content .hero-image,.case-page > .hero:not(:has(.hero-image)){height:auto!important;margin:76px 16px 0!important;border-radius:18px}
+  .case-page .hero-image,#page-content .hero-image,.case-page > .hero:not(:has(.hero-image)){height:auto!important;margin:76px 16px 0!important;border-radius:4px}
   .case-page .hero-image img,#page-content .hero-image img,.case-page > .hero img{height:auto!important;object-fit:contain!important}
   .site-foot{margin:64px 20px 0}
   .sf-inner{flex-direction:column;align-items:flex-start;gap:16px}
