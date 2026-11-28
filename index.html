@@ -103,15 +103,15 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 </style>
 <style>
 .pt-pill{flex-shrink:0;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:#EAF4E6;color:#3E6B37;font-size:12px;font-weight:500}
-.pt-art{position:relative;flex-grow:1;border-radius:14px;background:linear-gradient(135deg,#F1F7EC,#FBF6EA);overflow:hidden;min-height:170px}
-.pt-phone{position:absolute;left:50%;top:16px;width:236px;transform:translateX(-50%);background:#FFFFFF;border-radius:20px;padding:14px;box-shadow:0 16px 34px rgba(40,60,30,.14);font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:9px;transition:transform .5s cubic-bezier(.3,1,.4,1)}
+.pt-art{position:relative;flex-grow:1;border-radius:14px;background:linear-gradient(135deg,#F7F2EA,#F3F0FA);overflow:hidden;min-height:170px}
+.pt-phone{position:absolute;left:50%;top:16px;width:236px;transform:translateX(-50%);background:#FFFFFF;border-radius:20px;padding:14px;box-shadow:0 16px 34px rgba(40,30,60,.12);font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:9px;transition:transform .5s cubic-bezier(.3,1,.4,1)}
 .pt-h{margin:0;font-weight:600;font-size:13px;color:#2B2937}
 .pt-chips{display:flex;flex-wrap:wrap;gap:5px}
-.pt-chips span{font-size:10.5px;padding:4px 8px;border-radius:999px;background:#F2F5EE;color:#3D4A37}
-.pt-ask{align-self:flex-end;max-width:80%;font-size:11px;padding:7px 10px;border-radius:12px 12px 3px 12px;background:#2F5D2A;color:#FFFFFF}
+.pt-chips span{font-size:10.5px;padding:4px 8px;border-radius:999px;background:#F3F1EC;color:#45434C}
+.pt-ask{align-self:flex-end;max-width:80%;font-size:11px;padding:7px 10px;border-radius:12px 12px 3px 12px;background:#2B2937;color:#FFFFFF}
 .pt-ans{display:flex;flex-direction:column;gap:3px;font-size:11px;padding:9px 11px;border-radius:12px 12px 12px 3px;background:#F7F3E8;color:#4A4A52;opacity:0;transform:translateY(8px);transition:opacity .35s ease .15s,transform .45s cubic-bezier(.3,1,.4,1) .15s}
 .pt-ans b{font-weight:600;color:#2B2937;font-size:11.5px}
-.pantry-tile:hover .pt-phone,.pantry-tile:focus-visible .pt-phone{position:absolute;left:50%;top:16px;width:236px;transform:translateX(-50%);background:#FFFFFF;border-radius:20px;padding:14px;box-shadow:0 16px 34px rgba(40,60,30,.14);font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:9px;transition:transform .5s cubic-bezier(.3,1,.4,1)}
+.pantry-tile:hover .pt-phone,.pantry-tile:focus-visible .pt-phone{position:absolute;left:50%;top:16px;width:236px;transform:translateX(-50%);background:#FFFFFF;border-radius:20px;padding:14px;box-shadow:0 16px 34px rgba(40,30,60,.12);font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:9px;transition:transform .5s cubic-bezier(.3,1,.4,1)}
 .pantry-tile:hover .pt-ans,.pantry-tile:focus-visible .pt-ans{opacity:1;transform:none}
 @media (hover:none){.pt-ans{opacity:1;transform:none}}
 @media (max-width:760px){.pt-art{min-height:220px}}
@@ -339,8 +339,8 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
             </div>
           </div>
         </a>
-        <a href="pantry.html" class="tile hov-tile pantry-tile" aria-label="Pantry, designing an AI nutrition app, password protected case study" style="position: relative; border-radius: 24px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div aria-hidden="true" style="position: absolute; top: -9px; right: 34px; width: 84px; height: 22px; background: rgba(150,200,140,0.6); transform: rotate(5deg); z-index: 1"></div>
+        <a href="pantry.html" class="tile hov-tile pantry-tile" aria-label="Pantry, 0 to 1 consumer AI" style="position: relative; border-radius: 24px; background: #FFFFFF; padding: 14px 14px 26px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+          <div aria-hidden="true" style="position: absolute; top: -9px; right: 34px; width: 84px; height: 22px; background: rgba(229,138,164,0.55); transform: rotate(5deg); z-index: 1"></div>
           <div class="pt-art" aria-hidden="true">
             <div class="pt-phone">
               <p class="pt-h">My pantry</p>
@@ -352,8 +352,7 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
           <div style="padding: 0 6px; display: flex; flex-direction: column; gap: 4px">
             <p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Pantry · Side project</p>
             <div class="free-row" style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
-              <h2 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.15">Designing an AI nutrition app<span class="arr" aria-hidden="true">→</span></h2>
-              <span class="pt-pill"><svg width="10" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Password protected</span>
+              <h2 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.15">0→1 Consumer AI<span class="arr" aria-hidden="true">→</span></h2>
             </div>
           </div>
         </a>
@@ -369,6 +368,14 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
       </div>
     </div>
     <div data-ref="{{ setRow }}" style="display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px 24px 20px 4px; margin: 0 -4px">
+        <div class="gcard" aria-label="Designing a freemium upsell system, case study coming soon" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+          <div style="position: relative; height: 230px; border-radius: 14px; background: linear-gradient(135deg, #F5F2FC, #ECEEF9); overflow: hidden; display: flex; align-items: center; justify-content: center">
+            <img src="images/redesign/mode-menu.png" alt="Mode dataset menu with Schedule marked as a paid feature" style="display: block; height: 80%; width: auto; border-radius: 10px; box-shadow: 0 14px 30px rgba(40,30,80,0.14)">
+          </div>
+          <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Mode Studio</p>
+          <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Designing a freemium upsell system</h3>
+          <span style="align-self: flex-start; margin: 4px 6px 0; padding: 4px 10px; border-radius: 999px; background: #EFEAFB; color: #4E3FA6; font-size: 12px; font-weight: 500">Case study coming soon</span>
+        </div>
         <a href="playground-ux.html" class="tile gcard" data-on-mouseenter="{{ pgOn }}" data-on-mouseleave="{{ pgOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div style="position: relative; height: 230px; border-radius: 14px; background: #F2F3F5; overflow: hidden">
             <div style="position: absolute; left: -434px; top: -290px; width: 1284px; height: 764px; transform: scale(0.7); transform-origin: 0 0">
@@ -392,7 +399,27 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
             </div>
           </div>
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Playground Global</p>
-          <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">UX Design &amp; Design Strategy<span class="arr" aria-hidden="true">→</span></h3>
+          <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Designing autonomous navigation experiences<span class="arr" aria-hidden="true">→</span></h3>
+        </a>
+        <a href="playground-hri.html" class="tile gcard" data-on-mouseenter="{{ hriOn }}" data-on-mouseleave="{{ hriOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
+          <div style="position: relative; height: 230px; border-radius: 14px; background: {{ hriBg }}; transition: background .5s ease; overflow: hidden">
+            <div style="position: absolute; left: 50%; top: 50%; height: 88%; aspect-ratio: 820 / 964; transform: translate(-50%, -50%) translateX({{ hriX }}px) rotate({{ hriR }}deg); transition: transform .7s cubic-bezier(.3,1.5,.5,1)">
+              <img src="images/redesign/hri-cart.webp" alt="Sketch of the cart prototype used in informal user testing, with adjustable handlebars and a tablet stand" style="display: block; width: 100%; height: 100%">
+              <img src="images/redesign/hri-cart-on.webp" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: {{ hriGlow }}; transition: opacity .4s .25s">
+              <svg aria-hidden="true" viewBox="0 0 820 964" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none">
+                <defs><marker id="hriArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#2B2937" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></marker></defs>
+                <text x="-40" y="70" text-anchor="end" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.25s">adjustable</text><text x="-40" y="130" text-anchor="end" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.25s">handlebars</text>
+                <path d="M-30 110 Q 20 120 52 150" fill="none" stroke="#2B2937" stroke-width="5" stroke-linecap="round" marker-end="url(#hriArrow)" pathLength="1" stroke-dasharray="1" stroke-dashoffset="{{ hriDash }}" style="transition: stroke-dashoffset .45s ease 0.15s"></path>
+                <text x="-40" y="330" text-anchor="end" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.4s">tablet stand</text>
+                <path d="M-30 310 Q 60 300 112 222" fill="none" stroke="#2B2937" stroke-width="5" stroke-linecap="round" marker-end="url(#hriArrow)" pathLength="1" stroke-dasharray="1" stroke-dashoffset="{{ hriDash }}" style="transition: stroke-dashoffset .45s ease 0.3s"></path>
+                <text x="860" y="190" text-anchor="start" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.55s">regular</text><text x="860" y="250" text-anchor="start" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.55s">handle</text>
+                <path d="M850 230 Q 790 250 740 312" fill="none" stroke="#2B2937" stroke-width="5" stroke-linecap="round" marker-end="url(#hriArrow)" pathLength="1" stroke-dasharray="1" stroke-dashoffset="{{ hriDash }}" style="transition: stroke-dashoffset .45s ease 0.45s"></path>
+                
+              </svg>
+            </div>
+          </div>
+          <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Playground Global</p>
+          <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Human-Robot Interaction Design<span class="arr" aria-hidden="true">→</span></h3>
         </a>
         <a href="gratitude.html" class="tile gcard" data-on-mouseenter="{{ gratOn }}" data-on-mouseleave="{{ gratOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
           <div style="position: relative; height: 230px; border-radius: 14px; background: #FBF6E9; overflow: hidden">
@@ -418,34 +445,6 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
           <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Gratitude · Tech4Good</p>
           <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Social connection platform<span class="arr" aria-hidden="true">→</span></h3>
         </a>
-        <a href="playground-hri.html" class="tile gcard" data-on-mouseenter="{{ hriOn }}" data-on-mouseleave="{{ hriOff }}" class="gcard" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div style="position: relative; height: 230px; border-radius: 14px; background: {{ hriBg }}; transition: background .5s ease; overflow: hidden">
-            <div style="position: absolute; left: 50%; top: 50%; height: 88%; aspect-ratio: 820 / 964; transform: translate(-50%, -50%) translateX({{ hriX }}px) rotate({{ hriR }}deg); transition: transform .7s cubic-bezier(.3,1.5,.5,1)">
-              <img src="images/redesign/hri-cart.webp" alt="Sketch of the cart prototype used in informal user testing, with adjustable handlebars and a tablet stand" style="display: block; width: 100%; height: 100%">
-              <img src="images/redesign/hri-cart-on.webp" alt="" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: {{ hriGlow }}; transition: opacity .4s .25s">
-              <svg aria-hidden="true" viewBox="0 0 820 964" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none">
-                <defs><marker id="hriArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#2B2937" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></marker></defs>
-                <text x="-40" y="70" text-anchor="end" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.25s">adjustable</text><text x="-40" y="130" text-anchor="end" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.25s">handlebars</text>
-                <path d="M-30 110 Q 20 120 52 150" fill="none" stroke="#2B2937" stroke-width="5" stroke-linecap="round" marker-end="url(#hriArrow)" pathLength="1" stroke-dasharray="1" stroke-dashoffset="{{ hriDash }}" style="transition: stroke-dashoffset .45s ease 0.15s"></path>
-                <text x="-40" y="330" text-anchor="end" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.4s">tablet stand</text>
-                <path d="M-30 310 Q 60 300 112 222" fill="none" stroke="#2B2937" stroke-width="5" stroke-linecap="round" marker-end="url(#hriArrow)" pathLength="1" stroke-dasharray="1" stroke-dashoffset="{{ hriDash }}" style="transition: stroke-dashoffset .45s ease 0.3s"></path>
-                <text x="860" y="190" text-anchor="start" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.55s">regular</text><text x="860" y="250" text-anchor="start" font-family="Caveat, cursive" font-size="64" font-weight="500" fill="#2B2937" style="opacity: {{ hriO }}; transition: opacity .3s ease 0.55s">handle</text>
-                <path d="M850 230 Q 790 250 740 312" fill="none" stroke="#2B2937" stroke-width="5" stroke-linecap="round" marker-end="url(#hriArrow)" pathLength="1" stroke-dasharray="1" stroke-dashoffset="{{ hriDash }}" style="transition: stroke-dashoffset .45s ease 0.45s"></path>
-                
-              </svg>
-            </div>
-          </div>
-          <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Playground Global</p>
-          <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Human-Robot Interaction Design<span class="arr" aria-hidden="true">→</span></h3>
-        </a>
-        <div class="gcard" aria-label="Designing a freemium upsell system, case study coming soon" style="flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; background: #FFFFFF; padding: 16px 16px 32px; display: flex; flex-direction: column; gap: 8px; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05)">
-          <div style="position: relative; height: 230px; border-radius: 14px; background: linear-gradient(135deg, #F5F2FC, #ECEEF9); overflow: hidden; display: flex; align-items: center; justify-content: center">
-            <img src="images/redesign/mode-menu.png" alt="Mode dataset menu with Schedule marked as a paid feature" style="display: block; height: 80%; width: auto; border-radius: 10px; box-shadow: 0 14px 30px rgba(40,30,80,0.14)">
-          </div>
-          <p style="margin: 10px 6px 0; font-size: 13px; color: #5E5E5E">Mode Studio</p>
-          <h3 style="margin: 0 6px; font-family: 'Fraunces', serif; font-weight: 340; font-variation-settings: 'SOFT' 100, 'WONK' 0; font-optical-sizing: auto; letter-spacing: -0.005em; color: #2B2937; font-size: 22px; line-height: 1.2">Designing a freemium upsell system</h3>
-          <span style="align-self: flex-start; margin: 4px 6px 0; padding: 4px 10px; border-radius: 999px; background: #EFEAFB; color: #4E3FA6; font-size: 12px; font-weight: 500">Case study coming soon</span>
-        </div>
         <a href="https://www.linkedin.com/in/simrangunsi/" target="_blank" rel="noopener" class="tile gcard" data-on-mouseenter="{{ sayOn }}" data-on-mouseleave="{{ sayOff }}" data-on-mousemove="{{ sayMove }}" style="position: relative; overflow: hidden; isolation: isolate; flex: 0 0 380px; scroll-snap-align: start; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: #1C1C1C; box-shadow: 0 6px 18px rgba(20,20,40,0.05); box-sizing: border-box; min-height: 340px; background: radial-gradient(ellipse 70% 50% at 12% 110%, rgba(232,134,159,0.5) 0%, transparent 100%), radial-gradient(ellipse 60% 45% at 50% 114%, rgba(196,108,196,0.42) 0%, transparent 100%), radial-gradient(ellipse 70% 50% at 92% 106%, rgba(111,176,232,0.5) 0%, transparent 100%), radial-gradient(ellipse 90% 40% at 60% 102%, rgba(154,138,234,0.38) 0%, transparent 100%), #FFFFFF">
           <div aria-hidden="true" style="position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: {{ sayO }}; transition: opacity .5s; filter: blur(34px)"><span style="position: absolute; left: 0; top: 0; width: 170px; height: 170px; margin: -85px 0 0 -85px; border-radius: 50%; background: rgba(232,134,159,0.55); transform: translate(calc({{ sx }}px + -50px), calc({{ sy }}px + 10px)); transition: transform 0.35s cubic-bezier(.2,.8,.3,1)"></span><span style="position: absolute; left: 0; top: 0; width: 190px; height: 190px; margin: -95px 0 0 -95px; border-radius: 50%; background: rgba(176,112,214,0.45); transform: translate(calc({{ sx }}px + 30px), calc({{ sy }}px + -30px)); transition: transform 0.7s cubic-bezier(.2,.8,.3,1)"></span><span style="position: absolute; left: 0; top: 0; width: 160px; height: 160px; margin: -80px 0 0 -80px; border-radius: 50%; background: rgba(111,166,236,0.55); transform: translate(calc({{ sx }}px + 60px), calc({{ sy }}px + 40px)); transition: transform 1.1s cubic-bezier(.2,.8,.3,1)"></span><span style="position: absolute; left: 0; top: 0; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%; background: rgba(245,190,140,0.35); transform: translate(calc({{ sx }}px + -20px), calc({{ sy }}px + -60px)); transition: transform 1.5s cubic-bezier(.2,.8,.3,1)"></span></div>
           <p style="margin: 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E5E">Say hi</p>
