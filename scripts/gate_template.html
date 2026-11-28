@@ -28,6 +28,10 @@
 #gate .g-tile h3{margin:4px 6px 0;font-family:'Fraunces',serif;font-weight:400;font-variation-settings:'SOFT' 100,'WONK' 0;font-size:18px;line-height:1.2;color:#2B2937;text-align:left}
 @media (max-width:760px){#gate .g-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0;padding:4px 0 12px}#gate .g-tile{flex:0 0 200px;scroll-snap-align:start}}
 @media (max-width:520px){#gate h1{font-size:32px}#gate form{flex-direction:column}}
+#gate .g-copy{background:none;border:0;padding:0;font:inherit;cursor:pointer;color:#3B3BF5;text-decoration:none}
+#gate .g-copy:hover{text-decoration:underline}
+#gate .g-copied{margin-left:6px;font-size:13px;color:#3E6B37}
+#gate .g-copied:empty{margin:0}
 </style>
 </head>
 <body>
@@ -35,7 +39,7 @@
   {{NAV}}
   <main class="g-card">
     <h1>You found the secret door.</h1>
-    <p>The password is on my resume, or <a class="g-mail" href="mailto:skgunsi@gmail.com?subject=Case%20study%20access">email me for access</a>.</p>
+    <p>The password is on my resume, or <button type="button" class="g-mail g-copy" data-email="skgunsi@gmail.com" title="Copy skgunsi@gmail.com">email me for access</button><span class="g-copied" role="status" aria-live="polite"></span>.</p>
     <form id="g-form" autocomplete="off">
       <label for="g-pw" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Password</label>
       <input id="g-pw" type="password" placeholder="Password" autofocus>
@@ -78,6 +82,12 @@
     });
   });
 })();
+
+(function(){var b=document.querySelector('#gate .g-copy'),st=document.querySelector('#gate .g-copied');if(!b)return;
+b.addEventListener('click',function(){var e=b.dataset.email;
+function done(){b.textContent=e;st.textContent='copied ✓';clearTimeout(b._t);b._t=setTimeout(function(){st.textContent='';},2500);}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(e).then(done,function(){b.textContent=e;});}
+else{var t=document.createElement('textarea');t.value=e;document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(x){b.textContent=e;}t.remove();}});})();
 </script>
 </body>
 </html>
