@@ -104,16 +104,26 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
 <style>
 .pt-pill{flex-shrink:0;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:#EAF4E6;color:#3E6B37;font-size:12px;font-weight:500}
 .pt-art{position:relative;flex-grow:1;border-radius:14px;background:linear-gradient(135deg,#F7F2EA,#F3F0FA);overflow:hidden;min-height:170px}
-.pt-phone{position:absolute;left:50%;top:16px;width:236px;transform:translateX(-50%);background:#FFFFFF;border-radius:20px;padding:14px;box-shadow:0 16px 34px rgba(40,30,60,.12);font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:9px;transition:transform .5s cubic-bezier(.3,1,.4,1)}
-.pt-h{margin:0;font-weight:600;font-size:13px;color:#2B2937}
-.pt-chips{display:flex;flex-wrap:wrap;gap:5px}
-.pt-chips span{font-size:10.5px;padding:4px 8px;border-radius:999px;background:#F3F1EC;color:#45434C}
-.pt-ask{align-self:flex-end;max-width:80%;font-size:11px;padding:7px 10px;border-radius:12px 12px 3px 12px;background:#2B2937;color:#FFFFFF}
-.pt-ans{display:flex;flex-direction:column;gap:3px;font-size:11px;padding:9px 11px;border-radius:12px 12px 12px 3px;background:#F7F3E8;color:#4A4A52;opacity:0;transform:translateY(8px);transition:opacity .35s ease .15s,transform .45s cubic-bezier(.3,1,.4,1) .15s}
-.pt-ans b{font-weight:600;color:#2B2937;font-size:11.5px}
-.pantry-tile:hover .pt-phone,.pantry-tile:focus-visible .pt-phone{position:absolute;left:50%;top:16px;width:236px;transform:translateX(-50%);background:#FFFFFF;border-radius:20px;padding:14px;box-shadow:0 16px 34px rgba(40,30,60,.12);font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:9px;transition:transform .5s cubic-bezier(.3,1,.4,1)}
-.pantry-tile:hover .pt-ans,.pantry-tile:focus-visible .pt-ans{opacity:1;transform:none}
-@media (hover:none){.pt-ans{opacity:1;transform:none}}
+.pt-phone{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 22px;font-family:Inter,sans-serif;max-width:300px;margin:0 auto}
+.pt-ask{align-self:flex-end;max-width:82%;font-size:12px;line-height:1.35;padding:8px 11px;border-radius:14px 14px 4px 14px;background:#2B2937;color:#FFFFFF}
+.pt-avi{display:flex;gap:8px;align-items:flex-start}
+.pt-av{flex:none;width:24px;height:24px;border-radius:50%;background:#DCEBD5;color:#1B4332;font:600 11px/24px Inter,sans-serif;text-align:center}
+.pt-dots{display:flex;gap:4px;padding:10px 12px;border-radius:14px 14px 14px 4px;background:#FFFFFF;box-shadow:0 6px 16px rgba(40,30,60,.08)}
+.pt-dots i{width:5px;height:5px;border-radius:50%;background:#B9B6C2;animation:ptd 1.2s infinite}
+.pt-dots i:nth-child(2){animation-delay:.15s}.pt-dots i:nth-child(3){animation-delay:.3s}
+@keyframes ptd{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-2px)}}
+.pt-log{display:none;flex-direction:column;gap:7px;padding:10px 12px;border-radius:14px 14px 14px 4px;background:#FFFFFF;box-shadow:0 8px 20px rgba(40,30,60,.1);flex:1}
+.pt-lt{margin:0;font-size:11.5px;font-weight:600;color:#2B2937}
+.pt-macros{display:flex;gap:5px;flex-wrap:wrap}
+.pt-macros span{font-size:10.5px;color:#55535E;background:#F3F1EC;border-radius:999px;padding:3px 8px}
+.pt-macros b{font-weight:600;color:#2B2937}
+.pt-score{margin:0;font-size:10.5px;color:#6B6B73}
+.pt-score b{font-weight:600;color:#2B2937}
+.pt-score em{font-style:normal;font-weight:600;color:#2D6A4F;background:#E5F2E0;border-radius:999px;padding:1px 6px;margin-left:2px}
+.pantry-tile:hover .pt-dots,.pantry-tile:focus-visible .pt-dots{display:none}
+.pantry-tile:hover .pt-log,.pantry-tile:focus-visible .pt-log{display:flex;animation:ptin .4s cubic-bezier(.3,1.4,.5,1)}
+@keyframes ptin{from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:none}}
+@media (hover:none){.pt-dots{display:none}.pt-log{display:flex}}
 @media (max-width:760px){.pt-art{min-height:220px}}
 </style>
 </head>
@@ -343,10 +353,14 @@ a{color:#3B3BF5}a:hover{color:#2525C8}
           <div aria-hidden="true" style="position: absolute; top: -9px; right: 34px; width: 84px; height: 22px; background: rgba(229,138,164,0.55); transform: rotate(5deg); z-index: 1"></div>
           <div class="pt-art" aria-hidden="true">
             <div class="pt-phone">
-              <p class="pt-h">My pantry</p>
-              <div class="pt-chips"><span>🥬 spinach</span><span>🫘 chickpeas</span><span>🍋 lemon</span><span>🧄 garlic</span></div>
-              <div class="pt-ask">What can I make tonight?</div>
-              <div class="pt-ans"><b>Lemony chickpea &amp; spinach bowl</b><span>25 min · uses 4 of your items</span></div>
+              <div class="pt-ask">had a handful of trail mix on my way to work</div>
+              <div class="pt-avi"><span class="pt-av">A</span><span class="pt-dots"><i></i><i></i><i></i></span>
+                <div class="pt-log">
+                  <p class="pt-lt">Logged · Trail mix, 1 handful</p>
+                  <div class="pt-macros"><span><b>170</b> cal</span><span><b>5g</b> protein</span><span><b>11g</b> fat</span></div>
+                  <p class="pt-score">Score <b>78 → 80</b> <em>+2</em></p>
+                </div>
+              </div>
             </div>
           </div>
           <div style="padding: 0 6px; display: flex; flex-direction: column; gap: 4px">
